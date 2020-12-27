@@ -16,4 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 ### ide bundle
-/.idea/
+.idea/

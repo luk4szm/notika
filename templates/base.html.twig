@@ -1,12 +1,273 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Notika{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/font-google.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/jquery.mCustomScrollbar.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/jquery-jvectormap-2.0.3.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/notika-custom-icon.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.transitions.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/waves.min.css') }}">
+    {% endblock %}
+    {% block headjavascripts %}
+        <script src="{{ asset('assets/js/modernizr-2.8.3.min.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block top_label %}
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+            href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row visible-lg-inline">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <a href="/">
+                        <a href="#"><img src="{{ asset('assets/img/logo.png') }}" alt=""/></a>
+                    </a>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        {% if app.user %}
+                            <ul class="nav navbar-nav notika-top-nav">
+                                <li class="nav-item dropdown">
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                        <div class="spinner4 spinner-4"></div>
+                                        <div class="ntd-ctn"><span>2</span></div>
+                                        <span><i class="notika-icon notika-mail"></i></span>
+                                    </a>
+                                    <div role="menu" class="dropdown-menu message-dd animated fadeIn">
+                                        <div class="hd-mg-tt">
+                                            <h2>Messages</h2>
+                                        </div>
+                                        <div class="hd-message-info">
+                                            <a href="#">
+                                                <div class="hd-message-sn">
+                                                    <div class="hd-message-img">
+                                                        <img src="img/post/1.jpg" alt=""/>
+                                                    </div>
+                                                    <div class="hd-mg-ctn">
+                                                        <h3>David Belle</h3>
+                                                        <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="hd-mg-va">
+                                            <a href="#">View All</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                        <span><i class="notika-icon notika-menus"></i></span>
+                                    </a>
+                                    <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
+                                        <div class="hd-mg-tt">
+                                            <h2>Tasks</h2>
+                                        </div>
+                                        <div class="hd-message-info hd-task-info">
+                                            <div class="skill">
+                                                <div class="progress">
+                                                    <div class="lead-content">
+                                                        <p>HTML5 Validation Report</p>
+                                                    </div>
+                                                    <div class="progress-bar wow fadeInLeft" data-progress="95%"
+                                                         style="width: 95%;">
+                                                        <span>95%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hd-mg-va">
+                                            <a href="#">View All</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <div class="nav navbar-nav notika-top-nav">
+                                <div class="btn-demo-notika">
+                                    <div class="btn-list">
+                                        <button type="button" onclick="location.href='{{ path('index') }}'"
+                                                class="btn btn-success notika-btn-success">
+                                            Zarejestruj się
+                                        </button>
+                                        <button type="button" onclick="location.href='{{ path('index') }}'"
+                                                class="btn btn-default notika-btn-default">
+                                            Zaloguj się
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+{% endblock %}
+{% block desktop_menu %}
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li {% if app.request.get('_route') == 'index' %}class="active"{% endif %}>
+                            <a href="{{ path('index') }}"><i class="notika-icon notika-house"></i>Strona główna</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#rankings"><i class="notika-icon notika-windows"></i> Rankingi</a></li>
+                        <li><a data-toggle="tab" href="#tables"><i class="notika-icon notika-form"></i> Tabele</a></li>
+                        <li><a data-toggle="tab" href="#stats"><i class="notika-icon notika-bar-chart"></i> Statystyki</a></li>
+                        <li><a data-toggle="tab" href="#schedules"><i class="notika-icon notika-calendar"></i> Terminarze</a></li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="rankings" class="tab-pane notika-tab-menu-bg animated fadeIn">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                <li><a href="#">Champions League 2020/2021</a></li>
+                                <li><a href="#">Premier League 2020/2021</a></li>
+                            </ul>
+                        </div>
+                        <div id="tables" class="tab-pane notika-tab-menu-bg animated fadeIn">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                <li><a href="#">Champions League 2020/2021</a></li>
+                                <li><a href="#">Premier League 2020/2021</a></li>
+                            </ul>
+                        </div>
+                        <div id="stats" class="tab-pane notika-tab-menu-bg animated fadeIn">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                <li><a href="#">Champions League 2020/2021</a></li>
+                                <li><a href="#">Premier League 2020/2021</a></li>
+                            </ul>
+                        </div>
+                        <div id="schedules" class="tab-pane notika-tab-menu-bg animated fadeIn">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                <li><a href="#">Champions League 2020/2021</a></li>
+                                <li><a href="#">Premier League 2020/2021</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+{% endblock %}
+{% block mobile_menu %}
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a href="#">Home</a></li>
+                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Rankingi</a>
+                                    <ul id="demoevent" class="collapse dropdown-header-top">
+                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                        <li><a href="#">Champions League 2020/2021</a></li>
+                                        <li><a href="#">Premier League 2020/2021</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#tables" href="#">Tabele</a>
+                                    <ul id="tables" class="collapse dropdown-header-top">
+                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                        <li><a href="#">Champions League 2020/2021</a></li>
+                                        <li><a href="#">Premier League 2020/2021</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#stats" href="#">Statystyki</a>
+                                    <ul id="stats" class="collapse dropdown-header-top">
+                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                        <li><a href="#">Champions League 2020/2021</a></li>
+                                        <li><a href="#">Premier League 2020/2021</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#schedules" href="#">Terminarze</a>
+                                    <ul id="schedules" class="collapse dropdown-header-top">
+                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
+                                        <li><a href="#">Champions League 2020/2021</a></li>
+                                        <li><a href="#">Premier League 2020/2021</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © {{ "now"|date("Y") }}. Mensański Typer. Wszystkie prawa zastrzeżone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer area-->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.appear.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.chat.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sparkline-active.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.flot.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('assets/js/curvedLines.js') }}"></script>
+    <script src="{{ asset('assets/js/flot-active.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.meanmenu.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.todo.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-jvectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-price-slider.js') }}"></script>
+    <script src="{{ asset('assets/js/jvectormap-active.js') }}"></script>
+    <script src="{{ asset('assets/js/knob-active.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/counterup-active.js') }}"></script>
+    <script src="{{ asset('assets/js/wave.min.js') }}"></script>
+    <script src="{{ asset('assets/js/wave-active.js') }}"></script>
+{% endblock %}
+</body>
 </html>

@@ -4406,8 +4406,8 @@ textarea.auto-size {
 }
 
 .nk-block.toggled {
-   -webkit-animation-name: rollIn;
-   animation-name: rollIn;
+   -webkit-animation-name: fadeIn;
+   animation-name: fadeIn;
    -webkit-animation-duration: .9s;
    animation-duration: .9s;
    -webkit-animation-fill-mode: both;
@@ -4479,11 +4479,11 @@ textarea.auto-size {
 }
 
 .nk-navigation a[data-ma-block="#l-register"]:hover {
-   width: 95px;
+   width: 130px;
 }
 
 .nk-navigation a[data-ma-block="#l-forget-password"]:hover {
-   width: 147px;
+   width: 165px;
 }
 
 .nk-navigation a[data-ma-block="#l-login"]:hover {

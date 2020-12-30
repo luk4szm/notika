@@ -45,7 +45,7 @@ class Team
     private $games_home;
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="Guest")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="guest")
      */
     private $games_guest;
 

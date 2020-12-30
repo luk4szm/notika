@@ -81,13 +81,13 @@ class Game
     private $updated_by;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="gamesHome")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="games_home")
      * @ORM\JoinColumn(nullable=false)
      */
     private $home;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="gamesGuest")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="games_guest")
      * @ORM\JoinColumn(nullable=false)
      */
     private $guest;

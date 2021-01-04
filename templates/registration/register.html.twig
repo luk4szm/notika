@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zaloguj się!{% endblock %}
+
+{% block top_label %}
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+    <![endif]-->
+{% endblock %}
+
+{% block desktop_menu %}
+{% endblock %}
+
+{% block mobile_menu %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block content %}
+    <div class="login-content">
+        <div class="nk-block toggled" id="l-register">
+            {% if app.user %}
+                <div class="mb-3">
+                    Jesteś zalogowany jako {{ app.user.username }}, <a href="{{ path('app_logout') }}">wyloguj się</a>
+                </div>
+            {% else %}
+                <!-- Register -->
+                {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(registrationForm) }}
+                <div class="nk-form">
+                    <div class="input-group">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                        <div class="nk-int-st">
+                            {{ form_row(registrationForm.username, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                        <div class="nk-int-st">
+                            {{ form_row(registrationForm.firstName, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                        <div class="nk-int-st">
+                            {{ form_row(registrationForm.lastName, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-mail"></i></span>
+                        <div class="nk-int-st">
+                            {{ form_row(registrationForm.email, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                        <div class="nk-int-st">
+                            {{ form_row(registrationForm.plainPassword, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika"></i></span>
+                        <div class="nk-int-switch">
+                            {{ form_row(registrationForm.member, {
+                                class: 'asdasd',
+                                formwidget: 'checkbox_widget',
+                                label: 'Członek Stowarzyszenia Mensa Polska'
+                            }) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-login btn-success btn-float">
+                        <i class="notika-icon notika-right-arrow"></i>
+                    </button>
+                </div>
+
+                <div class="nk-navigation rg-ic-stl">
+                    <a href="{{ path('app_login') }}" data-ma-block="#l-login">
+                        <i class="notika-icon notika-right-arrow"></i>
+                        <span>Zaloguj</span>
+                    </a>
+                    <a href="" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password">
+                        <i>?</i>
+                        <span>Nie pamiętam hasła</span>
+                    </a>
+                    {{ form_end(registrationForm) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

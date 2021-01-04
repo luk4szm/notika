@@ -3,6 +3,17 @@
 {% block title %}{{ parent() }} Hello IndexController!{% endblock %}
 
 {% block content %}
+    <!-- App Flashes -->
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
     <!-- Start Status area -->
     <div class="notika-status-area">
         <div class="container">

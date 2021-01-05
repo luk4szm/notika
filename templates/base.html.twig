@@ -45,8 +45,8 @@
                     <div class="header-top-menu">
                         {% if app.user %}
                             <ul class="nav navbar-nav notika-top-nav">
-                                <li class="nav-item dropdown">
-                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
                                         <div class="spinner4 spinner-4"></div>
                                         <div class="ntd-ctn"><span>2</span></div>
                                         <span><i class="notika-icon notika-mail"></i></span>
@@ -98,6 +98,18 @@
                                             <a href="#">View All</a>
                                         </div>
                                     </div>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="mg-l-30 nav-link dropdown-toggle text-right" style="margin-top: -5px;">
+                                        <span class="font-gray" style="font-size: 13px">Zalogowano jako</span>
+                                        <br>
+                                        <span class="font-white f-500">Łukasz Mikowski</span>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ path('app_logout') }}" class="nav-link">
+                                        <span>&#10006;</span>
+                                    </a>
                                 </li>
                             </ul>
                         {% else %}

@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-enter:before {
+  content: "\ea13";
+}
 .notika-menu-befores:before {
   content: "\e93d";
 }

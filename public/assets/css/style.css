@@ -71,6 +71,13 @@ body {
    float: right
 }
 
+.font-white {
+   color: #ffffff;
+}
+.font-gray {
+   color: #eeeeee;
+}
+
 .alignleft {
    float: left;
    margin-right: 15px;
@@ -138,6 +145,10 @@ ul {
 body {
 }
 
+.mg-l-30 {
+   margin: 0px 0px 0px 30px;
+}
+
 .mg-tb-40 {
    margin: 40px 0px;
 }
@@ -160,6 +171,11 @@ body {
 
 .mg-t-10 {
    margin-top: 10px;
+}
+
+
+.mg-t-0 {
+   margin-top: 0;
 }
 
 .mg-t-20 {
@@ -267,6 +283,7 @@ body {
 /*----------------------------------------*/
 .header-top-area, .footer-copyright-area {
    background: #00c292;
+   height: 70px;
 }
 
 .logo-area {
@@ -290,11 +307,11 @@ body {
 
 .navbar-nav > li > a {
    color: #fff;
-   padding: 20px 0px 20px 30px;
+   padding: 8px 0px 20px 30px;
 }
 
 .rtl-layout .navbar-nav > li > a {
-   padding: 20px 30px 20px 0px;
+   padding: 8px 0px 20px 0px;
 }
 
 .nav.navbar-nav.notika-top-nav li a {
@@ -471,15 +488,15 @@ body {
 
 .hd-message-img.chat-img .chat-avaible i {
    position: absolute;
-   top: 0px;
-   right: 0px;
+   top: 0;
+   right: 0;
    font-size: 12px;
    color: #00c292;
 }
 
 .ntd-ctn {
    position: absolute;
-   top: 8px;
+   top: -3px;
    left: 48px;
    font-size: 10px;
    background: #e46a76;
@@ -497,7 +514,7 @@ body {
    border-radius: 50%;
    position: absolute;
    display: inline-block;
-   top: 3px;
+   top: -8px;
    left: -14px;
 }
 
@@ -1008,6 +1025,7 @@ ul.notika-menu-wrap li a {
    font-size: 14px;
    color: #fff;
    padding: 15px 0px;
+   margin: 10px 0px;
    text-align: center;
 }
 

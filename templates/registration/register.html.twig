@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Zaloguj się!{% endblock %}
+{% block title %}Zarejestruj konto{% endblock %}
 
 {% block top_label %}
     <!--[if lt IE 8]>
@@ -14,9 +14,6 @@
 {% endblock %}
 
 {% block mobile_menu %}
-{% endblock %}
-
-{% block footer %}
 {% endblock %}
 
 {% block content %}
@@ -97,7 +94,7 @@
                         <i class="notika-icon notika-right-arrow"></i>
                         <span>Zaloguj</span>
                     </a>
-                    <a href="" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password">
+                    <a href="{{ path('app_forgot_password_request') }}" data-ma-block="#l-forget-password">
                         <i>?</i>
                         <span>Nie pamiętam hasła</span>
                     </a>
@@ -106,4 +103,7 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

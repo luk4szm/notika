@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zresetuj hasło{% endblock %}
+
+{% block top_label %}
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    </p>
+    <![endif]-->
+{% endblock %}
+
+{% block desktop_menu %}
+{% endblock %}
+
+{% block mobile_menu %}
+{% endblock %}
+
+{% block content %}
+    <div class="login-content">
+        <!-- Forgot Password -->
+        <div class="nk-block toggled" id="l-forget-password">
+
+            {% form_theme resetForm 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(resetForm) }}
+            <div class="nk-form">
+
+                <div class="input-group mg-t-15">
+                    <span class="input-group-addon nk-ic-st-pro"></span>
+                    <div class="nk-int-st">
+                        {{ form_row(resetForm.plainPassword, {
+                            label: ' '
+                        }) }}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-login btn-success btn-float">
+                    <i class="notika-icon notika-right-arrow"></i>
+                </button>
+            </div>
+            {{ form_end(resetForm) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

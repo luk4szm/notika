@@ -42,11 +42,11 @@ class RegistrationFormType extends AbstractType
 				],
 				'constraints' => [
 					new NotBlank([
-						'message' => 'Please enter a password',
+						'message' => 'Proszę wpisać hasło',
 					]),
 					new Length([
 						'min' => 6,
-						'minMessage' => 'Your password should be at least {{ limit }} characters',
+						'minMessage' => 'Twoje hasło musi posiadać przynajmniej {{ limit }} znaków',
 						// max length allowed by Symfony for security reasons
 						'max' => 4096,
 					]),

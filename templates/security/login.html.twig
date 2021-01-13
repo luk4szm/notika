@@ -16,9 +16,6 @@
 {% block mobile_menu %}
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
-
 {% block content %}
     <div class="login-content">
         <!-- Login -->
@@ -61,45 +58,16 @@
                         <i class="notika-icon notika-plus-symbol"></i>
                         <span>Zarejestruj się</span>
                     </a>
-                    <a href="#" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password">
+                    <a href="{{ path('app_forgot_password_request') }}" data-ma-block="#l-forget-password">
                         <i>?</i>
                         <span>Nie pamiętam hasła</span>
                     </a>
                 </div>
             </form>
-        </div>
-
-
-        <!-- Forgot Password -->
-        <div class="nk-block" id="l-forget-password">
-            <div class="nk-form">
-                <p class="text-left">Wpisz w poniższym polu adres e-mail, który został podany podczas rejestracji konta.
-                    Następnie otrzymasz na niego kod umożliwiający zresetowanie hasła.</p>
-
-                <div class="input-group">
-                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-mail"></i></span>
-                    <div class="nk-int-st">
-                        <input type="text" class="form-control" placeholder="Adres e-mail">
-                    </div>
-                </div>
-
-                <a href="#l-login" data-ma-action="nk-login-switch" data-ma-block="#l-login"
-                   class="btn btn-login btn-success btn-float">
-                    <i class="notika-icon notika-right-arrow"></i>
-                </a>
-            </div>
-
-            <div class="nk-navigation nk-lg-ic rg-ic-stl">
-                <a href="" data-ma-action="nk-login-switch" data-ma-block="#l-login">
-                    <i class="notika-icon notika-right-arrow"></i>
-                    <span>Zaloguj</span>
-                </a>
-                <a href="" data-ma-action="nk-login-switch" data-ma-block="#l-register">
-                    <i class="notika-icon notika-plus-symbol"></i>
-                    <span>Zarejestruj się</span>
-                </a>
-            </div>
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

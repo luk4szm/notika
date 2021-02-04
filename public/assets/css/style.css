@@ -74,6 +74,7 @@ body {
 .font-white {
    color: #ffffff;
 }
+
 .font-gray {
    color: #eeeeee;
 }
@@ -123,7 +124,6 @@ a {
 }
 
 a:hover {
-   color: #00c292;
    text-decoration: none;
 }
 

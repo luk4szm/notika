@@ -103,7 +103,9 @@
                                     <div class="mg-l-30 nav-link dropdown-toggle text-right" style="margin-top: -5px;">
                                         <span class="font-gray" style="font-size: 13px">Zalogowano jako</span>
                                         <br>
-                                        <span class="font-white f-500">{{ app.user.firstName }} {{ app.user.lastName }}</span>
+                                        <a href="{{ path('user_profile') }}" class="font-white f-500" style="font-size: 14px;">
+                                            <span>{{ app.user.firstName }} {{ app.user.lastName }}</span>
+                                        </a>
                                     </div>
                                 </li>
                                 <li class="nav-item">

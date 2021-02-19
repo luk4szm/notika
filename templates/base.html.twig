@@ -1,284 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Notika{% endblock %}</title>
+    <title>
+        {% block title %}Mensański Typer{% endblock %}
+    </title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/jquery.mCustomScrollbar.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/notika-custom-icon.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/owl.theme.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/owl.transitions.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/waves.min.css') }}">
-    {% endblock %}
-    {% block headjavascripts %}
-        <script src="{{ asset('assets/js/modernizr-2.8.3.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css.map') }}">
     {% endblock %}
 </head>
 <body>
 {% block top_label %}
-    <!--[if lt IE 8]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    </p>
-    <![endif]-->
-    <!-- Start Header Top Area -->
-    <div class="header-top-area">
-        <div class="container">
-            <div class="row visible-lg-inline">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('index') }}">
+                <img src="{{ asset('assets/img/mtLogo.png') }}" style="height: 34px;" alt="mt_logo">
+                <img src="{{ asset('assets/img/mtLogoNapis.png') }}" style="height: 30px;" alt="mt_napis">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+                    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarToggler">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-outline-success" role="button">Zasady</a>
+                    {% if app.user %}
+                        <a href="{{ path('users') }}" class="btn btn-outline-success" role="button">Gracze</a>
+                    {% endif %}
+                </div>
+                <div class="btn-group ms-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ekstraklasa
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tabela</a></li>
+                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
+                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Liga Mistrzów
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tabela</a></li>
+                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
+                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Premier League
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tabela</a></li>
+                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
+                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {% if is_granted('ROLE_USER') %}
+                <div class="row row-cols-lg-auto align-items-center">
+                    <div class="col-12 d-flex mx-5">
+                        <a href="/" class="btn btn-outline-success me-2 btn-bet px-4" role="button">TYPUJ</a>
+                    </div>
+                </div>
+
+                <div class="row row-cols-lg-auto g-3 align-items-center">
+                    <div class="col-12 d-flex">
+                        <small class="text-right text-nowrap">Zalogowano jako<br>
+                            <b><a href="{{ path('user_profile') }}" class="link-secondary">
+                                    {{ app.user.firstName }} {{ app.user.lastName }}
+                                </a></b>
+                        </small>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div style="margin-left: 15px;">
                     <a href="/">
-                        <a href="#">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt=""/>
-                        </a>
+                        <img src="{{ asset('assets/svg/gear-fill.svg') }}" height="20px" alt="admin">
                     </a>
                 </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="header-top-menu">
-                        {% if app.user %}
-                            <ul class="nav navbar-nav notika-top-nav">
-                                <li class="dropdown">
-                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
-                                        <div class="spinner4 spinner-4"></div>
-                                        <div class="ntd-ctn"><span>2</span></div>
-                                        <span><i class="notika-icon notika-mail"></i></span>
-                                    </a>
-                                    <div role="menu" class="dropdown-menu message-dd animated fadeIn">
-                                        <div class="hd-mg-tt">
-                                            <h2>Messages</h2>
-                                        </div>
-                                        <div class="hd-message-info">
-                                            <a href="#">
-                                                <div class="hd-message-sn">
-                                                    <div class="hd-message-img">
-                                                        <img src="img/post/1.jpg" alt=""/>
-                                                    </div>
-                                                    <div class="hd-mg-ctn">
-                                                        <h3>David Belle</h3>
-                                                        <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="hd-mg-va">
-                                            <a href="#">View All</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                        <span><i class="notika-icon notika-menus"></i></span>
-                                    </a>
-                                    <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
-                                        <div class="hd-mg-tt">
-                                            <h2>Tasks</h2>
-                                        </div>
-                                        <div class="hd-message-info hd-task-info">
-                                            <div class="skill">
-                                                <div class="progress">
-                                                    <div class="lead-content">
-                                                        <p>HTML5 Validation Report</p>
-                                                    </div>
-                                                    <div class="progress-bar wow fadeInLeft" data-progress="95%"
-                                                         style="width: 95%;">
-                                                        <span>95%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="hd-mg-va">
-                                            <a href="#">View All</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="mg-l-30 nav-link dropdown-toggle text-right" style="margin-top: -5px;">
-                                        <span class="font-gray" style="font-size: 13px">Zalogowano jako</span>
-                                        <br>
-                                        <a href="{{ path('user_profile') }}" class="font-white f-500" style="font-size: 14px;">
-                                            <span>{{ app.user.firstName }} {{ app.user.lastName }}</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ path('app_logout') }}" class="nav-link">
-                                        <span>&#10006;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        {% else %}
-                            <div class="nav navbar-nav notika-top-nav">
-                                <div class="btn-demo-notika">
-                                    <div class="btn-list">
-                                        <button type="button" onclick="location.href='{{ path('app_register') }}'"
-                                                class="btn btn-success notika-btn-success">
-                                            Zarejestruj się
-                                        </button>
-                                        <button type="button" onclick="location.href='{{ path('app_login') }}'"
-                                                class="btn btn-default notika-btn-default">
-                                            Zaloguj się
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
+            {% endif %}
 
-                    </div>
+            {% if is_granted('ROLE_USER') %}
+                <div style="margin-left: 15px;">
+                    <a href="{{ path('app_logout') }}">
+                        <img src="{{ asset('assets/svg/door-closed.svg') }}" height="20px" alt="logout">
+                    </a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Header Top Area -->
-{% endblock %}
-{% block desktop_menu %}
-    <!-- Main Menu area start-->
-    <div class="main-menu-area mg-tb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li {% if app.request.get('_route') == 'index' %}class="active"{% endif %}>
-                            <a href="{{ path('index') }}"><i class="notika-icon notika-house"></i>Strona główna</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#rankings"><i class="notika-icon notika-windows"></i> Rankingi</a></li>
-                        <li><a data-toggle="tab" href="#tables"><i class="notika-icon notika-form"></i> Tabele</a></li>
-                        <li><a data-toggle="tab" href="#stats"><i class="notika-icon notika-bar-chart"></i> Statystyki</a></li>
-                        <li><a data-toggle="tab" href="#schedules"><i class="notika-icon notika-calendar"></i> Terminarze</a></li>
-                    </ul>
-                    <div class="tab-content custom-menu-content">
-                        <div id="rankings" class="tab-pane notika-tab-menu-bg animated fadeIn">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                <li><a href="#">Champions League 2020/2021</a></li>
-                                <li><a href="#">Premier League 2020/2021</a></li>
-                            </ul>
-                        </div>
-                        <div id="tables" class="tab-pane notika-tab-menu-bg animated fadeIn">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                <li><a href="#">Champions League 2020/2021</a></li>
-                                <li><a href="#">Premier League 2020/2021</a></li>
-                            </ul>
-                        </div>
-                        <div id="stats" class="tab-pane notika-tab-menu-bg animated fadeIn">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                <li><a href="#">Champions League 2020/2021</a></li>
-                                <li><a href="#">Premier League 2020/2021</a></li>
-                            </ul>
-                        </div>
-                        <div id="schedules" class="tab-pane notika-tab-menu-bg animated fadeIn">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                <li><a href="#">Champions League 2020/2021</a></li>
-                                <li><a href="#">Premier League 2020/2021</a></li>
-                            </ul>
-                        </div>
-                    </div>
+            {% endif %}
+
+            {% if is_granted('IS_ANONYMOUS') %}
+                <div class="btn-group">
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-success text-nowrap" role="button">Załóż konto</a>
+                    <a href="{{ path('app_login') }}" class="btn btn-success me-2 text-nowrap" role="button">Zaloguj się</a>
                 </div>
-            </div>
+            {% endif %}
         </div>
-    </div>
-    <!-- Main Menu area End-->
+    </nav>
 {% endblock %}
-{% block mobile_menu %}
-    <!-- Mobile Menu start -->
-    <div class="mobile-menu-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="mobile-menu">
-                        <nav id="dropdown">
-                            <ul class="mobile-menu-nav">
-                                <li><a href="#">Home</a></li>
-                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Rankingi</a>
-                                    <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                        <li><a href="#">Champions League 2020/2021</a></li>
-                                        <li><a href="#">Premier League 2020/2021</a></li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#tables" href="#">Tabele</a>
-                                    <ul id="tables" class="collapse dropdown-header-top">
-                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                        <li><a href="#">Champions League 2020/2021</a></li>
-                                        <li><a href="#">Premier League 2020/2021</a></li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#stats" href="#">Statystyki</a>
-                                    <ul id="stats" class="collapse dropdown-header-top">
-                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                        <li><a href="#">Champions League 2020/2021</a></li>
-                                        <li><a href="#">Premier League 2020/2021</a></li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#schedules" href="#">Terminarze</a>
-                                    <ul id="schedules" class="collapse dropdown-header-top">
-                                        <li><a href="#">Ekstraklasa 2020/2021</a></li>
-                                        <li><a href="#">Champions League 2020/2021</a></li>
-                                        <li><a href="#">Premier League 2020/2021</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Mobile Menu end -->
-{% endblock %}
-{% block content %}{% endblock %}
+<div class="pb-3">
+    {% block body %}
+
+    {% endblock %}
+</div>
 {% block footer %}
-    <!-- Start Footer area-->
-    <div class="footer-copyright-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="footer-copy-right">
-                        <p>Copyright © {{ "now"|date("Y") }}. Mensański Typer. Wszystkie prawa zastrzeżone</p>
-                    </div>
-                </div>
-            </div>
+    <nav class="fixed-bottom navbar-light bg-light text-center">
+        <div class="container-fluid text-center">
+            <span class="navbar-text">
+                Copyright © {{ "now"|date("Y") }}. Mensański Typer. Wszystkie prawa zastrzeżone
+            </span>
         </div>
-    </div>
-    <!-- End Footer area-->
+    </nav>
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.appear.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.sparkline.min.js') }}"></script>
-    <script src="{{ asset('assets/js/sparkline-active.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.flot.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('assets/js/curvedLines.js') }}"></script>
-    <script src="{{ asset('assets/js/flot-active.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.meanmenu.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.todo.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-price-slider.js') }}"></script>
-    <script src="{{ asset('assets/js/knob-active.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/js/counterup-active.js') }}"></script>
-    <script src="{{ asset('assets/js/wave.min.js') }}"></script>
-    <script src="{{ asset('assets/js/wave-active.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js.map') }}"></script>
 {% endblock %}
 </body>
 </html>

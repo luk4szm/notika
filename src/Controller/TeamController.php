@@ -9,19 +9,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TeamController extends AbstractController
 {
-	/**
-	 * @Route("/team/{id}", name="team_detail")
-	 * @param int $id
-	 * @return Response
-	 */
-	public function index(int $id): Response
-	{
-		$em = $this->getDoctrine()->getManager();
-		$team = $em->getRepository(Team::class)->find($id);
-		dump($team);
+    /**
+     * @Route("/team/{id}", name="team_detail")
+     * @param int $id
+     * @return Response
+     */
+    public function index(int $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $team = $em->getRepository(Team::class)->find($id);
 
-		return $this->render('team/index.html.twig', [
-			'team' => $team
-		]);
-	}
+        dump($team);
+
+        return $this->render('team/index.html.twig', [
+            'team' => $team
+        ]);
+    }
 }

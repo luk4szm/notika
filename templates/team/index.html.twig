@@ -4,6 +4,9 @@
 
 {% block body %}
     {% if team is not null %}
+        {% for game in team.gamesHome %}
+            {{ game.id }}
+        {% endfor %}
         <!-- Breadcomb area Start-->
         <div class="breadcomb-area">
             <div class="container">

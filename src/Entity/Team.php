@@ -35,7 +35,7 @@ class Team
     private $short_name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
@@ -48,6 +48,11 @@ class Team
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="guest")
      */
     private $games_guest;
+
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $country;
 
     public function __construct()
     {
@@ -104,6 +109,18 @@ class Team
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

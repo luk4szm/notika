@@ -1,73 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Zaloguj się!{% endblock %}
-
-{% block top_label %}
-    <!--[if lt IE 8]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    </p>
-    <![endif]-->
-{% endblock %}
-
-{% block desktop_menu %}
-{% endblock %}
-
-{% block mobile_menu %}
-{% endblock %}
+{% block title %}{{ parent() }} - zaloguj się{% endblock %}
 
 {% block body %}
-    <div class="login-content">
-        <!-- Login -->
-        <div class="nk-block toggled" id="l-login">
+    <div class="position-relative" style="height: 88vh">
+        <div class="position-absolute top-50 start-50 translate-middle">
             {% if app.user %}
-            <div class="mb-3">
-                Jesteś zalogowany jako {{ app.user.username }}, <a href="{{ path('app_logout') }}">wyloguj się</a>
-            </div>
+                <div class="mb-3">
+                    <div class="alert alert-success text-center">
+                        Jesteś zalogowany jako <b>{{ app.user.username }}</b>,<br><a href="{{ path('app_logout') }}">wyloguj się</a>
+                    </div>
+                </div>
             {% else %}
-            <form method="post" id="login-form">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <div class="nk-form">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    <div class="input-group">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                        <div class="nk-int-st">
-                            <input type="text" name="username" class="form-control" placeholder="Nazwa użytkownika"
-                                   value="{{ last_username }}" id="inputUsername" required autofocus>
-                        </div>
+                <!-- Login -->
+                <div class="card" style="width: 300px">
+                    <div class="card-header">
+                        Zaloguj się
                     </div>
-                    <div class="input-group mg-t-15">
-                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                        <div class="nk-int-st">
-                            <input type="password" name="password" class="form-control" placeholder="Hasło"
-                                   id="inputPassword" required>
-                        </div>
+                    <div class="card-body">
+                        {% if error %}
+                            <div class="alert alert-danger text-center">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        {% endif %}
+                        <form method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nazwa użytkownika</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                       value="{{ last_username }}" required autofocus>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Hasło</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" name="_remember_me" id="_remember_me">
+                                <label class="form-check-label" for="_remember_me">Zapamiętaj mnie</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Zaloguj</button>
+                        </form>
                     </div>
-                    <div class="fm-checkbox">
-                        <label><input type="checkbox" class="i-checks" name="_remember_me"> <i></i> Zapamiętaj mnie</label>
-                    </div>
-                    <button type="submit" class="btn btn-login btn-success btn-float">
-                        <i class="notika-icon notika-right-arrow right-arrow-ant"></i>
-                    </button>
                 </div>
 
-                <div class="nk-navigation nk-lg-ic">
-                    <a href="{{ path('app_register') }}" data-ma-block="#l-register">
-                        <i class="notika-icon notika-plus-symbol"></i>
-                        <span>Zarejestruj się</span>
-                    </a>
-                    <a href="{{ path('app_forgot_password_request') }}" data-ma-block="#l-forget-password">
-                        <i>?</i>
-                        <span>Nie pamiętam hasła</span>
-                    </a>
-                </div>
-            </form>
+                <a href="{{ path('app_register') }}">
+                    <span>Zarejestruj się</span>
+                </a>
+                <br/>
+                <a href="{{ path('app_forgot_password_request') }}">
+                    <span>Nie pamiętam hasła</span>
+                </a>
             {% endif %}
         </div>
     </div>
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

@@ -1,45 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Zresetuj hasło{% endblock %}
+{% block title %}{{ parent }} - zresetuj hasło{% endblock %}
 
-{% block top_label %}
-    <!--[if lt IE 8]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    </p>
-    <![endif]-->
-{% endblock %}
-
-{% block desktop_menu %}
-{% endblock %}
-
-{% block mobile_menu %}
-{% endblock %}
-
-{% block content %}
-    <div class="login-content">
-        <!-- Forgot Password -->
-        <div class="nk-block toggled" id="l-forget-password">
-
-            {% form_theme resetForm 'bootstrap_4_layout.html.twig' %}
-            {{ form_start(resetForm) }}
-            <div class="nk-form">
-
-                <div class="input-group mg-t-15">
-                    <span class="input-group-addon nk-ic-st-pro"></span>
-                    <div class="nk-int-st">
-                        {{ form_row(resetForm.plainPassword, {
-                            label: ' '
-                        }) }}
-                    </div>
+{% block body %}
+    <div class="position-relative" style="height: 88vh">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            {% if app.user %}
+            <div class="mb-3">
+                <div class="alert alert-success text-center">
+                    Jesteś zalogowany jako <b>{{ app.user.username }}</b>,<br><a href="{{ path('app_logout') }}">wyloguj się</a>
                 </div>
-
-                <button type="submit" class="btn btn-login btn-success btn-float">
-                    <i class="notika-icon notika-right-arrow"></i>
-                </button>
             </div>
-            {{ form_end(resetForm) }}
+            {% else %}
+            <!-- Forgot Password -->
+            <div class="card" style="width: 300px">
+                <div class="card-header">
+                    Zresetuj hasło
+                </div>t
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nazwa użytkownika</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                   value="{{ last_username }}" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Hasło</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" name="_remember_me" id="_remember_me">
+                            <label class="form-check-label" for="_remember_me">Zapamiętaj mnie</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zaloguj</button>
+                    </form>
+                </div>
+            </div>
 
+
+            <div class="nk-block toggled" id="l-forget-password">
+
+                {% form_theme resetForm 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(resetForm) }}
+                <div class="nk-form">
+
+                    <div class="input-group mg-t-15">
+                        <span class="input-group-addon nk-ic-st-pro"></span>
+                        <div class="nk-int-st">
+                            {{ form_row(resetForm.plainPassword, {
+                                label: ' '
+                            }) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-login btn-success btn-float">
+                        <i class="notika-icon notika-right-arrow"></i>
+                    </button>
+                </div>
+                {{ form_end(resetForm) }}
+
+            </div>
         </div>
     </div>
 {% endblock %}

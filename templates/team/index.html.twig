@@ -4,9 +4,13 @@
 
 {% block body %}
     {% if team is not null %}
-        {% for game in team.gamesHome %}
-            {{ game.id }}
-        {% endfor %}
+        {{ team.gamesGuest|length }}<br>
+        {{ team.gamesHome|length }}<br>
+        {{ team.gamesAll|length }}<br>
+
+        <a href="{{ path('team_detail', {'slug': team.slug}) }}">team details</a>
+
+
         <!-- Breadcomb area Start-->
         <div class="breadcomb-area">
             <div class="container">

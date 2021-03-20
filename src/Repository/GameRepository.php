@@ -19,6 +19,39 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
+    /**
+     * Find all games for specified team
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function findTeamAllGames($id)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.home = :val')
+            ->orWhere('g.guest = :val')
+            ->setParameter('val', $id)
+            ->orderBy('g.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Find next played game
+     *
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findNextGame()
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.date > :val')
+            ->setParameter('val', (new \DateTime())->format('Y-m-d H:i:s'))
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Game[] Returns an array of Game objects
     //  */

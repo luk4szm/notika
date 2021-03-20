@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - użytkownik{% endblock %}
+{% block title %}{{ parent() }} - {{ team.name }}{% endblock %}
 
 {% block body %}
     {% if team is not null %}

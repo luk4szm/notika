@@ -11,19 +11,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/users", name="users")
-	 * @return Response
-	 * @IsGranted("ROLE_USER")
+     * @Route("/user", name="users_list")
+     * @IsGranted("ROLE_USER")
+     * @return Response
      */
     public function index(): Response
     {
-    	$em = $this->getDoctrine()->getManager();
-    	$users = $em->getRepository(User::class)->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findAll();
 
-    	dump($users);
-
-        return $this->render('user/index.html.twig', [
-			'users' => $users
+        return $this->render('user/users_list.html.twig', [
+            'users' => $users,
         ]);
     }
+
+    /**
+     * @Route("/user/{username}", name="user_info")
+     * @param User $user
+     * @IsGranted("ROLE_USER")
+     * @return Response
+     */
+    public function user_info(User $user): Response
+    {
+        return $this->render('user/user_info.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+
 }

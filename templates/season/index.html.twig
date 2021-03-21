@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SeasonController!{% endblock %}
+
+{% block body %}
+    {{ dump(season) }}
+    Liczba wszystkich spotkań: {{ season.games|length }} <br /><br />
+
+    {% for game in season.games %}
+        {{ game.id }} <br />
+    {% endfor %}
+{% endblock %}

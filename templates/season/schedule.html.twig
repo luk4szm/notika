@@ -14,6 +14,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                         <th scope="col">Data</th>
                         <th scope="col">Gospodarz</th>
                         <th scope="col"></th>
@@ -26,12 +27,13 @@
                             {% set counter = (counter|default(0)) + 1 %}
                             {% if loop.first %}
                                 <tr>
-                                    <th scope="row" colspan="6" class="text-center">Kolejka #{{ game.round }}</th>
+                                    <th scope="row" colspan="7" class="text-center">Kolejka #{{ game.round }}</th>
                                 </tr>
                             {% endif %}
                             <tr>
                                 <td>{{ counter }}</td>
                                 <td>{{ game.round }}</td>
+                                <td>{% if game.isawarded %}&#9917;{% endif %}</td>
                                 <td>{{ game.date|date("Y-m-d H:i") }}</td>
                                 <td class="text-end fw-bold">{{ game.home.name }}</td>
                                 <td class="text-center">{{ game.goalsHome }} : {{ game.goalsGuest }}</td>

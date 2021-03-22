@@ -37,6 +37,22 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find all games for specified season
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function findSeasonAllGames($id)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.season = :val')
+            ->setParameter('val', $id)
+            ->orderBy('g.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Find next played game
      *
      * @return mixed

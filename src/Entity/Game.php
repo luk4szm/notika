@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Game
 {
     /**
+     * Time in minutes after which the games is probably is end
+     */
+    public const GAMETIME = 108;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -33,6 +38,8 @@ class Game
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    private $endDate;
 
     /**
      * @ORM\Column(type="smallint")
@@ -160,6 +167,13 @@ class Game
         $this->date = $date;
 
         return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        $this->endDate = new \DateTime($this->getDate()->format("Y-m-d H:i:s"));
+        $this->endDate->add(new \DateInterval("PT" . self::GAMETIME . "M"));
+        return $this->endDate;
     }
 
     public function getRound(): ?int

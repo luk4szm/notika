@@ -20,13 +20,12 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index($gameTime): Response
+    public function index(): Response
     {
         $nextGame = $this->em->getRepository(Game::class)->findNextGame();
 
         return $this->render('index/index.html.twig', [
             'nextGame' => $nextGame,
-            'gameTime' => $gameTime
         ]);
     }
 }

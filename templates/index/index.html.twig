@@ -3,7 +3,6 @@
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ gameTime }}
     {% if nextGame %}
         {{ nextGame.home.name }} vs. {{ nextGame.guest.name }} <br/>
         {{ nextGame.goalsHome }}:{{ nextGame.goalsGuest }}

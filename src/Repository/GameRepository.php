@@ -62,7 +62,7 @@ class GameRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('g')
             ->andWhere('g.date > :val')
-            ->setParameter('val', (new \DateTime())->format('Y-m-d H:i:s'))
+            ->setParameter('val', (new \DateTime()))
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

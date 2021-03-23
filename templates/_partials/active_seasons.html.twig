@@ -1,0 +1,18 @@
+<div class="btn-group ms-2">
+    {% for season in seasons %}
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ season.league.name }}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Tabela</a></li>
+                <li><a class="dropdown-item" href="{{ path('season_schedule', {'slug': season.slug}) }}">Terminarz</a></li>
+                <li><a class="dropdown-item" href="#">Statystyki</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Rankingi</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+</div>

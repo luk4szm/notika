@@ -17,50 +17,7 @@
                         <a href="{{ path('users_list') }}" class="btn btn-outline-success" role="button">Gracze</a>
                     {% endif %}
                 </div>
-                <div class="btn-group ms-2">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ekstraklasa
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tabela</a></li>
-                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
-                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
-                        </ul>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Liga Mistrzów
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tabela</a></li>
-                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
-                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
-                        </ul>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Premier League
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tabela</a></li>
-                            <li><a class="dropdown-item" href="#">Terminarz</a></li>
-                            <li><a class="dropdown-item" href="#">Statystyki</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Rankingi</a></li>
-                        </ul>
-                    </div>
-                </div>
+                {{ render(controller('App\\Controller\\SeasonController:active')) }}
             </div>
 
             {% if is_granted('ROLE_USER') %}

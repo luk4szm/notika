@@ -19,6 +19,21 @@ class SeasonRepository extends ServiceEntityRepository
         parent::__construct($registry, Season::class);
     }
 
+    /**
+     * Return list of active seasons
+     *
+     * @return mixed
+     */
+    public function findActiveSeasons()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.is_active = :val')
+            ->setParameter('val', true)
+            ->orderBy('s.name ', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Season[] Returns an array of Season objects
     //  */

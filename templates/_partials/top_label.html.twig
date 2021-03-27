@@ -10,7 +10,7 @@
                     aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarToggler">
+            <div class="collapse navbar-collapse" id="navbarToggler">
                 <div class="btn-group">
                     <a href="#" class="btn btn-outline-success" role="button">Zasady</a>
                     {% if app.user %}
@@ -39,7 +39,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_ADMIN') %}
-                <div style="margin-left: 15px;">
+                <div class="ms-2">
                     <a href="/">
                         <img src="{{ asset('assets/svg/gear-fill.svg') }}" height="20px" alt="admin">
                     </a>
@@ -47,7 +47,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
-                <div style="margin-left: 15px;">
+                <div class="ms-2">
                     <a href="{{ path('app_logout') }}">
                         <img src="{{ asset('assets/svg/door-closed.svg') }}" height="20px" alt="logout">
                     </a>

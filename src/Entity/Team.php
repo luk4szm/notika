@@ -61,10 +61,16 @@ class Team
      */
     private $country;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Table::class, mappedBy="team")
+     */
+    private $tables;
+
     public function __construct()
     {
         $this->games_home = new ArrayCollection();
         $this->games_guest = new ArrayCollection();
+        $this->tables = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,6 +204,36 @@ class Team
             // set the owning side to null (unless already changed)
             if ($games_guest->getGuest() === $this) {
                 $games_guest->setGuest(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Table[]
+     */
+    public function getTables(): Collection
+    {
+        return $this->tables;
+    }
+
+    public function addTable(Table $table): self
+    {
+        if (!$this->tables->contains($table)) {
+            $this->tables[] = $table;
+            $table->addTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(Table $table): self
+    {
+        if ($this->tables->removeElement($table)) {
+            // set the owning side to null (unless already changed)
+            if ($table->getSeason() === $this) {
+                $table->setSeason(null);
             }
         }
 

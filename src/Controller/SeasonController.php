@@ -33,7 +33,7 @@ class SeasonController extends AbstractController
     }
 
     /**
-     * @Route("/season/{slug}/schedule", name="season_schedule")
+     * @Route("/schedule/{slug}", name="season_schedule")
      * @param Season $season
      * @return Response
      */
@@ -42,12 +42,13 @@ class SeasonController extends AbstractController
         $games = $this->scheduleService->getSchedule($season);
 
         return $this->render('season/schedule.html.twig', [
+            'season' => $season,
             'games' => $games
         ]);
     }
 
     /**
-     * Route (name="active_seasons")
+     * @Route(name="active_seasons")
      * @return Response
      */
     public function active(): Response

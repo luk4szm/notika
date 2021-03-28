@@ -1,49 +1,69 @@
-{% extends 'base.html.twig' %}
+{% extends 'season/index.html.twig' %}
 
-{% block title %}Hello SeasonController!{% endblock %}
+{% block title %}Terminarz - {{ parent() }}{% endblock %}
 
-{% block body %}
-    {% for type in games %}
-        <div class="card mb-3">
-            <div class="card-header fw-bold">
-                {{ type.label }}
-            </div>
-            <div class="card-body">
-                <table class="table table-sm table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col">Data</th>
-                        <th scope="col">Gospodarz</th>
-                        <th scope="col"></th>
-                        <th scope="col">Gość</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for round in type.data %}
-                        {% for game in round %}
-                            {% set counter = (counter|default(0)) + 1 %}
-                            {% if loop.first %}
-                                <tr>
-                                    <th scope="row" colspan="7" class="text-center">Kolejka #{{ game.round }}</th>
+{% block content %}
+    {% if (games|length != 0) %}
+        {% for type in games %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ type.label }}
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col">Data</th>
+                            <th scope="col" class="text-end">Gospodarz</th>
+                            <th scope="col"></th>
+                            <th scope="col">Gość</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for round in type.data %}
+                            {% for game in round %}
+                                {% set counter = (counter|default(0)) + 1 %}
+                                {% if loop.first %}
+                                    <tr>
+                                        <th scope="row" colspan="3" class="text-center"></th>
+                                        <th scope="row" colspan="3" class="text-center">Kolejka #{{ game.round }}</th>
+                                    </tr>
+                                {% endif %}
+                                <tr class="row-link" data-href="{{ path('index') }}">
+                                    <td>{{ counter }}</td>
+                                    <td>{% if game.isawarded %}&#9917;{% endif %}</td>
+                                    <td>{{ game.date|date("Y-m-d H:i") }}</td>
+                                    <td class="text-end">{{ game.home.name }}</td>
+                                    <td class="text-center fw-mid">{{ game.goalsHome }} : {{ game.goalsGuest }}</td>
+                                    <td class="text-start">{{ game.guest.name }}</td>
                                 </tr>
-                            {% endif %}
-                            <tr>
-                                <td>{{ counter }}</td>
-                                <td>{{ game.round }}</td>
-                                <td>{% if game.isawarded %}&#9917;{% endif %}</td>
-                                <td>{{ game.date|date("Y-m-d H:i") }}</td>
-                                <td class="text-end fw-bold">{{ game.home.name }}</td>
-                                <td class="text-center">{{ game.goalsHome }} : {{ game.goalsGuest }}</td>
-                                <td class="text-start fw-bold">{{ game.guest.name }}</td>
-                            </tr>
+                            {% endfor %}
                         {% endfor %}
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="card mb-3">
+            <div class="card-body">
+                Brak spotkań
             </div>
         </div>
-    {% endfor %}
+    {% endif %}
 {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".row-link").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}
+

@@ -1,12 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SeasonController!{% endblock %}
+{% block title %}{{ season.name }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ dump(season) }}
-    Liczba wszystkich spotkań: {{ season.games|length }} <br /><br />
-
-    {% for game in season.games %}
-        {{ game.id }} <br />
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Mensański Typer</li>
+                        <li class="breadcrumb-item" aria-current="page">{{ season.name }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">Terminarz</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="col-sticky-top">
+                    {% block left_menu %}
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                Tabela
+                            </a>
+                            <a href="{{ path('season_schedule', {'slug': season.slug}) }}"
+                               class="list-group-item list-group-item-action {% if app.request.get('_route') == 'season_schedule' %}active{% endif %}">
+                                Terminarz
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                Statystyki
+                            </a>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="col-lg-9">
+                {% block content %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            {{ season.name }}
+                        </div>
+                        <div class="card-body">
+                            {{ season.slug }}
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

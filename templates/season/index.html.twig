@@ -16,27 +16,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <div class="col-sticky-top">
-                    {% block left_menu %}
-                        <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action">
-                                Tabela
-                            </a>
-                            <a href="{{ path('season_schedule', {'slug': season.slug}) }}"
-                               class="list-group-item list-group-item-action {% if app.request.get('_route') == 'season_schedule' %}active{% endif %}">
-                                Terminarz
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                Statystyki
-                            </a>
-                        </div>
-                    {% endblock %}
-                </div>
-            </div>
+            {% include 'season/_partials/left_column.html.twig' %}
             <div class="col-lg-9">
                 {% block content %}
-                    <div class="card mb-3">
+                    <div class="card">
                         <div class="card-header">
                             {{ season.name }}
                         </div>

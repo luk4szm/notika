@@ -1,0 +1,17 @@
+<div class="col-lg-3">
+    <div class="col-sticky-top">
+        <div class="list-group">
+            <a href="{{ path('season_table', {'slug': season.slug}) }}"
+               class="list-group-item list-group-item-action {% if app.request.get('_route') == 'season_table' %}active{% endif %}">
+                Tabela
+            </a>
+            <a href="{{ path('season_schedule', {'slug': season.slug}) }}"
+               class="list-group-item list-group-item-action {% if app.request.get('_route') == 'season_schedule' %}active{% endif %}">
+                Terminarz
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Statystyki
+            </a>
+        </div>
+    </div>
+</div>

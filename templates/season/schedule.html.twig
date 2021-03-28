@@ -5,7 +5,7 @@
 {% block content %}
     {% if (games|length != 0) %}
         {% for type in games %}
-            <div class="card mb-3">
+            <div class="card">
                 <div class="card-header">
                     {{ type.label }}
                 </div>
@@ -47,7 +47,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <div class="card mb-3">
+        <div class="card">
             <div class="card-body">
                 Brak spotkań
             </div>

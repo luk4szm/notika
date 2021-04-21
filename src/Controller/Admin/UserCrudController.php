@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-
 class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -12,14 +12,11 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud
+            ->setDefaultSort(['id' => 'ASC'])
+            ->setPaginatorPageSize(30)
+        ;
     }
-    */
 }

@@ -40,7 +40,7 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="ms-2">
-                    <a href="/">
+                    <a href="{{ path('admin') }}">
                         <img src="{{ asset('assets/svg/gear-fill.svg') }}" height="20px" alt="admin">
                     </a>
                 </div>

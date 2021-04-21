@@ -4,8 +4,55 @@
 
 {% block content %}
     <div class="card">
+        <div class="card-header">
+            {{ season.name }}
+        </div>
         <div class="card-body">
-            Tutaj będzie tabela
+            <table class="table table-sm">
+                <thead class="table-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Mecze</th>
+                    <th scope="col">Wygrane</th>
+                    <th scope="col">Remisy</th>
+                    <th scope="col">Przegrane</th>
+                    <th scope="col">Br+</th>
+                    <th scope="col">Br+</th>
+                    <th scope="col">Br+/-</th>
+                    <th scope="col">Punkty</th>
+                    <th scope="col">Forma</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participant in table %}
+                    <tr class="row-link" data-href="{{ path('team_detail', {'slug': participant.team.slug}) }}">
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-mid">{{ participant.team.name }}</td>
+                        <td>{{ participant.games }}</td>
+                        <td>{{ participant.won }}</td>
+                        <td>{{ participant.drawn }}</td>
+                        <td>{{ participant.lost }}</td>
+                        <td>{{ participant.goalsFor }}</td>
+                        <td>{{ participant.goalsAgainst }}</td>
+                        <td>{{ participant.goalsFor - participant.goalsAgainst }}</td>
+                        <td>{{ participant.points }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".row-link").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
 {% endblock %}

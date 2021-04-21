@@ -23,14 +23,11 @@ class TableController extends AbstractController
      */
     public function table(Season $season): Response
     {
-
-        $table = $this->em->getRepository(Table::class)->findAll();
-
-        dump($season, $table);
+        $table = $this->em->getRepository(Table::class)->findOrderedSeasonTable($season->getId());
 
         return $this->render('table/table.html.twig', [
             'season' => $season,
-            'table' => $table,
+            'table'  => $table,
         ]);
     }
 }

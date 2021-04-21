@@ -19,32 +19,21 @@ class TableRepository extends ServiceEntityRepository
         parent::__construct($registry, Table::class);
     }
 
-    // /**
-    //  * @return Table[] Returns an array of Table objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOrderedSeasonTable(int $id)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->_em->createQueryBuilder();
 
-    /*
-    public function findOneBySomeField($value): ?Table
-    {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+                    ->andWhere('t.season = :val')
+                    ->setParameter('val', $id)
+                    ->addOrderBy('t.division', 'ASC')
+                    ->addOrderBy('t.bracket', 'ASC')
+                    ->addOrderBy('t.place', 'ASC')
+                    ->addOrderBy('t.points', 'DESC')
+                    ->addOrderBy($qb->expr()->diff('t.goals_for', 't.goals_against'), 'DESC')
+                    ->addOrderBy('t.goals_for', 'DESC')
+                    ->addOrderBy('t.won', 'DESC')
+                    ->getQuery()
+                    ->getResult();
     }
-    */
 }

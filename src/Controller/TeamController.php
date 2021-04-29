@@ -25,7 +25,7 @@ class TeamController extends AbstractController
         }
 
         $repo = $em->getRepository(Game::class);
-        $team->gamesAll = $repo->findTeamAllGames($team->getId());
+        $team->gamesAll = $repo->findTeamGames($team);
 
         return $this->render('team/index.html.twig', [
             'team' => $team

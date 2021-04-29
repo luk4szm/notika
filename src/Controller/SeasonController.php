@@ -39,7 +39,7 @@ class SeasonController extends AbstractController
      */
     public function schedule(Season $season): Response
     {
-        $games = $this->scheduleService->getSchedule($season);
+        $games = $this->scheduleService->getSeasonSchedule($season);
 
         return $this->render('season/schedule.html.twig', [
             'season' => $season,

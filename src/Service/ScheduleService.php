@@ -23,12 +23,30 @@ class ScheduleService
      * @param Season $season
      * @return array
      */
-    public function getSchedule(Season $season): array
+    public function getSeasonSchedule(Season $season): array
     {
-        $seasonGames = $this->em->getRepository(Game::class)->findSeasonAllGames($season->getId());
+        $seasonGames = $this->em->getRepository(Game::class)->findSeasonGames($season);
 
+        return $this->splitGamesByDate($seasonGames);
+    }
+
+    public function getRoundSchedule(Season $season, int $round): array
+    {
+        $roundGames = $this->em->getRepository(Game::class)->findRoundGames($season, $round);
+
+        return $roundGames;
+    }
+
+    /**
+     * Divide games array for past, upcoming, and present with label
+     *
+     * @param array $gamesCollection
+     * @return array
+     */
+    private function splitGamesByDate(array $gamesCollection): array
+    {
         /** @var Game $game */
-        foreach ($seasonGames AS $game) {
+        foreach ($gamesCollection AS $game) {
             // get list of past games
             if ($game->getDate() < $this->now) {
                 $gamesPast[$game->getRound()][] = $game;

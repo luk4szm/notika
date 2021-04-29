@@ -13,13 +13,12 @@ class ScheduleService
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
+        $this->em  = $em;
         $this->now = (new \DateTime("2021-02-06 20:34:00"));
     }
 
     /**
      * Get whole schedule for season divided into games past, present and upcoming
-     *
      * @param Season $season
      * @return array
      */
@@ -30,6 +29,12 @@ class ScheduleService
         return $this->splitGamesByDate($seasonGames);
     }
 
+    /**
+     * Get list of games in specified round in season
+     * @param Season $season
+     * @param int $round
+     * @return array
+     */
     public function getRoundSchedule(Season $season, int $round): array
     {
         $roundGames = $this->em->getRepository(Game::class)->findRoundGames($season, $round);
@@ -39,7 +44,6 @@ class ScheduleService
 
     /**
      * Divide games array for past, upcoming, and present with label
-     *
      * @param array $gamesCollection
      * @return array
      */

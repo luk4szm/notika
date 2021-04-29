@@ -31,7 +31,7 @@
                                         <th scope="row" colspan="3" class="text-center">Kolejka #{{ game.round }}</th>
                                     </tr>
                                 {% endif %}
-                                <tr class="row-link" data-href="{{ path('index') }}">
+                                <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">
                                     <td>{{ counter }}</td>
                                     <td>{% if game.isawarded %}&#9917;{% endif %}</td>
                                     <td>{{ game.date|date("Y-m-d H:i") }}</td>

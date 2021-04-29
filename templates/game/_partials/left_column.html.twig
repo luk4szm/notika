@@ -1,0 +1,32 @@
+<div class="col-lg-3">
+    <div class="col-sticky-top">
+        <div class="card">
+            <div class="card-header text-center">
+                {{ game.season.name }}
+            </div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead class="table-light text-center">
+                    <tr>
+                        <th colspan="6" scope="col">Kolejka #{{ game.round }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for game in roundSchedule %}
+                        <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">
+                            {% if game.goalsHome is not null and game.goalsGuest is not null %}
+                                <td colspan="2" class="text-end">{{ game.home.shortName }}</td>
+                                <td colspan="2" class="text-center fw-mid">{{ game.goalsHome }} : {{ game.goalsGuest }}</td>
+                                <td colspan="2" class="text-start">{{ game.guest.shortName }}</td>
+                            {% else %}
+                                <td colspan="3" class="text-center fw-mid">{{ game.home.shortName }} vs. {{ game.guest.shortName }}</td>
+                                <td colspan="3" class="text-center">{{ game.date|date("d.m H:i") }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

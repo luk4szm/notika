@@ -1,0 +1,25 @@
+{% extends 'game/index.html.twig' %}
+
+{% block title %}Game - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header text-center">
+            {{ game.home.name }} vs. {{ game.guest.name }}
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".row-link").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}

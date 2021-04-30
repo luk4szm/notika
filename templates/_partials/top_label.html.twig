@@ -17,7 +17,7 @@
                         <a href="{{ path('users_list') }}" class="btn btn-outline-success" role="button">Gracze</a>
                     {% endif %}
                 </div>
-                {{ render(controller('App\\Controller\\SeasonController:active')) }}
+                {{ render(controller('App\\Controller\\SeasonController::active')) }}
             </div>
 
             {% if is_granted('ROLE_USER') %}

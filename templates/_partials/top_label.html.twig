@@ -2,8 +2,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ path('index') }}">
-                <img src="{{ asset('assets/img/mtLogo.png') }}" style="height: 34px;" alt="mt_logo">
-                <img src="{{ asset('assets/img/mtLogoNapis.png') }}" style="height: 30px;" alt="mt_napis">
+                <div class="d-inline-block">
+                    <img src="{{ asset('assets/img/mtLogo.png') }}" style="height: 34px;" alt="mt_logo">
+                </div>
+                <div class="d-none d-lg-inline-block">
+                    <img src="{{ asset('assets/img/mtLogoNapis.png') }}" style="height: 30px;" alt="mt_napis">
+                </div>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"

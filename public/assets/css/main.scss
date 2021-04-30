@@ -1,11 +1,22 @@
 $cyan: #17a2b8;
 $font-size-base: 0.95rem;
 $font-weight-mid: 500;
+$h0-font-size: $font-size-base * 4.5;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
 body {
   background-color: #f9f9f9;
+}
+
+.bg-success-opacity {
+  background: rgba(0, 222, 0, 0.08);
+}
+.bg-info-opacity {
+  background: rgba(0, 50, 255, 0.05);
+}
+.bg-danger-opacity {
+  background: rgba(222, 0, 0, 0.60);
 }
 
 .btn-bet {
@@ -27,6 +38,12 @@ body {
   top: 79px;
   margin-bottom: 1rem;
   z-index: 0;
+}
+
+.fs-0 {
+  font-size: $h0-font-size;
+  font-weight: $font-weight-light;
+  line-height: 4rem;
 }
 
 .fw-mid {

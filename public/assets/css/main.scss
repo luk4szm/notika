@@ -12,9 +12,11 @@ body {
 .bg-success-opacity {
   background: rgba(0, 222, 0, 0.08);
 }
+
 .bg-info-opacity {
   background: rgba(0, 50, 255, 0.05);
 }
+
 .bg-danger-opacity {
   background: rgba(222, 0, 0, 0.60);
 }
@@ -26,10 +28,20 @@ body {
 
 .card {
   margin-bottom: 1rem;
-}
 
-.card-header {
-  font-weight: $font-weight-mid;
+  &-header {
+    font-weight: $font-weight-mid;
+  }
+
+  &-link {
+    color: $black;
+    text-decoration: none;
+  }
+
+  &-link:hover {
+    color: $black;
+    text-decoration: underline;
+  }
 }
 
 .col-sticky-top {
@@ -52,8 +64,8 @@ body {
 
 .row-link {
   cursor: pointer;
-}
 
-.row-link:hover {
-  background-color: $gray-100;
+  &:hover {
+    background-color: $gray-100;
+  }
 }

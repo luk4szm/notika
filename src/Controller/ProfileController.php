@@ -12,16 +12,15 @@ class ProfileController extends AbstractController
 {
 	/**
 	 * @Route("/profile", name="user_profile")
+     * @IsGranted("ROLE_USER")
 	 */
-	public function index(): Response
+	public function summary(): Response
 	{
-		$user = $this->getDoctrine()
-			->getManager()
-			->getRepository(User::class)
-			->findOneBy(['id' => $this->getUser()]);
+        /** @var User $user */
+        $user = $this->getUser();
 
-		return $this->render('profile/index.html.twig', [
-			'user_profile' => $user
+		return $this->render('profile/content/summary.html.twig', [
+			'user' => $user
 		]);
 	}
 }

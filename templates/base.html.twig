@@ -14,8 +14,7 @@
 {% include('_partials/top_label.html.twig') %}
 {% include('_partials/flashes.html.twig') %}
 <div class="container my-3 pb-4">
-    {% block body %}
-    {% endblock %}
+    {% block body %}{% endblock %}
 </div>
 {% block footer %}
     <nav class="fixed-bottom navbar-light bg-light text-center">
@@ -26,10 +25,12 @@
         </div>
     </nav>
 {% endblock %}
+{% block modals %}{% endblock %}
 {% block javascripts %}
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.js.map') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {% endblock %}
+{% block customJs %}{% endblock %}
 </body>
 </html>

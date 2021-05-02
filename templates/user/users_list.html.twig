@@ -3,7 +3,8 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
+    {{ 'user.list'|trans }} <br>
     {% for user in users %}
-        <a href="{{ path('user_info', {'username': user.username}) }}">{{ user.username }}</a><br/>
+        <a href="{{ path('user_info', {'username': user.username}) }}">{{ user.fullName }}</a><br/>
     {% endfor %}
 {% endblock %}

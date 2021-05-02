@@ -1,2 +1,6 @@
+breadcump:
+  user: Użytkownik
+card:
+  summary: Podsumowanie
 user:
   list: Lista użytkowników

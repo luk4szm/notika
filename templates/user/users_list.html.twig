@@ -1,10 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'user/index.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}User list - {{ parent() }}{% endblock %}
 
-{% block body %}
-    {{ 'user.list'|trans }} <br>
-    {% for user in users %}
-        <a href="{{ path('user_info', {'username': user.username}) }}">{{ user.fullName }}</a><br/>
-    {% endfor %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {{ 'user.list'|trans }}
+        </div>
+        <div class="card-body">
+            {% for user in users %}
+                <a href="{{ path('user_info', {'username': user.username}) }}">{{ user.fullName }}</a><br/>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

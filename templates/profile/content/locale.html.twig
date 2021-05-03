@@ -1,0 +1,27 @@
+{% extends('profile/index.html.twig') %}
+
+{% block title %}{{ 'user.profile'|trans }} - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {{ 'card.locale'|trans }}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col text-center">
+                    <form method="GET">
+                        <button type="submit" name="_locale" value="pl"
+                                class="btn btn-{% if app.request.locale == 'en' %}outline-{% endif %}primary w-25 m-2">
+                            {{ 'locale.pl'|trans }}
+                        </button>
+                        <button type="submit" name="_locale" value="en"
+                                class="btn btn-{% if app.request.locale == 'pl' %}outline-{% endif %}primary w-25 m-2">
+                            {{ 'locale.en'|trans }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

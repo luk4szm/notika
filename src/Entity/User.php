@@ -103,6 +103,11 @@ class User implements UserInterface
 	 */
 	private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+	private $locale;
+
 	public function __construct()
 	{
 		$this->bets = new ArrayCollection();
@@ -397,4 +402,16 @@ class User implements UserInterface
 
 		return $this;
 	}
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
 }

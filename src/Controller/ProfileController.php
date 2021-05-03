@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/profile")
@@ -17,6 +18,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProfileController extends AbstractController
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * @Route("/", name="user_profile")
      */
@@ -39,6 +47,30 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('profile/content/password.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/locale", name="profile_locale")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function locale(Request $request, EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($newLocale = $request->query->get('_locale')) {
+            $user->setLocale($newLocale);
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', $this->translator->trans('profile.msgOnChangeLocale', [], null, $newLocale));
+        }
+
+        return $this->render('profile/content/locale.html.twig', [
             'user' => $user
         ]);
     }

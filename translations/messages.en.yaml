@@ -3,11 +3,16 @@ breadcump:
 card:
   summary: Summary
   changePassword: Change password
+  locale: Change language
+locale:
+  en: English version
+  pl: Wersja polska
 profile:
   firstName: First name
   lastName: Last name
   email: E-mail adress
   changeData: Change data
+  msgOnChangeLocale: You must log in again to see the changes
 user:
   list: User list
   profile: User profile

@@ -8,63 +8,7 @@
             {{ 'card.summary'|trans }}
         </div>
         <div class="card-body">
-            <div id="userInfo">
-                Adres e-mail: {{ user.email }}
-            </div>
-            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
-                    data-bs-target="#modal-email-change" data-bs-whatever="{{ user.email }}">
-                Change email
-            </button>
+            Adres e-mail: {{ user.email }}
         </div>
     </div>
-{% endblock %}
-
-{% block modals %}
-    <div class="modal fade" id="modal-email-change" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="email_change" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Zmień adres e-mail</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Change your e-mail adress</p>
-                        <div class="mb-3">
-                            <label for="new_email" class="col-form-label">E-mail adress:</label>
-                            <input type="text" class="form-control" id="new_email" name="new_email" value="{{ user.email }}">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block customJs %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var emailModal = new bootstrap.Modal(document.getElementById('modal-email-change'));
-
-            $("form#email_change").submit(function (event) {
-                event.preventDefault();
-                emailModal.hide();
-                var email = $("#new_email").val();
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path('user_update_email', {'username': user.username}) }}",
-                    data: "email="+email,
-                    success: function () {
-                        $("#userInfo").load(" #userInfo");
-                    }
-                });
-            });
-        });
-    </script>
 {% endblock %}

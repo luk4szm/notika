@@ -2,6 +2,17 @@ breadcump:
   user: Użytkownik
 card:
   summary: Podsumowanie
+  changePassword: Zmień hasło
+profile:
+  firstName: Imię
+  lastName: Nazwisko
+  email: Adres e-mail
+  changeData: Zmień dane
 user:
   list: Lista użytkowników
   profile: Profil użytkownika
+modal:
+  newPassword: Nowe hasło
+  repeatPassword: Powtórz hasło
+  save: Zapisz zmiany
+  close: Zamknij

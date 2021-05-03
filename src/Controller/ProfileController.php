@@ -17,32 +17,54 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProfileController extends AbstractController
 {
-	/**
-	 * @Route("/", name="user_profile")
-	 */
-	public function summary(): Response
-	{
+    /**
+     * @Route("/", name="user_profile")
+     */
+    public function summary(): Response
+    {
         /** @var User $user */
         $user = $this->getUser();
 
-		return $this->render('profile/content/summary.html.twig', [
-			'user' => $user
-		]);
-	}
+        return $this->render('profile/content/summary.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/password", name="profile_password")
+     */
+    public function password(): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('profile/content/password.html.twig', [
+            'user' => $user
+        ]);
+    }
 
     /**
      * @Route("/update/{id}", name="user_update", methods={"POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
+     * @param User $user
      * @return JsonResponse
      */
-    public function updateUserEmail(Request $request, EntityManagerInterface $em, User $user)
+    public function updateUserData(Request $request, EntityManagerInterface $em, User $user)
     {
         $data = json_decode($request->request->get('data'), true);
 
         if (isset($data['email'])) {
             $user->setLastEmail($user->getEmail());
             $user->setEmail($data['email']);
+        }
+
+        if (isset($data['firstName'])) {
+            $user->setFirstName($data['firstName']);
+        }
+
+        if (isset($data['lastName'])) {
+            $user->setLastName($data['lastName']);
         }
 
         $em->flush();

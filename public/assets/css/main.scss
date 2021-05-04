@@ -4,6 +4,7 @@ $font-weight-mid: 500;
 $h0-font-size: $font-size-base * 4.5;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 
 body {
   background-color: #f9f9f9;

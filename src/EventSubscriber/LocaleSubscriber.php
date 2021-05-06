@@ -3,16 +3,19 @@
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
     private $defaultLocale;
+    private $session;
 
-    public function __construct(string $defaultLocale = 'pl')
+    public function __construct(SessionInterface $session, string $defaultLocale = 'pl')
     {
         $this->defaultLocale = $defaultLocale;
+        $this->session = $session;
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -23,8 +26,9 @@ class LocaleSubscriber implements EventSubscriberInterface
         }
 
         // try to see if the locale has been set as a _locale routing parameter
-        if ($locale = $request->attributes->get('_locale')) {
-            $request->getSession()->set('_locale', $locale);
+        if ($locale = $request->query->get('_locale')) {
+            $request->setLocale($locale);
+            $this->session->set('_locale', $locale);
         } else {
         // if no explicit locale has been set on this request, use one from the session
             $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));

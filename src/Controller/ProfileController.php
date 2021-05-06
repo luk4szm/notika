@@ -66,8 +66,6 @@ class ProfileController extends AbstractController
             $user->setLocale($newLocale);
             $em->persist($user);
             $em->flush();
-
-            $this->addFlash('success', $this->translator->trans('profile.msgOnChangeLocale', [], null, $newLocale));
         }
 
         return $this->render('profile/content/locale.html.twig', [

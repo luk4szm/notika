@@ -53,14 +53,32 @@ body {
   z-index: 0;
 }
 
+.color {
+  &-gray {
+    color: #b3b3b3;
+  }
+
+  &-green {
+    color: limegreen;
+  }
+}
+
+.fs {
+  &-normal {
+    font-size: 1rem;
+  }
+}
+
 .fs-0 {
   font-size: $h0-font-size;
   font-weight: $font-weight-light;
   line-height: 4rem;
 }
 
-.fw-mid {
-  font-weight: $font-weight-mid;
+.fw {
+  &-mid {
+    font-weight: $font-weight-mid;
+  }
 }
 
 .row-link {
@@ -69,4 +87,14 @@ body {
   &:hover {
     background-color: $gray-100;
   }
+}
+
+input.matchScoresModal {
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    vertical-align: top;
+    font-weight: 500;
+    font-size: 28px;
 }

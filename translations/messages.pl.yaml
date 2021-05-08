@@ -1,9 +1,23 @@
 breadcump:
   user: Użytkownik
+bet:
+  your: Twój typ
+  change: zmień typ
+  make: zapisz typ
+  saved: Twój typ został zapisany
 card:
   summary: Podsumowanie
   changePassword: Zmień hasło
   locale: Zmień język
+game:
+  round: Runda
+  date: Data
+  points: pkt.
+  inProgress: spotkanie trwa
+  addResult: dodaj wynik spotkania
+  missingResult: czekamy na wynik
+general:
+  none: brak
 menu:
   rules: Zasady
   players: Gracze

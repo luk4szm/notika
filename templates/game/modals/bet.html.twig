@@ -1,0 +1,49 @@
+<div class="modal fade" id="userBetModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="userBetForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ 'bet.your'|trans }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <span class="fs-5 fw-mid">{{ game.home.name }}</span>
+                            vs.
+                            <span class="fs-5 fw-mid">{{ game.guest.name }}</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center">
+                            <span class="fs-normal">{{ game.date|date("d.m.Y H:i") }}</span>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center mt-3">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td width="48%" align="right">
+                                        <input id="goalsHome" class="form-control matchScoresModal" type="text" maxlength="1"
+                                               name="goalsHome" value="{% if userBet is not null %}{{ userBet.goalsHome }}{% endif %}">
+                                    </td>
+                                    <td class="align-middle" align="center">
+                                        :
+                                    </td>
+                                    <td width="48%" align="left">
+                                        <input id="goalsGuest" class="form-control matchScoresModal" type="text" maxlength="1"
+                                               name="goalsGuest" value="{% if userBet is not null %}{{ userBet.goalsGuest }}{% endif %}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">{{ 'modal.save'|trans }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'modal.close'|trans }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

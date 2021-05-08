@@ -1,9 +1,23 @@
 breadcump:
   user: User
+bet:
+  your: Your bet
+  change: change bet
+  make: make bet
+  saved: Your prediction has been saved
 card:
   summary: Summary
   changePassword: Change password
   locale: Change language
+game:
+  round: Round
+  date: Date
+  points: pts.
+  inProgress: game in progress
+  addResult: add game result
+  missingResult: we're waiting for result
+general:
+  none: none
 menu:
   rules: Rules
   players: Players

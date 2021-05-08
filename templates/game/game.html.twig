@@ -3,105 +3,175 @@
 {% block title %}Game - {{ parent() }}{% endblock %}
 
 {% block content %}
-    {{ dump(game) }}
-    <div class="card">
-        <div class="card-header text-center">
-            {{ game.home.name }} vs. {{ game.guest.name }}
-        </div>
-        <div class="card-body">
-            <div class="container">
-
-                {% if game.isAwarded %}
-                    <div class="row">
-                        <div class="col text-center">
-                            <div class="card bg-success-opacity mt-2 mb-3 p-2 fw-mid">
-                                &#9917; Spotkanie z bonusem! Zdobyte punkty w tym spotkaniu są podwojone &#9917;
+    <div id="gameInfo">
+        <div class="card">
+            <div class="card-header text-center">
+                {{ game.home.name }} vs. {{ game.guest.name }}
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    {% if game.isAwarded %}
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="card bg-success-opacity mt-2 mb-3 p-2 fw-mid">
+                                    &#9917; Spotkanie z bonusem! Zdobyte punkty w tym spotkaniu są podwojone &#9917;
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
-
-                {% if not game.isCounted %}
-                    <div class="row">
-                        <div class="col text-center">
-                            <div class="card bg-danger-opacity text-white mt-2 mb-3 p-2 fw-mid">
-                                Spotkanie to nie jest brane pod uwagę w rankingu
+                    {% endif %}
+                    {% if not game.isCounted %}
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="card bg-danger-opacity text-white mt-2 mb-3 p-2 fw-mid">
+                                    Spotkanie to nie jest brane pod uwagę w rankingu
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
 
-
-                <div class="row">
-                    <div class="col-sm-12 col-lg-4">
-
-                    </div>
-                    <div class="col-sm-12 col-lg-4">
-                        <table class="table table-sm">
-                            <tbody>
-                            <tr>
-                                <td class="text-right">
-                                    Runda:
-                                </td>
-                                <td class="text-center" colspan="2">
-                                    Kolejka #<span class="fw-mid">{{ game.round }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle text-right">
-                                    Data:
-                                </td>
-                                <td class="text-center lh-sm" colspan="2">
-                                    {{ game.date|date("d.m.Y") }}
-                                    <br>
-                                    godz. {{ game.date|date("H:i") }}
-                                </td>
-                            </tr>
-                            {% if app.user %}
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <table class="table table-sm">
+                                <tbody>
                                 <tr>
-                                    <td class="align-middle text-right">
-                                        Twój typ:
+                                    <td class="text-right">
+                                        {{ 'game.round'|trans }}:
                                     </td>
-                                    <td class="text-center lh-sm" colspan="2">
-                                        brak :-(
+                                    <td class="text-center" colspan="2">
+                                        {% if game.round matches '/^\\d+$/' %}#{% endif %}<span class="fw-mid">{{ game.round }}</span>
                                     </td>
                                 </tr>
-                            {% endif %}
-                            </tbody>
-                        </table>
+                                <tr>
+                                    <td class="align-middle text-right">
+                                        {{ 'game.date'|trans }}:
+                                    </td>
+                                    <td class="text-center lh-sm" colspan="2">
+                                        {{ game.date|date("d.m.Y") }}
+                                        <br>
+                                        godz. {{ game.date|date("H:i") }}
+                                    </td>
+                                </tr>
+                                {% if app.user %}
+                                    <tr>
+                                        <td class="align-middle text-right">
+                                            {{ 'bet.your'|trans }}:
+                                        </td>
+                                        {% if date() < game.date %}
+                                            {% if userBet is not null %}
+                                                <td class="text-center lh-sm align-middle">
+                                                <span class="fs-5 fw-mid">
+                                                    {{ userBet.goalsHome }} : {{ userBet.goalsGuest }}
+                                                </span>
+                                                </td>
+                                                <td class="text-center lh-sm align-middle">
+                                                    <button type="button" class="btn btn-outline-danger py-0 px-2 m-1"
+                                                            data-bs-toggle="modal" data-bs-target="#userBetModal">
+                                                        {{ 'bet.change'|trans }}
+                                                    </button>
+                                                </td>
+                                            {% else %}
+                                                <td class="text-center lh-sm align-middle" colspan="2">
+                                                    <button type="button" class="btn btn-outline-danger py-0 px-2 m-1"
+                                                            data-bs-toggle="modal" data-bs-target="#userBetModal">
+                                                        {{ 'bet.make'|trans }}
+                                                    </button>
+                                                </td>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if userBet is not null %}
+                                                <td class="text-center lh-sm align-middle">
+                                                <span class="fs-5 fw-mid">
+                                                    {{ userBet.goalsHome }} : {{ userBet.goalsGuest }}
+                                                </span>
+                                                </td>
+                                                <td class="text-center lh-sm align-middle">
+                                                    {% if game.goalsHome is not null and game.goalsGuest is not null %}
+                                                        <span class="fs-normal {% if userBet.pts == 0 %}color-gray{% else %}fw-mid{% endif %}">
+                                                        {{ userBet.pts|number_format(1) }} {{ 'game.points'|trans }}
+                                                    </span>
+                                                    {% endif %}
+                                                </td>
+                                            {% else %}
+                                                <td class="text-center lh-sm align-middle" colspan="2">
+                                                    <span>{{ 'general.none'|trans }} :-(</span>
+                                                </td>
+                                            {% endif %}
+                                        {% endif %}
+                                    </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
 
-                        <div class="text-center">
-                            {% if date() > game.date and date() < game.endDate %}
-                                <p class="fs-4">mecz w toku</p>
-                            {% elseif date() > game.endDate %}
-                                {% if game.goalsHome is not null and game.goalsGuest is not null %}
-                                    <p class="fs-0">{{ game.goalsHome }} : {{ game.goalsGuest }}</p>
-                                {% else %}
-                                    {% if app.user %}
-                                        <p class="fs-5">dodaj wynik spotkania</p>
+                            <div class="text-center">
+                                {% if date() > game.date and date() < game.endDate %}
+                                    <p class="fs-4 fw-mid color-green">{{ 'game.inProgress'|trans }}</p>
+                                {% elseif date() > game.endDate %}
+                                    {% if game.goalsHome is not null and game.goalsGuest is not null %}
+                                        <p class="fs-0">{{ game.goalsHome }} : {{ game.goalsGuest }}</p>
                                     {% else %}
-                                        <p class="fs-4">czekamy na wynik</p>
+                                        {% if app.user %}
+                                            <p class="fs-5">{{ 'game.addResult'|trans }}</p>
+                                        {% else %}
+                                            <p class="fs-4">{{ 'game.missingResult'|trans }}</p>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-lg-4">
-
-                    </div>
-                </div>
-
-                {% if game.description is not null %}
-                    <div class="row">
-                        <div class="col text-center">
-                            <div class="card bg-info-opacity mt-2 mb-3 p-2 fw-mid">
-                                {{ game.description }}
                             </div>
                         </div>
-                    </div>
-                {% endif %}
+                        <div class="col-sm-12 col-lg-4">
 
+                        </div>
+                    </div>
+                    {% if game.description is not null %}
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="card bg-info-opacity mt-2 mb-3 p-2 fw-mid">
+                                    {{ game.description }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block modals %}
+    {% include 'game/modals/bet.html.twig' %}
+    <div id="betSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+        <div class="toast-body text-center">
+            {{ 'bet.saved'|trans }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJs %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const modal = new bootstrap.Modal(document.getElementById('userBetModal'));
+            $("form#userBetForm").submit(function (event) {
+                event.preventDefault();
+                modal.hide();
+
+                const bet = {
+                    goalsHome: $("#goalsHome").val(),
+                    goalsGuest: $("#goalsGuest").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('game_save_bet', {'id': game.id}) }}",
+                    dataType: 'json',
+                    data: "data=" + JSON.stringify(bet),
+                    success: function () {
+                        $("#gameInfo").load(" #gameInfo");
+                        $('#betSaveConfirm').toast('show');
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

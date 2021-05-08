@@ -4,6 +4,14 @@ card:
   summary: Summary
   changePassword: Change password
   locale: Change language
+menu:
+  rules: Rules
+  players: Players
+  season:
+    table: Table
+    schedule: Schedule
+    stats: Statistics
+    ranking: Ranking
 locale:
   en: English version
   pl: Wersja polska

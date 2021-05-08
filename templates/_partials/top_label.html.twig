@@ -16,9 +16,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <div class="btn-group">
-                    <a href="#" class="btn btn-outline-success" role="button">Zasady</a>
+                    <a href="#" class="btn btn-outline-success" role="button">{{ 'menu.rules'|trans }}</a>
                     {% if app.user %}
-                        <a href="{{ path('users_list') }}" class="btn btn-outline-success" role="button">Gracze</a>
+                        <a href="{{ path('users_list') }}" class="btn btn-outline-success" role="button">{{ 'menu.players'|trans }}</a>
                     {% endif %}
                 </div>
                 {{ render(controller('App\\Controller\\SeasonController::active')) }}

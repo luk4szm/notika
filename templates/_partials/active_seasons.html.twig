@@ -5,13 +5,13 @@
                 {{ season.league.name }}
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ path('season_table', {'slug': season.slug}) }}">Tabela</a></li>
-                <li><a class="dropdown-item" href="{{ path('season_schedule', {'slug': season.slug}) }}">Terminarz</a></li>
-                <li><a class="dropdown-item" href="#">Statystyki</a></li>
+                <li><a class="dropdown-item" href="{{ path('season_table', {'slug': season.slug}) }}">{{ 'menu.season.table'|trans }}</a></li>
+                <li><a class="dropdown-item" href="{{ path('season_schedule', {'slug': season.slug}) }}">{{ 'menu.season.schedule'|trans }}</a></li>
+                <li><a class="dropdown-item" href="#">{{ 'menu.season.stats'|trans }}</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Rankingi</a></li>
+                <li><a class="dropdown-item" href="#">{{ 'menu.season.ranking'|trans }}</a></li>
             </ul>
         </div>
     {% endfor %}

@@ -67,7 +67,8 @@
                                                 </td>
                                                 <td class="text-center lh-sm align-middle">
                                                     <button type="button" class="btn btn-outline-success py-1 px-2 m-1"
-                                                            data-bs-toggle="modal" data-bs-target="#userBetModal" title="{{ 'bet.change'|trans }}">
+                                                            data-bs-toggle="modal" data-bs-target="#userBetModal"
+                                                            title="{{ 'bet.change'|trans }}">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </button>
                                                 </td>
@@ -121,7 +122,6 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-4">
-
                         </div>
                     </div>
                     {% if game.description is not null %}
@@ -146,7 +146,7 @@
             <div class="container">
                 <div class="row">
                     <div class="d-none d-lg-block col-lg-3 justify-content-center">
-                        fghfg
+                        <canvas id="bets" width="100%" height="80%"></canvas>
                     </div>
                     <div class="col-lg-9 justify-content-center">
                         Typowania uczestniów
@@ -155,41 +155,143 @@
             </div>
         </div>
     </div>
-{% endblock %}
 
-{% block modals %}
-    {% include 'game/modals/bet.html.twig' %}
-    <div id="betSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
-        <div class="toast-body text-center">
-            {{ 'bet.saved'|trans }}
+    <div class="card">
+        <div class="card-header">
+            Zmiana pozycji
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 justify-content-center">
+                        <canvas id="myChart" width="100%" height="25%"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
 
-{% block customJs %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            const modal = new bootstrap.Modal(document.getElementById('userBetModal'));
-            $("form#userBetForm").submit(function (event) {
-                event.preventDefault();
-                modal.hide();
-
-                const bet = {
-                    goalsHome: $("#goalsHome").val(),
-                    goalsGuest: $("#goalsGuest").val()
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path('game_save_bet', {'id': game.id}) }}",
-                    dataType: 'json',
-                    data: "data=" + JSON.stringify(bet),
-                    success: function () {
-                        $("#gameInfo").load(" #gameInfo");
-                        $('#betSaveConfirm').toast('show');
+{% block charts %}
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7'],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [1, 2, 5, 2, 2, 4, 1],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }, {
+                    label: 'My Seconf Dataset',
+                    data: [2, 3, 2, 1, 1, 2, 2],
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
                     }
-                });
-            });
+                },
+                scales: {
+                    y: {
+                        max: 10,
+                        min: 1,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        beginAtZero: true,
+                        reverse: true
+                    }
+                }
+            }
+        });
+
+        var gtx = document.getElementById('bets');
+        var bets = new Chart(gtx, {
+            type: 'bar',
+            data: {
+                labels: ['Rozkład typowań [%]'],
+                datasets: [{
+                    label: 'Wygrana',
+                    data: [33.5],
+                    fill: false,
+                    backgroundColor: 'rgb(88, 214, 141, 0.9)',
+                    tension: 0.1
+                }, {
+                    label: 'Remis',
+                    data: [78.9],
+                    fill: false,
+                    backgroundColor: 'rgb(247, 220, 111, 0.9)',
+                    tension: 0.1
+                }, {
+                    label: 'Przegrana',
+                    data: [10.8],
+                    fill: false,
+                    backgroundColor: 'rgb(241, 148, 138, 0.9)',
+                    tension: 0.1
+                }],
+            },
+
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        max: 100,
+                        beginAtZero: true,
+                    }
+                }
+            }
         });
     </script>
+{% endblock %}
+
+{% block modals %}
+    {% if app.user %}
+        {% include 'game/modals/bet.html.twig' %}
+        <div id="betSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+            <div class="toast-body text-center">
+                {{ 'bet.saved'|trans }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block customJs %}
+    {% if app.user %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                const modal = new bootstrap.Modal(document.getElementById('userBetModal'));
+                $("form#userBetForm").submit(function (event) {
+                    event.preventDefault();
+                    modal.hide();
+
+                    const bet = {
+                        goalsHome: $("#goalsHome").val(),
+                        goalsGuest: $("#goalsGuest").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('game_save_bet', {'id': game.id}) }}",
+                        dataType: 'json',
+                        data: "data=" + JSON.stringify(bet),
+                        success: function () {
+                            $("#gameInfo").load(" #gameInfo");
+                            $('#betSaveConfirm').toast('show');
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endif %}
 {% endblock %}

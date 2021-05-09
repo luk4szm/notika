@@ -8,7 +8,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Mensański Typer</li>
                         <li class="breadcrumb-item" aria-current="page">{{ game.season.name }}</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ game.home.name}} vs. {{ game.guest.name }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ game.home.name }} vs. {{ game.guest.name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -21,6 +21,9 @@
             </div>
         </div>
     </div>
+
+    {% block charts %}
+    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

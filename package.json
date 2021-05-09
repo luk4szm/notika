@@ -21,6 +21,7 @@
   "homepage": "https://github.com/luk4szm/notika#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
-    "bootstrap": "^5.0.0-beta3"
+    "bootstrap": "^5.0.0-beta3",
+    "chart.js": "^3.2.1"
   }
 }

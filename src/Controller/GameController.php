@@ -54,6 +54,10 @@ class GameController extends AbstractController
      */
     public function saveBet(Request $request, Game $game): Response
     {
+        if (new \DateTime() > $game->getDate()) {
+            return $this->json(['status' => 'error'], 302);
+        }
+
         $data = json_decode($request->request->get('data'), true);
 
         /** @var Bet $bet */
@@ -88,6 +92,10 @@ class GameController extends AbstractController
      */
     public function saveResult(Request $request, Game $game): Response
     {
+        if ($game->getGoalsHome() !== null && $game->getGoalsGuest() !== null) {
+            return $this->json(['status' => 'error'], 302);
+        }
+
         $data = json_decode($request->request->get('data'), true);
 
         $game->setGoalsHome(intval($data['goalsHome']));
@@ -97,6 +105,6 @@ class GameController extends AbstractController
 
         $this->em->flush();
 
-        return $this->json(['success' => 'ok']);
+        return $this->json(['status' => 'success']);
     }
 }

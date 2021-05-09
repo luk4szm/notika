@@ -5,6 +5,7 @@ bet:
   change: zmień typ
   make: zapisz typ
   saved: Twój typ został zapisany
+  notSaved: Twój typ NIE został zapisany
 card:
   summary: Podsumowanie
   changePassword: Zmień hasło
@@ -15,7 +16,8 @@ game:
   date: Data
   points: pkt.
   result:
-    save: Wynik spotkania został zapisany
+    saved: Wynik spotkania został zapisany
+    notSaved: Wynik spotkania NIE został zapisany
   inProgress: spotkanie trwa
   addResult: dodaj wynik spotkania
   missingResult: czekamy na wynik

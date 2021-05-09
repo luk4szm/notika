@@ -267,12 +267,22 @@
                     {{ 'bet.saved'|trans }}
                 </div>
             </div>
+            <div id="betSaveError" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+                <div class="toast-body text-center">
+                    {{ 'bet.notSaved'|trans }}
+                </div>
+            </div>
         {% endif %}
         {% if date() > game.endDate and game.goalsHome is null and game.goalsGuest is null %}
             {% include 'game/modals/result.html.twig' %}
             <div id="resultSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
                 <div class="toast-body text-center">
-                    {{ 'bet.saved'|trans }}
+                    {{ 'game.result.saved'|trans }}
+                </div>
+            </div>
+            <div id="resultSaveError" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+                <div class="toast-body text-center">
+                    {{ 'game.result.notSaved'|trans }}
                 </div>
             </div>
         {% endif %}
@@ -302,7 +312,11 @@
                         success: function () {
                             $("#gameInfo").load(" #gameInfo");
                             $('#betSaveConfirm').toast('show');
-                        }
+                        },
+                        error: function () {
+                            $("#gameInfo").load(" #gameInfo");
+                            $('#betSaveError').toast('show');
+                        },
                     });
                 });
                 {% endif %}
@@ -327,7 +341,12 @@
                             $("#gameInfo").load(" #gameInfo");
                             $("#roundSchedule").load(" #roundSchedule");
                             $('#resultSaveConfirm').toast('show');
-                        }
+                        },
+                        error: function () {
+                            $("#gameInfo").load(" #gameInfo");
+                            $("#roundSchedule").load(" #roundSchedule");
+                            $('#resultSaveError').toast('show');
+                        },
                     });
                 });
                 {% endif %}

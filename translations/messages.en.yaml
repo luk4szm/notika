@@ -5,6 +5,7 @@ bet:
   change: change bet
   make: make bet
   saved: Your prediction has been saved
+  notSaved: Your prediction hasn't been saved
 card:
   summary: Summary
   changePassword: Change password
@@ -15,7 +16,8 @@ game:
   date: Date
   points: pts.
   result:
-    save: Game result has been saved
+    saved: Game result has been saved
+    notSaved: Game result hasn't been saved
   inProgress: game in progress
   addResult: add game result
   missingResult: we're waiting for result

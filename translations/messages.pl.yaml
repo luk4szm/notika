@@ -14,6 +14,8 @@ game:
   round: Runda
   date: Data
   points: pkt.
+  result:
+    save: Wynik spotkania został zapisany
   inProgress: spotkanie trwa
   addResult: dodaj wynik spotkania
   missingResult: czekamy na wynik
@@ -40,6 +42,9 @@ user:
   list: Lista użytkowników
   profile: Profil użytkownika
 modal:
+  title:
+    gameResult: Wynik spotkania
+    userBet: Twój typ
   newPassword: Nowe hasło
   repeatPassword: Powtórz hasło
   save: Zapisz zmiany

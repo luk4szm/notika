@@ -113,7 +113,10 @@
                                         <p class="fs-0">{{ game.goalsHome }} : {{ game.goalsGuest }}</p>
                                     {% else %}
                                         {% if app.user %}
-                                            <p class="fs-5">{{ 'game.addResult'|trans }}</p>
+                                            <button type="button" class="btn btn-outline-info px-4 py-2 m-2"
+                                                    data-bs-toggle="modal" data-bs-target="#gameResultModal">
+                                                {{ 'game.addResult'|trans }}
+                                            </button>
                                         {% else %}
                                             <p class="fs-4">{{ 'game.missingResult'|trans }}</p>
                                         {% endif %}
@@ -174,8 +177,8 @@
 
 {% block charts %}
     <script>
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['1', '2', '3', '4', '5', '6', '7'],
@@ -212,8 +215,8 @@
             }
         });
 
-        var gtx = document.getElementById('bets');
-        var bets = new Chart(gtx, {
+        const gtx = document.getElementById('bets');
+        new Chart(gtx, {
             type: 'bar',
             data: {
                 labels: ['Rozkład typowań [%]'],
@@ -257,12 +260,22 @@
 
 {% block modals %}
     {% if app.user %}
-        {% include 'game/modals/bet.html.twig' %}
-        <div id="betSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
-            <div class="toast-body text-center">
-                {{ 'bet.saved'|trans }}
+        {% if date() < game.date %}
+            {% include 'game/modals/bet.html.twig' %}
+            <div id="betSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+                <div class="toast-body text-center">
+                    {{ 'bet.saved'|trans }}
+                </div>
             </div>
-        </div>
+        {% endif %}
+        {% if date() > game.endDate and game.goalsHome is null and game.goalsGuest is null %}
+            {% include 'game/modals/result.html.twig' %}
+            <div id="resultSaveConfirm" class="toast" style="max-width: 230px; position: absolute; top: 70px; right: 20px;">
+                <div class="toast-body text-center">
+                    {{ 'bet.saved'|trans }}
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}
 
@@ -270,14 +283,15 @@
     {% if app.user %}
         <script type="text/javascript">
             $(document).ready(function () {
-                const modal = new bootstrap.Modal(document.getElementById('userBetModal'));
+                {% if date() < game.date %}
+                const betModal = new bootstrap.Modal(document.getElementById('userBetModal'));
                 $("form#userBetForm").submit(function (event) {
                     event.preventDefault();
-                    modal.hide();
+                    betModal.hide();
 
                     const bet = {
-                        goalsHome: $("#goalsHome").val(),
-                        goalsGuest: $("#goalsGuest").val()
+                        goalsHome: $("#betGoalsHome").val(),
+                        goalsGuest: $("#betGoalsGuest").val()
                     };
 
                     $.ajax({
@@ -291,6 +305,32 @@
                         }
                     });
                 });
+                {% endif %}
+
+                {% if date() > game.endDate and game.goalsHome is null and game.goalsGuest is null %}
+                const resultModal = new bootstrap.Modal(document.getElementById('gameResultModal'));
+                $("form#gameResultForm").submit(function (event) {
+                    event.preventDefault();
+                    resultModal.hide();
+
+                    const result = {
+                        goalsHome: $("#resultGoalsHome").val(),
+                        goalsGuest: $("#resultGoalsGuest").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('game_save_result', {'id': game.id}) }}",
+                        dataType: 'json',
+                        data: "data=" + JSON.stringify(result),
+                        success: function () {
+                            $("#gameInfo").load(" #gameInfo");
+                            $("#roundSchedule").load(" #roundSchedule");
+                            $('#resultSaveConfirm').toast('show');
+                        }
+                    });
+                });
+                {% endif %}
             });
         </script>
     {% endif %}

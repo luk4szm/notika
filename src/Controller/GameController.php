@@ -49,7 +49,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/game/{id}/save-bet", name="game_save_bet")
+     * @Route("/game/{id}/save-bet", name="game_save_bet", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
     public function saveBet(Request $request, Game $game): Response
@@ -76,6 +76,24 @@ class GameController extends AbstractController
         } else {
             $bet->setUpdatedAt(new \DateTimeImmutable());
         }
+
+        $this->em->flush();
+
+        return $this->json(['success' => 'ok']);
+    }
+
+    /**
+     * @Route("/game/{id}/save-result", name="game_save_result", methods={"POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function saveResult(Request $request, Game $game): Response
+    {
+        $data = json_decode($request->request->get('data'), true);
+
+        $game->setGoalsHome(intval($data['goalsHome']));
+        $game->setGoalsGuest(intval($data['goalsGuest']));
+        $game->setUpdatedAt(new \DateTimeImmutable());
+        $game->setUpdatedBy($this->getUser());
 
         $this->em->flush();
 

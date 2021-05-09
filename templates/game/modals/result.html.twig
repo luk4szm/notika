@@ -1,9 +1,9 @@
-<div class="modal fade" id="userBetModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="gameResultModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="userBetForm" method="POST">
+            <form id="gameResultForm" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ 'modal.title.userBet'|trans }}</h5>
+                    <h5 class="modal-title">{{ 'modal.title.gameResult'|trans }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -24,15 +24,15 @@
                             <table class="table table-borderless">
                                 <tr>
                                     <td width="48%" align="right">
-                                        <input id="betGoalsHome" class="form-control matchScoresModal" type="text" maxlength="1" pattern="[0-9]{1}"
-                                               name="betGoalsHome" value="{% if userBet is not null %}{{ userBet.goalsHome }}{% endif %}">
+                                        <input id="resultGoalsHome" name="resultGoalsHome" type="text" pattern="[0-9]{1}"
+                                               class="form-control matchScoresModal" maxlength="1">
                                     </td>
                                     <td class="align-middle" align="center">
                                         :
                                     </td>
                                     <td width="48%" align="left">
-                                        <input id="betGoalsGuest" class="form-control matchScoresModal" type="text" maxlength="1" pattern="[0-9]{1}"
-                                               name="betGoalsGuest" value="{% if userBet is not null %}{{ userBet.goalsGuest }}{% endif %}">
+                                        <input id="resultGoalsGuest" name="resultGoalsGuest" type="text" pattern="[0-9]{1}"
+                                               class="form-control matchScoresModal" maxlength="1">
                                     </td>
                                 </tr>
                             </table>

@@ -14,6 +14,8 @@ game:
   round: Round
   date: Date
   points: pts.
+  result:
+    save: Game result has been saved
   inProgress: game in progress
   addResult: add game result
   missingResult: we're waiting for result
@@ -40,6 +42,9 @@ user:
   list: User list
   profile: User profile
 modal:
+  title:
+    gameResult: Game result
+    userBet: Your bet
   newPassword: New password
   repeatPassword: Repeat password
   save: Save changes

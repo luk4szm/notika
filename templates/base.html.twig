@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/main.css.map') }}">
     {% endblock %}
+    <script defer src="{{ asset('assets/js/brands.js') }}"></script>
+    <script defer src="{{ asset('assets/js/solid.js') }}"></script>
+    <script defer src="{{ asset('assets/js/fontawesome.js') }}"></script>
 </head>
 <body>
 {% include('_partials/top_label.html.twig') %}
@@ -30,7 +33,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.js.map') }}"></script>
-    <script src="{{ asset('assets/js/fontawesome.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 {% endblock %}
 {% block customJs %}{% endblock %}

@@ -10,6 +10,7 @@ card:
   changePassword: Change password
   locale: Change language
 game:
+  bets: Bets
   round: Round
   date: Date
   points: pts.

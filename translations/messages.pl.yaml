@@ -10,6 +10,7 @@ card:
   changePassword: Zmień hasło
   locale: Zmień język
 game:
+  bets: Typowania
   round: Runda
   date: Data
   points: pkt.

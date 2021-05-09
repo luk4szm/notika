@@ -66,14 +66,14 @@
                                                 </span>
                                                 </td>
                                                 <td class="text-center lh-sm align-middle">
-                                                    <button type="button" class="btn btn-outline-danger py-0 px-2 m-1"
-                                                            data-bs-toggle="modal" data-bs-target="#userBetModal">
-                                                        {{ 'bet.change'|trans }}
+                                                    <button type="button" class="btn btn-outline-success py-1 px-2 m-1"
+                                                            data-bs-toggle="modal" data-bs-target="#userBetModal" title="{{ 'bet.change'|trans }}">
+                                                        <i class="fas fa-pencil-alt"></i>
                                                     </button>
                                                 </td>
                                             {% else %}
                                                 <td class="text-center lh-sm align-middle" colspan="2">
-                                                    <button type="button" class="btn btn-outline-danger py-0 px-2 m-1"
+                                                    <button type="button" class="btn btn-outline-danger py-1 px-2 m-1"
                                                             data-bs-toggle="modal" data-bs-target="#userBetModal">
                                                         {{ 'bet.make'|trans }}
                                                     </button>
@@ -133,6 +133,24 @@
                             </div>
                         </div>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'game.bets'|trans }}
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="d-none d-lg-block col-lg-3 justify-content-center">
+                        fghfg
+                    </div>
+                    <div class="col-lg-9 justify-content-center">
+                        Typowania uczestniów
+                    </div>
                 </div>
             </div>
         </div>

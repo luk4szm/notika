@@ -89,12 +89,19 @@ body {
   }
 }
 
+.toast {
+  max-width: 250px;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+}
+
 input.matchScoresModal {
-    margin: 0;
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    vertical-align: top;
-    font-weight: 500;
-    font-size: 28px;
+  margin: 0;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  vertical-align: top;
+  font-weight: 500;
+  font-size: 28px;
 }

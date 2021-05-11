@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bet;
 use App\Entity\Game;
+use App\Service\GameService;
 use App\Service\ScheduleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,10 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     private $em;
+    private $gameService;
     private $scheduleService;
 
-    public function __construct(ScheduleService $scheduleService, EntityManagerInterface $em)
+    public function __construct(
+        GameService $gameService,
+        ScheduleService $scheduleService,
+        EntityManagerInterface $em
+    )
     {
+        $this->gameService     = $gameService;
         $this->scheduleService = $scheduleService;
         $this->em              = $em;
     }
@@ -33,42 +40,11 @@ class GameController extends AbstractController
             $game->getRound()
         );
 
-        $userBet = null;
-        $bets    = null;
-
-        if (count($game->getBets()) > 0) {
-            $bets = [
-                'home'  => 0,
-                'draw'  => 0,
-                'guest' => 0,
-            ];
-
-            foreach ($game->getBets() as $bet) {
-                if ($bet->getGoalsHome() > $bet->getGoalsGuest()) {
-                    $bets['home']++;
-                } elseif ($bet->getGoalsHome() == $bet->getGoalsGuest()) {
-                    $bets['draw']++;
-                } else {
-                    $bets['guest']++;
-                }
-
-                if ($this->getUser() === $bet->getUser()) {
-                    $userBet = $bet;
-                }
-            }
-
-            $bets = [
-                'home'  => number_format(($bets['home'] / count($game->getBets())) * 100, 1),
-                'draw'  => number_format(($bets['draw'] / count($game->getBets())) * 100, 1),
-                'guest' => number_format(($bets['guest'] / count($game->getBets())) * 100, 1),
-            ];
-        }
-
         return $this->render('game/game.html.twig', [
             'game'          => $game,
             'roundSchedule' => $roundSchedule,
-            'bets'          => $bets,
-            'userBet'       => $userBet,
+            'bets'          => $this->gameService->getPercentageBetDistribution($game),
+            'userBet'       => $this->gameService->getUserBet($game),
         ]);
     }
 
@@ -79,7 +55,7 @@ class GameController extends AbstractController
     public function saveBet(Request $request, Game $game): Response
     {
         if (new \DateTime() > $game->getDate()) {
-            return $this->json(['status' => 'error'], 302);
+            return $this->json(['errorMsg' => 'the game has already begun'], 302);
         }
 
         $data = json_decode($request->request->get('data'), true);
@@ -107,11 +83,7 @@ class GameController extends AbstractController
 
         $this->em->flush();
 
-        return $this->json([
-                               'home'  => '50',
-                               'draw'  => '15',
-                               'guest' => '35',
-                           ]);
+        return $this->json($this->gameService->getPercentageBetDistribution($game));
     }
 
     /**

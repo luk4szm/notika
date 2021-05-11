@@ -141,6 +141,8 @@
         </div>
     </div>
 
+    {{ dump(bets) }}
+
     <div class="card">
         <div class="card-header">
             {{ 'game.bets'|trans }}
@@ -148,12 +150,23 @@
         <div class="card-body">
             <div class="container">
                 <div class="row">
-                    <div class="d-none d-lg-block col-lg-3 justify-content-center">
-                        <canvas id="bets" width="100%" height="80%"></canvas>
-                    </div>
-                    <div class="col-lg-9 justify-content-center">
-                        Typowania uczestniów
-                    </div>
+                    {% if bets is not null %}
+                        <div class="d-none d-lg-block col-lg-3">
+                            <canvas id="betsChart" width="100%" height="80%"></canvas>
+                        </div>
+                        <div class="col-lg-9 align-self-center">
+                            <div id="betsCard">
+                                Zapisanych typów na tę chwilę: <span class="fw-mid">{{ game.bets|length }}</span>.<br>
+                                Szczegóły dot. złożonych typów uczestników zabawy pozostaną ukryte do momentu rozpoczęcia spotkania.<br>
+                                Do tego czasu widoczny będzie jedynie ich procentowy rozkład.
+
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-12 text-center">
+                            Brak złożonych typów
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -181,15 +194,15 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['1', '2', '3', '4', '5', '6', '7'],
+                labels: ['Kolejka 1', 'Kolejka 2', 'Kolejka 3', 'Kolejka 4', 'Kolejka 5', 'Kolejka 6', 'Kolejka 7'],
                 datasets: [{
-                    label: 'My First Dataset',
+                    label: 'Łukasz Mikowski',
                     data: [1, 2, 5, 2, 2, 4, 1],
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
                 }, {
-                    label: 'My Seconf Dataset',
+                    label: 'Stanisław Mikowski',
                     data: [2, 3, 2, 1, 1, 2, 2],
                     fill: false,
                     tension: 0.1
@@ -203,6 +216,7 @@
                 },
                 scales: {
                     y: {
+                        label: 'Pozycja w table',
                         max: 10,
                         min: 1,
                         ticks: {
@@ -215,26 +229,27 @@
             }
         });
 
-        const gtx = document.getElementById('bets');
-        new Chart(gtx, {
+        var gtx = document.getElementById('betsChart');
+
+        var gtxChart = new Chart(gtx, {
             type: 'bar',
             data: {
                 labels: ['Rozkład typowań [%]'],
                 datasets: [{
-                    label: 'Wygrana',
-                    data: [33.5],
+                    label: '{{ game.home.name }}',
+                    data: [{{ bets.home }}],
                     fill: false,
                     backgroundColor: 'rgb(88, 214, 141, 0.9)',
                     tension: 0.1
                 }, {
                     label: 'Remis',
-                    data: [78.9],
+                    data: [{{ bets.draw }}],
                     fill: false,
                     backgroundColor: 'rgb(247, 220, 111, 0.9)',
                     tension: 0.1
                 }, {
-                    label: 'Przegrana',
-                    data: [10.8],
+                    label: '{{ game.guest.name }}',
+                    data: [{{ bets.guest }}],
                     fill: false,
                     backgroundColor: 'rgb(241, 148, 138, 0.9)',
                     tension: 0.1
@@ -309,12 +324,18 @@
                         url: "{{ path('game_save_bet', {'id': game.id}) }}",
                         dataType: 'json',
                         data: "data=" + JSON.stringify(bet),
-                        success: function () {
+                        success: function (result) {
                             $("#gameInfo").load(" #gameInfo");
+                            $("#betsCard").load(" #betsCard");
                             $('#betSaveConfirm').toast('show');
+                            gtxChart.data.datasets[0].data = [result.home];
+                            gtxChart.data.datasets[1].data = [result.draw];
+                            gtxChart.data.datasets[2].data = [result.guest];
+                            gtxChart.update();
+                            console.log(result);
+
                         },
                         error: function () {
-                            $("#gameInfo").load(" #gameInfo");
                             $('#betSaveError').toast('show');
                         },
                     });

@@ -34,16 +34,40 @@ class GameController extends AbstractController
         );
 
         $userBet = null;
-        foreach ($game->getBets() as $bet) {
-            if ($this->getUser() === $bet->getUser()) {
-                $userBet = $bet;
-                break;
+        $bets    = null;
+
+        if (count($game->getBets()) > 0) {
+            $bets = [
+                'home'  => 0,
+                'draw'  => 0,
+                'guest' => 0,
+            ];
+
+            foreach ($game->getBets() as $bet) {
+                if ($bet->getGoalsHome() > $bet->getGoalsGuest()) {
+                    $bets['home']++;
+                } elseif ($bet->getGoalsHome() == $bet->getGoalsGuest()) {
+                    $bets['draw']++;
+                } else {
+                    $bets['guest']++;
+                }
+
+                if ($this->getUser() === $bet->getUser()) {
+                    $userBet = $bet;
+                }
             }
+
+            $bets = [
+                'home'  => number_format(($bets['home'] / count($game->getBets())) * 100, 1),
+                'draw'  => number_format(($bets['draw'] / count($game->getBets())) * 100, 1),
+                'guest' => number_format(($bets['guest'] / count($game->getBets())) * 100, 1),
+            ];
         }
 
         return $this->render('game/game.html.twig', [
             'game'          => $game,
             'roundSchedule' => $roundSchedule,
+            'bets'          => $bets,
             'userBet'       => $userBet,
         ]);
     }
@@ -83,7 +107,11 @@ class GameController extends AbstractController
 
         $this->em->flush();
 
-        return $this->json(['success' => 'ok']);
+        return $this->json([
+                               'home'  => '50',
+                               'draw'  => '15',
+                               'guest' => '35',
+                           ]);
     }
 
     /**

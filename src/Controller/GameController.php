@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Bet;
 use App\Entity\Game;
 use App\Service\GameService;
 use App\Service\ScheduleService;
@@ -58,30 +57,7 @@ class GameController extends AbstractController
             return $this->json(['errorMsg' => 'the game has already begun'], 302);
         }
 
-        $data = json_decode($request->request->get('data'), true);
-
-        /** @var Bet $bet */
-        $bet = $this->em
-            ->getRepository(Bet::class)
-            ->findOneBy([
-                            'game' => $game,
-                            'user' => $this->getUser(),
-                        ]);
-        $bet = $bet ? $bet : new Bet();
-        $bet->setGoalsHome($data['goalsHome']);
-        $bet->setGoalsGuest($data['goalsGuest']);
-
-        if (!$bet->getId()) {
-            $bet->setUser($this->getUser());
-            $bet->setGame($game);
-            $bet->setCreatedAt(new \DateTimeImmutable());
-
-            $this->em->persist($bet);
-        } else {
-            $bet->setUpdatedAt(new \DateTimeImmutable());
-        }
-
-        $this->em->flush();
+        $this->gameService->saveUserBet($game, $this->getUser(), json_decode($request->request->get('data'), true));
 
         return $this->json($this->gameService->getPercentageBetDistribution($game));
     }
@@ -96,14 +72,7 @@ class GameController extends AbstractController
             return $this->json(['status' => 'error'], 302);
         }
 
-        $data = json_decode($request->request->get('data'), true);
-
-        $game->setGoalsHome(intval($data['goalsHome']));
-        $game->setGoalsGuest(intval($data['goalsGuest']));
-        $game->setUpdatedAt(new \DateTimeImmutable());
-        $game->setUpdatedBy($this->getUser());
-
-        $this->em->flush();
+        $this->gameService->saveGameResult($game, $this->getUser(), json_decode($request->request->get('data'), true));
 
         return $this->json(['status' => 'success']);
     }

@@ -40,10 +40,10 @@ class GameController extends AbstractController
         );
 
         return $this->render('game/game.html.twig', [
-            'game'          => $game,
-            'roundSchedule' => $roundSchedule,
-            'bets'          => $this->gameService->getPercentageBetDistribution($game),
-            'userBet'       => $this->gameService->getUserBet($game),
+            'game'             => $game,
+            'roundSchedule'    => $roundSchedule,
+            'betsDistribution' => $this->gameService->getPercentageBetDistribution($game),
+            'userBet'          => $this->gameService->getUserBet($game),
         ]);
     }
 

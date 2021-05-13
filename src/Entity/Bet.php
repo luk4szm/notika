@@ -34,7 +34,7 @@ class Bet
     private $user;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="float", scale=1, nullable=true)
      */
     private $pts;
 
@@ -95,12 +95,12 @@ class Bet
         return $this;
     }
 
-    public function getPts(): ?int
+    public function getPts(): ?float
     {
         return $this->pts;
     }
 
-    public function setPts(?int $pts): self
+    public function setPts(?float $pts): self
     {
         $this->pts = $pts;
 

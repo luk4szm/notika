@@ -129,10 +129,10 @@ class GameService
      * @param Game $game
      * @param User $user
      * @param array $data
-     * @return Game
+     * @return bool
      * @throws \Exception
      */
-    public function saveGameResult(Game $game, User $user, array $data): Game
+    public function saveGameResult(Game $game, User $user, array $data): bool
     {
         $game->setGoalsHome(intval($data['goalsHome']));
         $game->setGoalsGuest(intval($data['goalsGuest']));
@@ -141,6 +141,82 @@ class GameService
 
         $this->em->flush();
 
-        return $game;
+        return true;
+    }
+
+    public function calcBetPoints(Game $game)
+    {
+        if (!$game->getBets()->count()) {
+            return null;
+        }
+
+        if ($game->getGoalsHome() === null || $game->getGoalsGuest() === null) {
+            return null;
+        }
+
+        if (!$game->getIsCounted()) {
+            foreach ($game->getBets() as $bet) {
+                $bet->setPts(0);
+            }
+
+            $this->em->flush();
+
+            return true;
+        }
+
+        /** @var Bet $bet */
+        foreach ($game->getBets() as $bet) {
+
+            $bet->setPts(0);
+
+            // exact hit & number of goals over 3.5
+            if ($game->getGoalsHome() == $bet->getGoalsHome()
+                && $game->getGoalsGuest() == $bet->getGoalsGuest()
+                && $game->getGoalsHome() + $game->getGoalsGuest() > 3.5
+            ) {
+                $bet->setPts(5);
+            } // exact hit & number of goals below 3.5
+            elseif ($game->getGoalsHome() == $bet->getGoalsHome()
+                    && $game->getGoalsGuest() == $bet->getGoalsGuest()
+                    && $game->getGoalsHome() + $game->getGoalsGuest() < 3.5
+            ) {
+                $bet->setPts(4);
+            } // correct settlement & good goals diffrence
+            elseif ((($game->getGoalsHome() > $game->getGoalsGuest() && $bet->getGoalsHome() > $bet->getGoalsGuest())
+                     ||
+                     ($game->getGoalsHome() < $game->getGoalsGuest() && $bet->getGoalsHome() < $bet->getGoalsGuest())
+                     ||
+                     ($game->getGoalsHome() == $game->getGoalsGuest() && $bet->getGoalsHome() == $bet->getGoalsGuest()))
+                    &&
+                    abs($game->getGoalsHome() - $game->getGoalsGuest()) == abs($bet->getGoalsHome() - $bet->getGoalsGuest())
+            ) {
+                if ($game->getGoalsHome() == $bet->getGoalsHome()) {
+                    $denominator = 1;
+                } else {
+                    $denominator = abs($game->getGoalsHome() - $bet->getGoalsHome());
+                }
+                $bet->setPts(
+                    number_format(2 + 1 / $denominator, 1)
+                );
+            } // correct settlement & wrong goals diffrence
+            elseif ((($game->getGoalsHome() > $game->getGoalsGuest() && $bet->getGoalsHome() > $bet->getGoalsGuest())
+                     ||
+                     ($game->getGoalsHome() < $game->getGoalsGuest() && $bet->getGoalsHome() < $bet->getGoalsGuest())
+                     ||
+                     ($game->getGoalsHome() == $game->getGoalsGuest() && $bet->getGoalsHome() == $bet->getGoalsGuest()))
+                    &&
+                    abs($game->getGoalsHome() - $game->getGoalsGuest()) != abs($bet->getGoalsHome() - $bet->getGoalsGuest())
+            ) {
+                $bet->setPts(2);
+            }
+
+            if ($game->getIsAwarded()) {
+                $bet->setPts(2 * $bet->getPts());
+            }
+        }
+
+        $this->em->flush();
+
+        return true;
     }
 }

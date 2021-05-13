@@ -8,6 +8,7 @@ use App\Service\ScheduleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,7 +52,7 @@ class GameController extends AbstractController
      * @Route("/game/{id}/save-bet", name="game_save_bet", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function saveBet(Request $request, Game $game): Response
+    public function saveBet(Request $request, Game $game): JsonResponse
     {
         if (new \DateTime() > $game->getDate()) {
             return $this->json(['errorMsg' => 'the game has already begun'], 302);
@@ -66,14 +67,15 @@ class GameController extends AbstractController
      * @Route("/game/{id}/save-result", name="game_save_result", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function saveResult(Request $request, Game $game): Response
+    public function saveResult(Request $request, Game $game): JsonResponse
     {
         if ($game->getGoalsHome() !== null && $game->getGoalsGuest() !== null) {
-            return $this->json(['status' => 'error'], 302);
+            return $this->json(['errorMsg' => 'we already have game result in database'], 302);
         }
 
         $this->gameService->saveGameResult($game, $this->getUser(), json_decode($request->request->get('data'), true));
+        $this->gameService->calcBetPoints($game);
 
-        return $this->json(['status' => 'success']);
+        return $this->json(['success']);
     }
 }

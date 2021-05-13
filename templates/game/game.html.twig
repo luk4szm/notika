@@ -170,7 +170,7 @@
                                     {% endif %}
                                 {% else %}
                                     {% if game.bets is not empty %}
-                                        <table class="table table-sm">
+                                        <table id="betsTable" class="table table-sm">
                                             <thead class="table-light">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -182,12 +182,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {% for bet in game.bets %}
+                                            {% for bet in game.bets|sort((a, b) => a.pts < b.pts) %}
                                                 <tr>
                                                     <td>{{ loop.index }}</td>
                                                     <td class="fw-mid">{{ bet.user.fullName }}</td>
                                                     <td>{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>
-                                                    <td class="fw-mid">{{ bet.pts }}</td>
+                                                    <td>
+                                                        {% if bet.pts is not null %}
+                                                            {% set class = bet.pts > 0 ? 'fw-mid' : 'color-gray' %}
+                                                            <span class="{{ class }}">{{ bet.pts|number_format(1) }}</span>
+                                                        {% endif %}
+                                                    </td>
                                                     <td class="text-end">{{ bet.createdAt|date("d.m.Y H:i") }}</td>
                                                     <td class="text-center">
                                                         {% if bet.updatedAt is not null %}
@@ -337,6 +342,7 @@
             <div id="resultSaveError" class="toast">
                 <div class="toast-body text-center">
                     {{ 'game.result.notSaved'|trans }}
+                    <div id="resultSaveErrorMessage"></div>
                 </div>
             </div>
         {% endif %}
@@ -371,10 +377,8 @@
                             gtxChart.data.datasets[1].data = [result.draw];
                             gtxChart.data.datasets[2].data = [result.guest];
                             gtxChart.update();
-
                         },
                         error: function (result) {
-                            console.log(result);
                             $('#betSaveErrorMessage').html(result.responseJSON.errorMsg);
                             $('#betSaveError').toast('show');
                         },
@@ -399,15 +403,15 @@
                         dataType: 'json',
                         data: "data=" + JSON.stringify(result),
                         success: function () {
-                            $("#gameInfo").load(" #gameInfo");
-                            $("#roundSchedule").load(" #roundSchedule");
-                            $("#betsCard").load(" #betsCard");
                             $('#resultSaveConfirm').toast('show');
+                            $("#gameInfo").load(" #gameInfo");
+                            $("#betsTable").load(" #betsTable");
                         },
                         error: function () {
-                            $("#gameInfo").load(" #gameInfo");
-                            $("#roundSchedule").load(" #roundSchedule");
+                            $('#resultSaveErrorMessage').html(result.responseJSON.errorMsg);
                             $('#resultSaveError').toast('show');
+                            $("#gameInfo").load(" #gameInfo");
+                            $("#betsTable").load(" #betsTable");
                         },
                     });
                 });

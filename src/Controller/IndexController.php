@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Bet;
 use App\Entity\Game;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,15 +23,9 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         $nextGame    = $this->em->getRepository(Game::class)->findNextGame();
-        $missingBets = null;
-
-        if ($this->getUser()) {
-            $missingBets = $this->em->getRepository(Bet::class)->countUserMissingBets();
-        }
 
         return $this->render('index/index.html.twig', [
             'nextGame'    => $nextGame,
-            'missingBets' => $missingBets,
         ]);
     }
 }

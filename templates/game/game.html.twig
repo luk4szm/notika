@@ -372,11 +372,11 @@
                         success: function (result) {
                             $("#gameInfo").load(" #gameInfo");
                             $("#betsCard").load(" #betsCard");
-                            $('#betSaveConfirm').toast('show');
                             gtxChart.data.datasets[0].data = [result.home];
                             gtxChart.data.datasets[1].data = [result.draw];
                             gtxChart.data.datasets[2].data = [result.guest];
                             gtxChart.update();
+                            $('#betSaveConfirm').toast('show');
                         },
                         error: function (result) {
                             $('#betSaveErrorMessage').html(result.responseJSON.errorMsg);
@@ -403,15 +403,15 @@
                         dataType: 'json',
                         data: "data=" + JSON.stringify(result),
                         success: function () {
-                            $('#resultSaveConfirm').toast('show');
                             $("#gameInfo").load(" #gameInfo");
                             $("#betsTable").load(" #betsTable");
+                            $('#resultSaveConfirm').toast('show');
                         },
                         error: function () {
                             $('#resultSaveErrorMessage').html(result.responseJSON.errorMsg);
-                            $('#resultSaveError').toast('show');
                             $("#gameInfo").load(" #gameInfo");
                             $("#betsTable").load(" #betsTable");
+                            $('#resultSaveError').toast('show');
                         },
                     });
                 });

@@ -20,6 +20,7 @@
 <div class="container my-3 pb-4">
     {% block body %}{% endblock %}
 </div>
+<div id="spinner"></div>
 {% block footer %}
     <nav class="fixed-bottom navbar-light bg-light text-center">
         <div class="container-fluid text-center">
@@ -34,6 +35,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.js.map') }}"></script>
+    <script src="{{ asset('assets/js/spinner.js') }}"></script>
 {% endblock %}
 {% block customJs %}{% endblock %}
 </body>

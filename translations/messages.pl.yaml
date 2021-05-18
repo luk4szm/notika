@@ -24,6 +24,10 @@ game:
 general:
   none: brak
 menu:
+  login: Zaloguj się
+  register: Zarejestruj się
+  loggedAs: Zalogowano jako
+  bet: TYPUJ
   rules: Zasady
   players: Gracze
   season:

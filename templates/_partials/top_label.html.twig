@@ -27,14 +27,14 @@
             {% if is_granted('ROLE_USER') %}
                 <div class="row row-cols-lg-auto align-items-center">
                     <div class="col-12 d-flex mx-5">
-                        <a href="/" class="btn btn-outline-success me-2 btn-bet px-4" role="button">TYPUJ
+                        <a href="/" class="btn btn-outline-success me-2 btn-bet px-4" role="button">{{ 'menu.bet'|trans }}
                             &nbsp;<span class="badge bg-success">{{ app.session.get('userMissingBets') }}</span></a>
                     </div>
                 </div>
 
-                <div class="row row-cols-lg-auto g-3 align-items-center">
+                <div class="row row-cols-lg-auto g-3 align-items-center text-end">
                     <div class="col-12 d-flex">
-                        <small class="text-right text-nowrap lh-sm">Zalogowano jako<br>
+                        <small class="text-nowrap lh-sm">{{ 'menu.loggedAs'|trans }}:<br>
                             <b><a href="{{ path('user_profile') }}" class="link-secondary">
                                     {{ app.user.firstName }} {{ app.user.lastName }}
                                 </a></b>
@@ -44,7 +44,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_ADMIN') %}
-                <div class="ms-2">
+                <div class="ms-3">
                     <a href="{{ path('admin') }}">
                         <img src="{{ asset('assets/svg/gear-fill.svg') }}" height="20px" alt="admin">
                     </a>
@@ -52,7 +52,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
-                <div class="ms-2">
+                <div class="ms-3">
                     <a href="{{ path('app_logout') }}">
                         <img src="{{ asset('assets/svg/door-closed.svg') }}" height="20px" alt="logout">
                     </a>
@@ -61,8 +61,8 @@
 
             {% if is_granted('IS_ANONYMOUS') %}
                 <div class="btn-group">
-                    <a href="{{ path('app_register') }}" class="btn btn-outline-success text-nowrap" role="button">Załóż konto</a>
-                    <a href="{{ path('app_login') }}" class="btn btn-success me-2 text-nowrap" role="button">Zaloguj się</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-success text-nowrap" role="button">{{ 'menu.register'|trans }}</a>
+                    <a href="{{ path('app_login') }}" class="btn btn-success me-2 text-nowrap" role="button">{{ 'menu.login'|trans }}</a>
                 </div>
             {% endif %}
         </div>

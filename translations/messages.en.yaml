@@ -24,6 +24,10 @@ game:
 general:
   none: none
 menu:
+  login: Sign in
+  register: Sign up
+  loggedAs: Logged as
+  bet: BET
   rules: Rules
   players: Players
   season:

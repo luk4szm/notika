@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\RankingRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,11 +16,6 @@ class Ranking
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="rankings")
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="float")
@@ -54,38 +47,15 @@ class Ranking
      */
     private $updatedAt;
 
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rankings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        $this->user->removeElement($user);
-
-        return $this;
     }
 
     public function getPts(): ?float
@@ -156,6 +126,18 @@ class Ranking
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -144,6 +144,12 @@ class GameService
         return true;
     }
 
+    /**
+     * Calculate points for every bet in game
+     *
+     * @param Game $game
+     * @return bool
+     */
     public function calcBetPoints(Game $game)
     {
         if (!$game->getBets()->count()) {
@@ -166,7 +172,6 @@ class GameService
 
         /** @var Bet $bet */
         foreach ($game->getBets() as $bet) {
-
             $bet->setPts(0);
 
             // exact hit & number of goals over 3.5

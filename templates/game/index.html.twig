@@ -25,14 +25,3 @@
     {% block charts %}
     {% endblock %}
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        jQuery(document).ready(function ($) {
-            $(".row-link").click(function () {
-                window.location = $(this).data("href");
-            });
-        });
-    </script>
-{% endblock %}

@@ -84,4 +84,24 @@ class GameRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getOneOrNullResult();
     }
+
+    /**
+     * Find all games with missing result
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findGamesWithNoResult()
+    {
+        $time = (new \DateTime())
+            ->sub(new \DateInterval('PT' . Game::GAMETIME . 'M'));
+
+        return $this->createQueryBuilder('g')
+                    ->andWhere('g.date < :val')
+                    ->setParameter('val', $time)
+                    ->andWhere('g.goals_home IS NULL')
+                    ->andWhere('g.goals_guest IS NULL')
+                    ->orderBy('g.date', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

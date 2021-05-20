@@ -11,6 +11,8 @@ card:
   changePassword: Zmień hasło
   locale: Zmień język
 game:
+  gameplay: Rozgrywki
+  meeting: Spotkanie
   bets: Typowania
   round: Runda
   date: Data
@@ -23,6 +25,10 @@ game:
   missingResult: czekamy na wynik
 general:
   none: brak
+index:
+  helpContribute: Pomóż współtworzyć ranking typera!
+  missingResultUser: Dodaj do bazy brakujące wyniki zakończonych spotkań
+  missingResult: W bazie brakuje wyników zakończonych spotkań. Zaloguj się i je dodaj.
 menu:
   login: Zaloguj się
   register: Zarejestruj się

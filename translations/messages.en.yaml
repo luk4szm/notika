@@ -11,6 +11,8 @@ card:
   changePassword: Change password
   locale: Change language
 game:
+  gameplay: Gameplay
+  meeting: Meeting
   bets: Bets
   round: Round
   date: Date
@@ -23,6 +25,10 @@ game:
   missingResult: we're waiting for result
 general:
   none: none
+index:
+  helpContribute: Help contribute to the ranking
+  missingResultUser: Add to the database the missing results of completed matches
+  missingResult: The results of completed meetings are missing in the database. Sign in and add them.
 menu:
   login: Sign in
   register: Sign up

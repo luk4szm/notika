@@ -16913,6 +16913,9 @@ body {
 .color-green {
   color: limegreen;
 }
+.color-green-transparent {
+  background: rgba(0, 222, 0, 0.08);
+}
 
 .fs-normal {
   font-size: 1rem;
@@ -16932,7 +16935,7 @@ body {
   cursor: pointer;
 }
 .row-link:hover {
-  background-color: #f8f9fa;
+  background-color: rgba(164, 164, 164, 0.15);
 }
 
 .toast {

@@ -14,7 +14,7 @@ class IndexController extends AbstractController
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em       = $em;
+        $this->em = $em;
     }
 
     /**
@@ -22,10 +22,12 @@ class IndexController extends AbstractController
      */
     public function index(): Response
     {
-        $nextGame    = $this->em->getRepository(Game::class)->findNextGame();
+        $nextGame       = $this->em->getRepository(Game::class)->findNextGame();
+        $missingResults = $this->em->getRepository(Game::class)->findGamesWithNoResult();
 
         return $this->render('index/index.html.twig', [
-            'nextGame'    => $nextGame,
+            'nextGame'       => $nextGame,
+            'missingResults' => $missingResults,
         ]);
     }
 }

@@ -87,10 +87,16 @@ class Season
      */
     private $tables;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RankingInfo::class, mappedBy="season")
+     */
+    private $rankingInfos;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
         $this->tables = new ArrayCollection();
+        $this->rankingInfos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -284,6 +290,36 @@ class Season
             // set the owning side to null (unless already changed)
             if ($table->getSeason() === $this) {
                 $table->setSeason(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RankingInfo[]
+     */
+    public function getRankingInfos(): Collection
+    {
+        return $this->rankingInfos;
+    }
+
+    public function addRankingInfo(RankingInfo $rankingInfo): self
+    {
+        if (!$this->rankingInfos->contains($rankingInfo)) {
+            $this->rankingInfos[] = $rankingInfo;
+            $rankingInfo->setSeason($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRankingInfo(RankingInfo $rankingInfo): self
+    {
+        if ($this->rankingInfos->removeElement($rankingInfo)) {
+            // set the owning side to null (unless already changed)
+            if ($rankingInfo->getSeason() === $this) {
+                $rankingInfo->setSeason(null);
             }
         }
 

@@ -108,17 +108,23 @@ class User implements UserInterface
      */
 	private $locale;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Ranking::class, mappedBy="user")
+     */
+    private $rankings;
+
 	public function __construct()
-	{
-		$this->bets = new ArrayCollection();
-		$this->gamedAdded = new ArrayCollection();
-		$this->gamesUpdated = new ArrayCollection();
-	}
+               	{
+               		$this->bets = new ArrayCollection();
+               		$this->gamedAdded = new ArrayCollection();
+               		$this->gamesUpdated = new ArrayCollection();
+                 $this->rankings = new ArrayCollection();
+               	}
 
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+               	{
+               		return $this->id;
+               	}
 
 	/**
 	 * A visual identifier that represents this user.
@@ -126,282 +132,282 @@ class User implements UserInterface
 	 * @see UserInterface
 	 */
 	public function getUsername(): string
-	{
-		return (string)$this->username;
-	}
+               	{
+               		return (string)$this->username;
+               	}
 
 	public function setUsername(string $username): self
-	{
-		$this->username = $username;
-
-		return $this;
-	}
+               	{
+               		$this->username = $username;
+               
+               		return $this;
+               	}
 
 	/**
 	 * @see UserInterface
 	 */
 	public function getRoles(): array
-	{
-		$roles = $this->roles;
-		// guarantee every user at least has ROLE_USER
-		$roles[] = 'ROLE_USER';
-
-		return array_unique($roles);
-	}
+               	{
+               		$roles = $this->roles;
+               		// guarantee every user at least has ROLE_USER
+               		$roles[] = 'ROLE_USER';
+               
+               		return array_unique($roles);
+               	}
 
 	public function setRoles(array $roles): self
-	{
-		$this->roles = $roles;
-
-		return $this;
-	}
+               	{
+               		$this->roles = $roles;
+               
+               		return $this;
+               	}
 
 	/**
 	 * @see UserInterface
 	 */
 	public function getPassword(): string
-	{
-		return (string)$this->password;
-	}
+               	{
+               		return (string)$this->password;
+               	}
 
 	public function setPassword(string $password): self
-	{
-		$this->password = $password;
-
-		return $this;
-	}
+               	{
+               		$this->password = $password;
+               
+               		return $this;
+               	}
 
 	/**
 	 * @see UserInterface
 	 */
 	public function getSalt()
-	{
-		// not needed when using the "bcrypt" algorithm in security.yaml
-	}
+               	{
+               		// not needed when using the "bcrypt" algorithm in security.yaml
+               	}
 
 	/**
 	 * @see UserInterface
 	 */
 	public function eraseCredentials()
-	{
-		// If you store any temporary, sensitive data on the user, clear it here
-		// $this->plainPassword = null;
-	}
+               	{
+               		// If you store any temporary, sensitive data on the user, clear it here
+               		// $this->plainPassword = null;
+               	}
 
 	public function getEmail(): ?string
-	{
-		return $this->email;
-	}
+               	{
+               		return $this->email;
+               	}
 
 	public function setEmail(?string $email): self
-	{
-		$this->email = $email;
-
-		return $this;
-	}
+               	{
+               		$this->email = $email;
+               
+               		return $this;
+               	}
 
 	public function getFirstName(): ?string
-	{
-		return $this->first_name;
-	}
+               	{
+               		return $this->first_name;
+               	}
 
 	public function setFirstName(string $first_name): self
-	{
-		$this->first_name = $first_name;
-
-		return $this;
-	}
+               	{
+               		$this->first_name = $first_name;
+               
+               		return $this;
+               	}
 
 	public function getLastName(): ?string
-	{
-		return $this->last_name;
-	}
+               	{
+               		return $this->last_name;
+               	}
 
 	public function setLastName(string $last_name): self
-	{
-		$this->last_name = $last_name;
-
-		return $this;
-	}
+               	{
+               		$this->last_name = $last_name;
+               
+               		return $this;
+               	}
 
 	public function getFullName(): ?string
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
+                   {
+                       return $this->first_name . ' ' . $this->last_name;
+                   }
 
 	public function getActive(): ?bool
-	{
-		return $this->active;
-	}
+               	{
+               		return $this->active;
+               	}
 
 	public function setActive(bool $active): self
-	{
-		$this->active = $active;
-
-		return $this;
-	}
+               	{
+               		$this->active = $active;
+               
+               		return $this;
+               	}
 
 	public function getNation(): ?int
-	{
-		return $this->nation;
-	}
+               	{
+               		return $this->nation;
+               	}
 
 	public function setNation(int $nation): self
-	{
-		$this->nation = $nation;
-
-		return $this;
-	}
+               	{
+               		$this->nation = $nation;
+               
+               		return $this;
+               	}
 
 	public function getLanguage(): ?string
-	{
-		return $this->language;
-	}
+               	{
+               		return $this->language;
+               	}
 
 	public function setLanguage(string $language): self
-	{
-		$this->language = $language;
-
-		return $this;
-	}
+               	{
+               		$this->language = $language;
+               
+               		return $this;
+               	}
 
 	public function getMember(): ?bool
-	{
-		return $this->member;
-	}
+               	{
+               		return $this->member;
+               	}
 
 	public function setMember(bool $member): self
-	{
-		$this->member = $member;
-
-		return $this;
-	}
+               	{
+               		$this->member = $member;
+               
+               		return $this;
+               	}
 
 	public function getLastEmail(): ?string
-	{
-		return $this->last_email;
-	}
+               	{
+               		return $this->last_email;
+               	}
 
 	public function setLastEmail(?string $last_email): self
-	{
-		$this->last_email = $last_email;
-
-		return $this;
-	}
+               	{
+               		$this->last_email = $last_email;
+               
+               		return $this;
+               	}
 
 	public function getCreatedAt(): ?\DateTimeInterface
-	{
-		return $this->created_at;
-	}
+               	{
+               		return $this->created_at;
+               	}
 
 	public function setCreatedAt(\DateTimeInterface $created_at): self
-	{
-		$this->created_at = $created_at;
-
-		return $this;
-	}
+               	{
+               		$this->created_at = $created_at;
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return Collection|Bet[]
 	 */
 	public function getBets(): Collection
-	{
-		return $this->bets;
-	}
+               	{
+               		return $this->bets;
+               	}
 
 	public function addBet(Bet $bet): self
-	{
-		if (!$this->bets->contains($bet)) {
-			$this->bets[] = $bet;
-			$bet->setUser($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->bets->contains($bet)) {
+               			$this->bets[] = $bet;
+               			$bet->setUser($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removeBet(Bet $bet): self
-	{
-		if ($this->bets->removeElement($bet)) {
-			// set the owning side to null (unless already changed)
-			if ($bet->getUser() === $this) {
-				$bet->setUser(null);
-			}
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->bets->removeElement($bet)) {
+               			// set the owning side to null (unless already changed)
+               			if ($bet->getUser() === $this) {
+               				$bet->setUser(null);
+               			}
+               		}
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return Collection|Game[]
 	 */
 	public function getGamedAdded(): Collection
-	{
-		return $this->gamedAdded;
-	}
+               	{
+               		return $this->gamedAdded;
+               	}
 
 	public function addGamedAdded(Game $gamedAdded): self
-	{
-		if (!$this->gamedAdded->contains($gamedAdded)) {
-			$this->gamedAdded[] = $gamedAdded;
-			$gamedAdded->setCreatedBy($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->gamedAdded->contains($gamedAdded)) {
+               			$this->gamedAdded[] = $gamedAdded;
+               			$gamedAdded->setCreatedBy($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removeGamedAdded(Game $gamedAdded): self
-	{
-		if ($this->gamedAdded->removeElement($gamedAdded)) {
-			// set the owning side to null (unless already changed)
-			if ($gamedAdded->getCreatedBy() === $this) {
-				$gamedAdded->setCreatedBy(null);
-			}
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->gamedAdded->removeElement($gamedAdded)) {
+               			// set the owning side to null (unless already changed)
+               			if ($gamedAdded->getCreatedBy() === $this) {
+               				$gamedAdded->setCreatedBy(null);
+               			}
+               		}
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return Collection|Game[]
 	 */
 	public function getGamesUpdated(): Collection
-	{
-		return $this->gamesUpdated;
-	}
+               	{
+               		return $this->gamesUpdated;
+               	}
 
 	public function addGamesUpdated(Game $gamesUpdated): self
-	{
-		if (!$this->gamesUpdated->contains($gamesUpdated)) {
-			$this->gamesUpdated[] = $gamesUpdated;
-			$gamesUpdated->setUpdatedBy($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->gamesUpdated->contains($gamesUpdated)) {
+               			$this->gamesUpdated[] = $gamesUpdated;
+               			$gamesUpdated->setUpdatedBy($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removeGamesUpdated(Game $gamesUpdated): self
-	{
-		if ($this->gamesUpdated->removeElement($gamesUpdated)) {
-			// set the owning side to null (unless already changed)
-			if ($gamesUpdated->getUpdatedBy() === $this) {
-				$gamesUpdated->setUpdatedBy(null);
-			}
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->gamesUpdated->removeElement($gamesUpdated)) {
+               			// set the owning side to null (unless already changed)
+               			if ($gamesUpdated->getUpdatedBy() === $this) {
+               				$gamesUpdated->setUpdatedBy(null);
+               			}
+               		}
+               
+               		return $this;
+               	}
 
 	public function isVerified(): bool
-	{
-		return $this->isVerified;
-	}
+               	{
+               		return $this->isVerified;
+               	}
 
 	public function setIsVerified(bool $isVerified): self
-	{
-		$this->isVerified = $isVerified;
-
-		return $this;
-	}
+               	{
+               		$this->isVerified = $isVerified;
+               
+               		return $this;
+               	}
 
     public function getLocale(): ?string
     {
@@ -411,6 +417,33 @@ class User implements UserInterface
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ranking[]
+     */
+    public function getRankings(): Collection
+    {
+        return $this->rankings;
+    }
+
+    public function addRanking(Ranking $ranking): self
+    {
+        if (!$this->rankings->contains($ranking)) {
+            $this->rankings[] = $ranking;
+            $ranking->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRanking(Ranking $ranking): self
+    {
+        if ($this->rankings->removeElement($ranking)) {
+            $ranking->removeUser($this);
+        }
 
         return $this;
     }

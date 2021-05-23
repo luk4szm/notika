@@ -109,16 +109,16 @@ class User implements UserInterface
     private $locale;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ranking::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Classification::class, mappedBy="user", orphanRemoval=true)
      */
-    private $rankings;
+    private $classifications;
 
     public function __construct()
     {
-        $this->bets         = new ArrayCollection();
-        $this->gamedAdded   = new ArrayCollection();
-        $this->gamesUpdated = new ArrayCollection();
-        $this->rankings     = new ArrayCollection();
+        $this->bets            = new ArrayCollection();
+        $this->gamedAdded      = new ArrayCollection();
+        $this->gamesUpdated    = new ArrayCollection();
+        $this->classifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -421,29 +421,29 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Ranking[]
+     * @return Collection|Classification[]
      */
-    public function getRankings(): Collection
+    public function getClassifications(): Collection
     {
-        return $this->rankings;
+        return $this->classifications;
     }
 
-    public function addRanking(Ranking $ranking): self
+    public function addClassification(Classification $classification): self
     {
-        if (!$this->rankings->contains($ranking)) {
-            $this->rankings[] = $ranking;
-            $ranking->setUser($this);
+        if (!$this->classifications->contains($classification)) {
+            $this->classifications[] = $classification;
+            $classification->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeRanking(Ranking $ranking): self
+    public function removeClassification(Classification $classification): self
     {
-        if ($this->rankings->removeElement($ranking)) {
+        if ($this->classifications->removeElement($classification)) {
             // set the owning side to null (unless already changed)
-            if ($ranking->getUser() === $this) {
-                $ranking->setUser(null);
+            if ($classification->getUser() === $this) {
+                $classification->setUser(null);
             }
         }
 

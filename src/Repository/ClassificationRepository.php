@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\RankingInfo;
+use App\Entity\Classification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method RankingInfo|null find($id, $lockMode = null, $lockVersion = null)
- * @method RankingInfo|null findOneBy(array $criteria, array $orderBy = null)
- * @method RankingInfo[]    findAll()
- * @method RankingInfo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Classification|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Classification|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Classification[]    findAll()
+ * @method Classification[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RankingInfoRepository extends ServiceEntityRepository
+class ClassificationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, RankingInfo::class);
+        parent::__construct($registry, Classification::class);
     }
 
     // /**
-    //  * @return RankingInfo[] Returns an array of RankingInfo objects
+    //  * @return Ranking[] Returns an array of Ranking objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RankingInfoRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?RankingInfo
+    public function findOneBySomeField($value): ?Ranking
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

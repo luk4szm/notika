@@ -18,24 +18,39 @@ class Ranking
     private $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\ManyToOne(targetEntity=Season::class, inversedBy="rankings")
      */
-    private $pts;
+    private $season;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $hit;
+    private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $typedRounds;
+    private $shortName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
-    private $typedGames;
+    private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $mark;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $startRound;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $endRound;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,63 +60,93 @@ class Ranking
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rankings")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+    private $closeAt;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPts(): ?float
+    public function getSeason(): ?Season
     {
-        return $this->pts;
+        return $this->season;
     }
 
-    public function setPts(float $pts): self
+    public function setSeason(?Season $season): self
     {
-        $this->pts = $pts;
+        $this->season = $season;
 
         return $this;
     }
 
-    public function getHit(): ?int
+    public function getName(): ?string
     {
-        return $this->hit;
+        return $this->name;
     }
 
-    public function setHit(int $hit): self
+    public function setName(string $name): self
     {
-        $this->hit = $hit;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getTypedRounds(): ?int
+    public function getShortName(): ?string
     {
-        return $this->typedRounds;
+        return $this->shortName;
     }
 
-    public function setTypedRounds(int $typedRounds): self
+    public function setShortName(string $shortName): self
     {
-        $this->typedRounds = $typedRounds;
+        $this->shortName = $shortName;
 
         return $this;
     }
 
-    public function getTypedGames(): ?int
+    public function getIsActive(): ?bool
     {
-        return $this->typedGames;
+        return $this->isActive;
     }
 
-    public function setTypedGames(int $typedGames): self
+    public function setIsActive(bool $isActive): self
     {
-        $this->typedGames = $typedGames;
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getMark(): ?string
+    {
+        return $this->mark;
+    }
+
+    public function setMark(?string $mark): self
+    {
+        $this->mark = $mark;
+
+        return $this;
+    }
+
+    public function getStartRound(): ?int
+    {
+        return $this->startRound;
+    }
+
+    public function setStartRound(?int $startRound): self
+    {
+        $this->startRound = $startRound;
+
+        return $this;
+    }
+
+    public function getEndRound(): ?int
+    {
+        return $this->endRound;
+    }
+
+    public function setEndRound(?int $endRound): self
+    {
+        $this->endRound = $endRound;
 
         return $this;
     }
@@ -118,26 +163,14 @@ class Ranking
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getCloseAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->closeAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setCloseAt(?\DateTimeInterface $closeAt): self
     {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+        $this->closeAt = $closeAt;
 
         return $this;
     }

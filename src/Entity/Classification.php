@@ -53,6 +53,12 @@ class Classification
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Ranking::class, inversedBy="classifications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ranking;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +144,18 @@ class Classification
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRanking(): ?Ranking
+    {
+        return $this->ranking;
+    }
+
+    public function setRanking(?Ranking $ranking): self
+    {
+        $this->ranking = $ranking;
 
         return $this;
     }

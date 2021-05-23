@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RankingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -68,6 +70,16 @@ class Ranking
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $closeAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Classification::class, mappedBy="Ranking", orphanRemoval=true)
+     */
+    private $classifications;
+
+    public function __construct()
+    {
+        $this->classifications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +202,36 @@ class Ranking
     public function setCloseAt(?\DateTimeInterface $closeAt): self
     {
         $this->closeAt = $closeAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Classification[]
+     */
+    public function getClassifications(): Collection
+    {
+        return $this->classifications;
+    }
+
+    public function addClassification(Classification $classification): self
+    {
+        if (!$this->classifications->contains($classification)) {
+            $this->classifications[] = $classification;
+            $classification->setRanking($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassification(Classification $classification): self
+    {
+        if ($this->classifications->removeElement($classification)) {
+            // set the owning side to null (unless already changed)
+            if ($classification->getRanking() === $this) {
+                $classification->setRanking(null);
+            }
+        }
 
         return $this;
     }

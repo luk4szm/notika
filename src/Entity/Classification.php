@@ -76,6 +76,13 @@ class Classification
         return $this;
     }
 
+    public function addPts(float $pts): self
+    {
+        $this->pts = $this->getPts() + $pts;
+
+        return $this;
+    }
+
     public function getHits(): ?int
     {
         return $this->hits;
@@ -84,6 +91,13 @@ class Classification
     public function setHits(int $hits): self
     {
         $this->hits = $hits;
+
+        return $this;
+    }
+
+    public function increaseHit(): self
+    {
+        $this->hits++;
 
         return $this;
     }
@@ -100,6 +114,13 @@ class Classification
         return $this;
     }
 
+    public function increaseTypedRounds(): self
+    {
+        $this->typedRounds++;
+
+        return $this;
+    }
+
     public function getTypedGames(): ?int
     {
         return $this->typedGames;
@@ -108,6 +129,13 @@ class Classification
     public function setTypedGames(int $typedGames): self
     {
         $this->typedGames = $typedGames;
+
+        return $this;
+    }
+
+    public function increaseTypedGames(): self
+    {
+        $this->typedGames++;
 
         return $this;
     }

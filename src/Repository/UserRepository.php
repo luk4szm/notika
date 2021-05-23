@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Ranking;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -34,6 +35,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    /**
+     * Find all users who have saved their predictions as part of the ranking
+     * @param Ranking $ranking
+     * @return array|null
+     */
+    public function findRankingParticipants(Ranking $ranking): ?array
+    {
+        return $this->createQueryBuilder('u')
+                    ->leftJoin('u.bets', 'b')
+                    ->leftJoin('b.game', 'g')
+                    ->leftJoin('g.season', 's')
+                    ->leftJoin('s.rankings', 'r')
+                    ->andWhere('r.id = :id')
+                    ->setParameter('id', $ranking->getId())
+                    ->getQuery()
+                    ->getResult();
     }
 
     // /**

@@ -5,13 +5,31 @@
                 {{ season.league.name }}
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ path('season_table', {'slug': season.slug}) }}">{{ 'menu.season.table'|trans }}</a></li>
-                <li><a class="dropdown-item" href="{{ path('season_schedule', {'slug': season.slug}) }}">{{ 'menu.season.schedule'|trans }}</a></li>
-                <li><a class="dropdown-item" href="#">{{ 'menu.season.stats'|trans }}</a></li>
                 <li>
-                    <hr class="dropdown-divider">
+                    <a class="dropdown-item" href="{{ path('season_table', {'slug': season.slug}) }}">
+                        {{ 'menu.season.table'|trans }}
+                    </a>
                 </li>
-                <li><a class="dropdown-item" href="#">{{ 'menu.season.ranking'|trans }}</a></li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('season_schedule', {'slug': season.slug}) }}">
+                        {{ 'menu.season.schedule'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">{{ 'menu.season.stats'|trans }}</a>
+                </li>
+                {% if season.rankings is not empty %}
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    {% for ranking in season.rankings %}
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                {{ ranking.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
     {% endfor %}

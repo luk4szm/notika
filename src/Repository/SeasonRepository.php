@@ -27,7 +27,8 @@ class SeasonRepository extends ServiceEntityRepository
     public function findActiveSeasons()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.is_active = :val')
+            ->join('s.rankings', 'r')
+            ->andWhere('r.isActive = :val')
             ->setParameter('val', true)
             ->orderBy('s.name ', 'ASC')
             ->getQuery()

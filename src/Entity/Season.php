@@ -27,11 +27,6 @@ class Season
     private $league;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_active;
-
-    /**
      * @ORM\Column(type="string", length=10)
      */
     private $type;
@@ -112,18 +107,6 @@ class Season
     public function setLeague(?League $league): self
     {
         $this->league = $league;
-
-        return $this;
-    }
-
-    public function getIsActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setIsActive(bool $is_active): self
-    {
-        $this->is_active = $is_active;
 
         return $this;
     }

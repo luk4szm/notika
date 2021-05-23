@@ -24,7 +24,7 @@
                     </li>
                     {% for ranking in season.rankings %}
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ path('ranking_detail', {'slug': ranking.slug}) }}">
                                 {{ ranking.name }}
                             </a>
                         </li>

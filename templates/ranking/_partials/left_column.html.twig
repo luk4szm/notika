@@ -1,0 +1,23 @@
+<div class="col-lg-3">
+    <div class="col-sticky-top">
+        <div class="card">
+            <div class="card-header">
+                Sortuj wg
+            </div>
+            <div class="card-body">
+
+            </div>
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="card">
+                <div class="card-header">
+                    Administration
+                </div>
+                <div class="card-body">
+                    przelicz punktacje
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

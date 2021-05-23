@@ -32,7 +32,7 @@ class Game
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_counted;
+    private $isCounted;
 
     /**
      * @ORM\Column(type="datetime")
@@ -49,17 +49,17 @@ class Game
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $goals_home;
+    private $goalsHome;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $goals_guest;
+    private $goalsGuest;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_awarded;
+    private $isAwarded;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -69,32 +69,32 @@ class Game
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gamedAdded")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $created_by;
+    private $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gamesUpdated")
      */
-    private $updated_by;
+    private $updatedBy;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="games_home")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="gamesHome")
      * @ORM\JoinColumn(nullable=false)
      */
     private $home;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="games_guest")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="gamesGuest")
      * @ORM\JoinColumn(nullable=false)
      */
     private $guest;
@@ -147,12 +147,12 @@ class Game
 
     public function getIsCounted(): ?bool
     {
-        return $this->is_counted;
+        return $this->isCounted;
     }
 
-    public function setIsCounted(bool $is_counted): self
+    public function setIsCounted(bool $isCounted): self
     {
-        $this->is_counted = $is_counted;
+        $this->isCounted = $isCounted;
 
         return $this;
     }
@@ -190,36 +190,36 @@ class Game
 
     public function getGoalsHome(): ?int
     {
-        return $this->goals_home;
+        return $this->goalsHome;
     }
 
-    public function setGoalsHome(?int $goals_home): self
+    public function setGoalsHome(?int $goalsHome): self
     {
-        $this->goals_home = $goals_home;
+        $this->goalsHome = $goalsHome;
 
         return $this;
     }
 
     public function getGoalsGuest(): ?int
     {
-        return $this->goals_guest;
+        return $this->goalsGuest;
     }
 
-    public function setGoalsGuest(?int $goals_guest): self
+    public function setGoalsGuest(?int $goalsGuest): self
     {
-        $this->goals_guest = $goals_guest;
+        $this->goalsGuest = $goalsGuest;
 
         return $this;
     }
 
     public function getIsAwarded(): ?bool
     {
-        return $this->is_awarded;
+        return $this->isAwarded;
     }
 
-    public function setIsAwarded(bool $is_awarded): self
+    public function setIsAwarded(bool $isAwarded): self
     {
-        $this->is_awarded = $is_awarded;
+        $this->isAwarded = $isAwarded;
 
         return $this;
     }
@@ -238,48 +238,48 @@ class Game
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     public function getCreatedBy(): ?User
     {
-        return $this->created_by;
+        return $this->createdBy;
     }
 
-    public function setCreatedBy(?User $created_by): self
+    public function setCreatedBy(?User $createdBy): self
     {
-        $this->created_by = $created_by;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     public function getUpdatedBy(): ?User
     {
-        return $this->updated_by;
+        return $this->updatedBy;
     }
 
-    public function setUpdatedBy(?User $updated_by): self
+    public function setUpdatedBy(?User $updatedBy): self
     {
-        $this->updated_by = $updated_by;
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }

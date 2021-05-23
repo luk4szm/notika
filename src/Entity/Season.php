@@ -39,7 +39,7 @@ class Season
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $short_name;
+    private $shortName;
 
      /**
      * @ORM\Column(type="string", length=255)
@@ -55,22 +55,22 @@ class Season
     /**
      * @ORM\Column(type="smallint")
      */
-    private $teams_count;
+    private $teamsCount;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $rounds_count;
+    private $roundsCount;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $round_games;
+    private $roundGames;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $group_games;
+    private $groupGames;
 
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="season")
@@ -137,12 +137,12 @@ class Season
 
     public function getShortName(): ?string
     {
-        return $this->short_name;
+        return $this->shortName;
     }
 
-    public function setShortName(string $short_name): self
+    public function setShortName(string $shortName): self
     {
-        $this->short_name = $short_name;
+        $this->shortName = $shortName;
 
         return $this;
     }
@@ -173,48 +173,48 @@ class Season
 
     public function getTeamsCount(): ?int
     {
-        return $this->teams_count;
+        return $this->teamsCount;
     }
 
-    public function setTeamsCount(int $teams_count): self
+    public function setTeamsCount(int $teamsCount): self
     {
-        $this->teams_count = $teams_count;
+        $this->teamsCount = $teamsCount;
 
         return $this;
     }
 
     public function getRoundsCount(): ?int
     {
-        return $this->rounds_count;
+        return $this->roundsCount;
     }
 
-    public function setRoundsCount(int $rounds_count): self
+    public function setRoundsCount(int $roundsCount): self
     {
-        $this->rounds_count = $rounds_count;
+        $this->roundsCount = $roundsCount;
 
         return $this;
     }
 
     public function getRoundGames(): ?int
     {
-        return $this->round_games;
+        return $this->roundGames;
     }
 
-    public function setRoundGames(int $round_games): self
+    public function setRoundGames(int $roundGames): self
     {
-        $this->round_games = $round_games;
+        $this->roundGames = $roundGames;
 
         return $this;
     }
 
     public function getGroupGames(): ?int
     {
-        return $this->group_games;
+        return $this->groupGames;
     }
 
-    public function setGroupGames(?int $group_games): self
+    public function setGroupGames(?int $groupGames): self
     {
-        $this->group_games = $group_games;
+        $this->groupGames = $groupGames;
 
         return $this;
     }

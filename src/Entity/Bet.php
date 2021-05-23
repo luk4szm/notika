@@ -20,12 +20,12 @@ class Bet
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $goals_home;
+    private $goalsHome;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $goals_guest;
+    private $goalsGuest;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="bets")
@@ -46,12 +46,12 @@ class Bet
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="bets")
@@ -66,24 +66,24 @@ class Bet
 
     public function getGoalsHome(): ?int
     {
-        return $this->goals_home;
+        return $this->goalsHome;
     }
 
-    public function setGoalsHome(?int $goals_home): self
+    public function setGoalsHome(?int $goalsHome): self
     {
-        $this->goals_home = $goals_home;
+        $this->goalsHome = $goalsHome;
 
         return $this;
     }
 
     public function getGoalsGuest(): ?int
     {
-        return $this->goals_guest;
+        return $this->goalsGuest;
     }
 
-    public function setGoalsGuest(int $goals_guest): self
+    public function setGoalsGuest(int $goalsGuest): self
     {
-        $this->goals_guest = $goals_guest;
+        $this->goalsGuest = $goalsGuest;
 
         return $this;
     }
@@ -126,24 +126,24 @@ class Bet
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

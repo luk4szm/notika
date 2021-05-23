@@ -23,7 +23,7 @@ class Team
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_club;
+    private $isClub;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -39,7 +39,7 @@ class Team
     /**
      * @ORM\Column(type="string", length=3, unique=true)
      */
-    private $short_name;
+    private $shortName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -49,12 +49,12 @@ class Team
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="home")
      */
-    private $games_home;
+    private $gamesHome;
 
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="guest")
      */
-    private $games_guest;
+    private $gamesGuest;
 
     /**
      * @ORM\Column(type="string", length=2, nullable=true)
@@ -68,8 +68,8 @@ class Team
 
     public function __construct()
     {
-        $this->games_home = new ArrayCollection();
-        $this->games_guest = new ArrayCollection();
+        $this->gamesHome = new ArrayCollection();
+        $this->gamesGuest = new ArrayCollection();
         $this->tables = new ArrayCollection();
     }
 
@@ -80,12 +80,12 @@ class Team
 
     public function getIsClub(): ?bool
     {
-        return $this->is_club;
+        return $this->isClub;
     }
 
-    public function setIsClub(bool $is_club): self
+    public function setIsClub(bool $isClub): self
     {
-        $this->is_club = $is_club;
+        $this->isClub = $isClub;
 
         return $this;
     }
@@ -116,12 +116,12 @@ class Team
 
     public function getShortName(): ?string
     {
-        return $this->short_name;
+        return $this->shortName;
     }
 
-    public function setShortName(string $short_name): self
+    public function setShortName(string $shortName): self
     {
-        $this->short_name = $short_name;
+        $this->shortName = $shortName;
 
         return $this;
     }
@@ -155,25 +155,25 @@ class Team
      */
     public function getGamesHome(): Collection
     {
-        return $this->games_home;
+        return $this->gamesHome;
     }
 
-    public function addGamesHome(Game $games_home): self
+    public function addGamesHome(Game $gamesHome): self
     {
-        if (!$this->games_home->contains($games_home)) {
-            $this->games_home[] = $games_home;
-            $games_home->setHome($this);
+        if (!$this->gamesHome->contains($gamesHome)) {
+            $this->gamesHome[] = $gamesHome;
+            $gamesHome->setHome($this);
         }
 
         return $this;
     }
 
-    public function removeGamesHome(Game $games_home): self
+    public function removeGamesHome(Game $gamesHome): self
     {
-        if ($this->games_home->removeElement($games_home)) {
+        if ($this->gamesHome->removeElement($gamesHome)) {
             // set the owning side to null (unless already changed)
-            if ($games_home->getHome() === $this) {
-                $games_home->setHome(null);
+            if ($gamesHome->getHome() === $this) {
+                $gamesHome->setHome(null);
             }
         }
 
@@ -185,25 +185,25 @@ class Team
      */
     public function getGamesGuest(): Collection
     {
-        return $this->games_guest;
+        return $this->gamesGuest;
     }
 
-    public function addGamesGuest(Game $games_guest): self
+    public function addGamesGuest(Game $gamesGuest): self
     {
-        if (!$this->games_guest->contains($games_guest)) {
-            $this->games_guest[] = $games_guest;
-            $games_guest->setGuest($this);
+        if (!$this->gamesGuest->contains($gamesGuest)) {
+            $this->gamesGuest[] = $gamesGuest;
+            $gamesGuest->setGuest($this);
         }
 
         return $this;
     }
 
-    public function removeGamesGuest(Game $games_guest): self
+    public function removeGamesGuest(Game $gamesGuest): self
     {
-        if ($this->games_guest->removeElement($games_guest)) {
+        if ($this->gamesGuest->removeElement($gamesGuest)) {
             // set the owning side to null (unless already changed)
-            if ($games_guest->getGuest() === $this) {
-                $games_guest->setGuest(null);
+            if ($gamesGuest->getGuest() === $this) {
+                $gamesGuest->setGuest(null);
             }
         }
 

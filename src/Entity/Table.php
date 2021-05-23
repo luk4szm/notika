@@ -68,12 +68,12 @@ class Table
     /**
      * @ORM\Column(type="integer")
      */
-    private $goals_for;
+    private $goalsFor;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $goals_against;
+    private $goalsAgainst;
 
     /**
      * @ORM\Column(type="integer")
@@ -195,24 +195,24 @@ class Table
 
     public function getGoalsFor(): ?int
     {
-        return $this->goals_for;
+        return $this->goalsFor;
     }
 
-    public function setGoalsFor(int $goals_for): self
+    public function setGoalsFor(int $goalsFor): self
     {
-        $this->goals_for = $goals_for;
+        $this->goalsFor = $goalsFor;
 
         return $this;
     }
 
     public function getGoalsAgainst(): ?int
     {
-        return $this->goals_against;
+        return $this->goalsAgainst;
     }
 
-    public function setGoalsAgainst(int $goals_against): self
+    public function setGoalsAgainst(int $goalsAgainst): self
     {
-        $this->goals_against = $goals_against;
+        $this->goalsAgainst = $goalsAgainst;
 
         return $this;
     }

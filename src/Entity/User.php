@@ -46,12 +46,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="boolean")
@@ -76,12 +76,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $last_email;
+    private $lastEmail;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity=Bet::class, mappedBy="user")
@@ -89,12 +89,12 @@ class User implements UserInterface
     private $bets;
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="created_by")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="createdBy")
      */
     private $gamedAdded;
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="updated_by")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="updatedBy")
      */
     private $gamesUpdated;
 
@@ -207,31 +207,31 @@ class User implements UserInterface
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     public function getFullName(): ?string
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     public function getActive(): ?bool
@@ -284,24 +284,24 @@ class User implements UserInterface
 
     public function getLastEmail(): ?string
     {
-        return $this->last_email;
+        return $this->lastEmail;
     }
 
-    public function setLastEmail(?string $last_email): self
+    public function setLastEmail(?string $lastEmail): self
     {
-        $this->last_email = $last_email;
+        $this->lastEmail = $lastEmail;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

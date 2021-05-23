@@ -180,12 +180,14 @@ class GameService
                 && $game->getGoalsHome() + $game->getGoalsGuest() > 3.5
             ) {
                 $bet->setPts(5);
+                $bet->setHit(true);
             } // exact hit & number of goals below 3.5
             elseif ($game->getGoalsHome() == $bet->getGoalsHome()
                     && $game->getGoalsGuest() == $bet->getGoalsGuest()
                     && $game->getGoalsHome() + $game->getGoalsGuest() < 3.5
             ) {
                 $bet->setPts(4);
+                $bet->setHit(true);
             } // correct settlement & good goals diffrence
             elseif ((($game->getGoalsHome() > $game->getGoalsGuest() && $bet->getGoalsHome() > $bet->getGoalsGuest())
                      ||

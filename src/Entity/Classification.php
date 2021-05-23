@@ -20,22 +20,22 @@ class Classification
     /**
      * @ORM\Column(type="float")
      */
-    private $pts;
+    private $pts = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $hit;
+    private $hits = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $typedRounds;
+    private $typedRounds = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $typedGames;
+    private $typedGames = 0;
 
     /**
      * @ORM\Column(type="datetime")
@@ -76,14 +76,14 @@ class Classification
         return $this;
     }
 
-    public function getHit(): ?int
+    public function getHits(): ?int
     {
-        return $this->hit;
+        return $this->hits;
     }
 
-    public function setHit(int $hit): self
+    public function setHits(int $hits): self
     {
-        $this->hit = $hit;
+        $this->hits = $hits;
 
         return $this;
     }

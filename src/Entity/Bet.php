@@ -39,6 +39,11 @@ class Bet
     private $pts;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hit = false;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -103,6 +108,18 @@ class Bet
     public function setPts(?float $pts): self
     {
         $this->pts = $pts;
+
+        return $this;
+    }
+
+    public function getHit(): ?bool
+    {
+        return $this->hit;
+    }
+
+    public function setHit(bool $hit): self
+    {
+        $this->hit = $hit;
 
         return $this;
     }

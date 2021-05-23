@@ -72,7 +72,7 @@ class Ranking
     private $closeAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Classification::class, mappedBy="Ranking", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Classification::class, mappedBy="ranking", orphanRemoval=true)
      */
     private $classifications;
 

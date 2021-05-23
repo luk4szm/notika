@@ -98,8 +98,8 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g')
                     ->andWhere('g.date < :val')
                     ->setParameter('val', $time)
-                    ->andWhere('g.goals_home IS NULL')
-                    ->andWhere('g.goals_guest IS NULL')
+                    ->andWhere('g.goalsHome IS NULL')
+                    ->andWhere('g.goalsGuest IS NULL')
                     ->orderBy('g.date', 'ASC')
                     ->getQuery()
                     ->getResult();

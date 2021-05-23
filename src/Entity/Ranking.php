@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RankingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=RankingRepository::class)
@@ -31,6 +32,12 @@ class Ranking
      * @ORM\Column(type="string", length=255)
      */
     private $shortName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="boolean")
@@ -99,6 +106,18 @@ class Ranking
     public function setShortName(string $shortName): self
     {
         $this->shortName = $shortName;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

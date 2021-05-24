@@ -1,0 +1,41 @@
+{% extends 'ranking/index.html.twig' %}
+
+{% block title %}Ranking - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {{ ranking.name }}
+        </div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead class="table-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Gracz</th>
+                    <th scope="col">Punkty</th>
+                    <th scope="col">Trafienia</th>
+                    <th scope="col">Skuteczność</th>
+                    <th scope="col">Typowanych spotkań</th>
+                    <th scope="col">Średnia pkt</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for participant in ranking.classifications %}
+                    {% set average = participant.pts / participant.typedGames %}
+
+                    <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
+                        <td>{{ loop.index }}</td>
+                        <td class="fw-mid">{{ participant.user.username }}</td>
+                        <td class="fw-mid">{{ participant.pts|number_format(1) }}</td>
+                        <td>{{ participant.hits }}</td>
+                        <td></td>
+                        <td>{{ participant.typedGames }}</td>
+                        <td>{{ average|number_format(1) }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

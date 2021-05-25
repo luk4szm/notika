@@ -105,6 +105,11 @@ class Game
      */
     private $season;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Round::class, inversedBy="games")
+     */
+    private $round;
+
     public function __construct()
     {
         $this->bets = new ArrayCollection();
@@ -316,6 +321,18 @@ class Game
     public function setSeason(?Season $season): self
     {
         $this->season = $season;
+
+        return $this;
+    }
+
+    public function getRound(): ?Round
+    {
+        return $this->round;
+    }
+
+    public function setRound(?Round $round): self
+    {
+        $this->round = $round;
 
         return $this;
     }

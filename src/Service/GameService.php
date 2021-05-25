@@ -149,7 +149,7 @@ class GameService
      * Make up appeal to round for all games
      * @return int
      */
-    public function findRoundEntity(): int
+    public function assignRoundEntity(): int
     {
         $games = $this->em->getRepository(Game::class)->findBy(['round' => null]);
         $count = 0;

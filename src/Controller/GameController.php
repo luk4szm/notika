@@ -80,12 +80,12 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/find-round-entity", name="find_round_entity")
+     * @Route("/assign-round-entity", name="assign_round_entity")
      * @return JsonResponse
      */
-    public function findRoundEntity(): JsonResponse
+    public function assignRoundEntity(): JsonResponse
     {
-        $count = $this->gameService->findRoundEntity();
+        $count = $this->gameService->assignRoundEntity();
 
         return $this->json('games updated: ' . $count);
     }

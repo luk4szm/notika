@@ -30,19 +30,6 @@ class ScheduleService
     }
 
     /**
-     * Get list of games in specified round in season
-     * @param Season $season
-     * @param int $round
-     * @return array
-     */
-    public function getRoundSchedule(Season $season, int $round): array
-    {
-        $roundGames = $this->em->getRepository(Game::class)->findRoundGames($season, $round);
-
-        return $roundGames;
-    }
-
-    /**
      * Divide games array for past, upcoming, and present with label
      * @param array $gamesCollection
      * @return array
@@ -53,15 +40,15 @@ class ScheduleService
         foreach ($gamesCollection AS $game) {
             // get list of past games
             if ($game->getDate() < $this->now) {
-                $gamesPast[$game->getRoundNr()][] = $game;
+                $gamesPast[$game->getRound()->getOrdinal()][] = $game;
             }
             // get list of upcoming games
             if ($game->getDate() > $this->now) {
-                $gamesUpcoming[$game->getRoundNr()][] = $game;
+                $gamesUpcoming[$game->getRound()->getOrdinal()][] = $game;
             }
             //get list of present games
             if ($game->getDate() <= $this->now and $game->getEndDate() > $this->now) {
-                $gamesPresent[$game->getRoundNr()][] = $game;
+                $gamesPresent[$game->getRound()->getOrdinal()][] = $game;
             }
         }
 

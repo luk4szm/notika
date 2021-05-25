@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Game;
+use App\Entity\Round;
 use App\Entity\Season;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -58,12 +59,12 @@ class GameRepository extends ServiceEntityRepository
      * @param int $round
      * @return mixed
      */
-    public function findRoundGames(Season $season, int $round)
+    public function findRoundGames(Season $season, Round $round)
     {
         return $this->createQueryBuilder('g')
                     ->andWhere('g.season = :season')
                     ->setParameter('season', $season)
-                    ->andWhere('g.roundNr = :round')
+                    ->andWhere('g.round = :round')
                     ->setParameter('round', $round)
                     ->orderBy('g.date', 'ASC')
                     ->getQuery()

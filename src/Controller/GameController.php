@@ -35,9 +35,9 @@ class GameController extends AbstractController
      */
     public function index(Game $game): Response
     {
-        $roundSchedule = $this->scheduleService->getRoundSchedule(
+        $roundSchedule = $this->em->getRepository(Game::class)->findRoundGames(
             $game->getSeason(),
-            $game->getRoundNr()
+            $game->getRound()
         );
 
         return $this->render('game/game.html.twig', [

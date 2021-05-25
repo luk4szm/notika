@@ -155,12 +155,13 @@ class GameService
         $count = 0;
 
         /** @var Game $game */
+        /** @var Round $round */
         foreach ($games as $game) {
             $round = $this->em->getRepository(Round::class)
                               ->findOneBy([
-                                           'season'  => $game->getSeason(),
-                                           'ordinal' => $game->getRoundNr(),
-                                       ]);
+                                              'season'  => $game->getSeason(),
+                                              'ordinal' => $game->getRoundNr(),
+                                          ]);
 
             $game->setRound($round);
 

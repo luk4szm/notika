@@ -4,10 +4,10 @@
 
 {% block content %}
     {% if (games|length != 0) %}
-        {% for type in games %}
+        {% for gameType in games %}
             <div class="card">
                 <div class="card-header">
-                    {{ type.label }}
+                    {{ gameType.label }}
                 </div>
                 <div class="card-body">
                     <table class="table table-sm">
@@ -22,17 +22,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for round in type.data %}
+                        {% for round in gameType.data %}
                             {% for game in round %}
-                                {% set counter = (counter|default(0)) + 1 %}
                                 {% if loop.first %}
                                     <tr>
                                         <th scope="row" colspan="3" class="text-center"></th>
-                                        <th scope="row" colspan="3" class="text-center">Kolejka #{{ game.roundNr }}</th>
+                                        <th scope="row" colspan="3" class="text-center">Kolejka #{{ game.round.ordinal }}</th>
                                     </tr>
                                 {% endif %}
                                 <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">
-                                    <td>{{ counter }}</td>
+                                    <td>{{ loop.index }}</td>
                                     <td>{% if game.isawarded %}&#9917;{% endif %}</td>
                                     <td>{{ game.date|date("Y-m-d H:i") }}</td>
                                     <td class="text-end">{{ game.home.name }}</td>

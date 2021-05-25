@@ -44,7 +44,7 @@ class Game
     /**
      * @ORM\Column(type="smallint")
      */
-    private $round;
+    private $roundNr;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -176,14 +176,14 @@ class Game
         return $this->endDate;
     }
 
-    public function getRound(): ?int
+    public function getRoundNr(): ?int
     {
-        return $this->round;
+        return $this->roundNr;
     }
 
-    public function setRound(int $round): self
+    public function setRoundNr(int $roundNr): self
     {
-        $this->round = $round;
+        $this->roundNr = $roundNr;
 
         return $this;
     }

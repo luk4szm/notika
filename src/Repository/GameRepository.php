@@ -63,7 +63,7 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g')
                     ->andWhere('g.season = :season')
                     ->setParameter('season', $season)
-                    ->andWhere('g.round = :round')
+                    ->andWhere('g.roundNr = :round')
                     ->setParameter('round', $round)
                     ->orderBy('g.date', 'ASC')
                     ->getQuery()

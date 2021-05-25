@@ -37,7 +37,7 @@ class GameController extends AbstractController
     {
         $roundSchedule = $this->scheduleService->getRoundSchedule(
             $game->getSeason(),
-            $game->getRound()
+            $game->getRoundNr()
         );
 
         return $this->render('game/game.html.twig', [

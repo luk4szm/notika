@@ -53,15 +53,15 @@ class ScheduleService
         foreach ($gamesCollection AS $game) {
             // get list of past games
             if ($game->getDate() < $this->now) {
-                $gamesPast[$game->getRound()][] = $game;
+                $gamesPast[$game->getRoundNr()][] = $game;
             }
             // get list of upcoming games
             if ($game->getDate() > $this->now) {
-                $gamesUpcoming[$game->getRound()][] = $game;
+                $gamesUpcoming[$game->getRoundNr()][] = $game;
             }
             //get list of present games
             if ($game->getDate() <= $this->now and $game->getEndDate() > $this->now) {
-                $gamesPresent[$game->getRound()][] = $game;
+                $gamesPresent[$game->getRoundNr()][] = $game;
             }
         }
 

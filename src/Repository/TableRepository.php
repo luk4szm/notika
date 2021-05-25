@@ -30,8 +30,8 @@ class TableRepository extends ServiceEntityRepository
                     ->addOrderBy('t.bracket', 'ASC')
                     ->addOrderBy('t.place', 'ASC')
                     ->addOrderBy('t.points', 'DESC')
-                    ->addOrderBy($qb->expr()->diff('t.goals_for', 't.goals_against'), 'DESC')
-                    ->addOrderBy('t.goals_for', 'DESC')
+                    ->addOrderBy($qb->expr()->diff('t.goalsFor', 't.goalsAgainst'), 'DESC')
+                    ->addOrderBy('t.goalsFor', 'DESC')
                     ->addOrderBy('t.won', 'DESC')
                     ->getQuery()
                     ->getResult();

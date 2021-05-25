@@ -39,7 +39,7 @@ class GameRepository extends ServiceEntityRepository
 
     /**
      * Find all games for specified season
-     * @param $id
+     * @param Season $season
      * @return mixed
      */
     public function findSeasonGames(Season $season)

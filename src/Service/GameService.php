@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Bet;
 use App\Entity\Game;
+use App\Entity\Round;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -145,8 +146,34 @@ class GameService
     }
 
     /**
+     * Make up appeal to round for all games
+     * @return int
+     */
+    public function findRoundEntity(): int
+    {
+        $games = $this->em->getRepository(Game::class)->findBy(['round' => null]);
+        $count = 0;
+
+        /** @var Game $game */
+        foreach ($games as $game) {
+            $round = $this->em->getRepository(Round::class)
+                              ->findOneBy([
+                                           'season'  => $game->getSeason(),
+                                           'ordinal' => $game->getRoundNr(),
+                                       ]);
+
+            $game->setRound($round);
+
+            $count++;
+        }
+
+        $this->em->flush();
+
+        return $count;
+    }
+
+    /**
      * Calculate points for every bet in game
-     *
      * @param Game $game
      * @return bool
      */

@@ -5,20 +5,16 @@
 {% block content %}
     <div id="gameInfo">
         <div class="card">
+            {% if game.isAwarded %}
+            <div class="ribbon-wrapper-2">
+                <div class="ribbon-2">BONUS!</div>
+            </div>
+            {% endif %}
             <div class="card-header text-center">
                 {{ game.home.name }} vs. {{ game.guest.name }}
             </div>
             <div class="card-body">
                 <div class="container">
-                    {% if game.isAwarded %}
-                        <div class="row">
-                            <div class="col text-center">
-                                <div class="card bg-success-opacity mt-2 mb-3 p-2 fw-mid">
-                                    &#9917; Spotkanie z bonusem! Zdobyte punkty w tym spotkaniu są podwojone &#9917;
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
                     {% if not game.isCounted %}
                         <div class="row">
                             <div class="col text-center">

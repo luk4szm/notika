@@ -27,7 +27,9 @@
                                 {% if loop.first %}
                                     <tr>
                                         <th scope="row" colspan="3" class="text-center"></th>
-                                        <th scope="row" colspan="3" class="text-center">Kolejka #{{ game.round.ordinal }}</th>
+                                        <th scope="row" colspan="3" class="text-center">
+                                            {{ 'game.round'|trans }} {{ round_name(game.round) }}
+                                        </th>
                                     </tr>
                                 {% endif %}
                                 <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">

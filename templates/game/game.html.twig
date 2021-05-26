@@ -40,7 +40,7 @@
                                         {{ 'game.round'|trans }}:
                                     </td>
                                     <td class="text-center" colspan="2">
-                                        {% if game.round.ordinal matches '/^\\d+$/' %}#{% endif %}<span class="fw-mid">{{ game.round.ordinal }}</span>
+                                        <span class="fw-mid">{{ round_name(game.round) }}</span>
                                     </td>
                                 </tr>
                                 <tr>

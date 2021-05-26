@@ -16,6 +16,9 @@ game:
   bets: Bets
   round: Round
   date: Date
+  time: ""
+  home: Home
+  guest: Guest
   points: pts.
   result:
     saved: Game result has been saved
@@ -50,6 +53,10 @@ profile:
   email: E-mail adress
   changeData: Change data
   msgOnChangeLocale: You must log in again to see the changes
+schedule:
+  ongoing: Ongoing games
+  upcoming: Upcoming games
+  finished: Finished games
 user:
   list: User list
   profile: User profile

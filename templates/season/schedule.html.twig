@@ -7,7 +7,7 @@
         {% for gameType in games %}
             <div class="card">
                 <div class="card-header">
-                    {{ gameType.label }}
+                    {{ gameType.label|trans }}
                 </div>
                 <div class="card-body">
                     <table class="table table-sm">
@@ -15,10 +15,10 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col"></th>
-                            <th scope="col">Data</th>
-                            <th scope="col" class="text-end">Gospodarz</th>
+                            <th scope="col">{{ 'game.date'|trans }}</th>
+                            <th scope="col" class="text-end">{{ 'game.home'|trans }}</th>
                             <th scope="col"></th>
-                            <th scope="col">Gość</th>
+                            <th scope="col">{{ 'game.guest'|trans }}</th>
                         </tr>
                         </thead>
                         <tbody>

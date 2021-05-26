@@ -16,6 +16,9 @@ game:
   bets: Typowania
   round: Runda
   date: Data
+  time: godz.
+  home: Gospodarz
+  guest: Gość
   points: pkt.
   result:
     saved: Wynik spotkania został zapisany
@@ -50,6 +53,10 @@ profile:
   email: Adres e-mail
   changeData: Zmień dane
   msgOnChangeLocale: Aby zobaczyć zmiany musisz zalogować się ponownie
+schedule:
+  ongoing: Spotkania w toku
+  upcoming: Zaplanowane spotkania
+  finished: Rozegrane spotkania
 user:
   list: Lista użytkowników
   profile: Profil użytkownika

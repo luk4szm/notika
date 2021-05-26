@@ -50,7 +50,7 @@
                                     <td class="text-center lh-sm" colspan="2">
                                         {{ game.date|date("d.m.Y") }}
                                         <br>
-                                        godz. {{ game.date|date("H:i") }}
+                                        {{ 'game.time'|trans }} {{ game.date|date("H:i") }}
                                     </td>
                                 </tr>
                                 {% if app.user %}

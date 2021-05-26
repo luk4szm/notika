@@ -55,15 +55,15 @@ class ScheduleService
         $games = [];
         if (!empty($gamesPresent)) {
             ksort($gamesPresent, SORT_NUMERIC);
-            $games[] = ['label' => 'Spotkania w toku', 'data' => $gamesPresent];
+            $games[] = ['label' => 'schedule.ongoing', 'data' => $gamesPresent];
         }
         if (!empty($gamesUpcoming)) {
             ksort($gamesUpcoming, SORT_NUMERIC);
-            $games[] = ['label' => 'Zaplanowane spotkania', 'data' => $gamesUpcoming];
+            $games[] = ['label' => 'schedule.upcoming', 'data' => $gamesUpcoming];
         }
         if (!empty($gamesPast)) {
             krsort($gamesPast, SORT_NUMERIC);
-            $games[] = ['label' => 'Rozegrane spotkania', 'data' => $gamesPast];
+            $games[] = ['label' => 'schedule.finished', 'data' => $gamesPast];
         }
 
         return $games;

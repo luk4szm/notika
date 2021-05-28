@@ -8,7 +8,49 @@
             {{ 'card.summary'|trans }}
         </div>
         <div class="card-body">
-            Adres e-mail: {{ user.email }}
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0">
+                    {% set sex = user.firstName|last == 'a' ? 'female' : 'male' %}
+                    <img class="mx-5 my-3 user-profile-img" src="{{ asset('assets/img/' ~ sex ~ '.png') }}" alt="{{ sex }}">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <table class="table table-sm">
+                        <tbody>
+                        <tr>
+                            <td class="fs-4 fw-mid" width="30%" colspan="2">
+                                {{ user.fullName }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">
+                                Typowanych spotkań:
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-mid">{{ bets.amount }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">
+                                Trafnych typów:
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-mid">{{ bets.good }}</span>
+                                <small>{{ ((bets.good/bets.amount)*100)|number_format(1) }}%</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%">
+                                Dokładnych trafień:
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-mid">{{ bets.hits }}</span>
+                                <small>{{ ((bets.hits/bets.amount)*100)|number_format(1) }}%</small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

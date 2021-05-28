@@ -33,4 +33,32 @@ class BetService
 
         return count($this->em->getRepository(Bet::class)->findUserMissingBets($user));
     }
+
+    /**
+     * Calculate stats of user bets
+     * @param User $user
+     * @return array
+     */
+    public function calcUserBets(User $user): array
+    {
+        $bets['amount'] = $user->getBets()->count();
+        $bets['hits'] = 0;
+        $bets['good'] = 0;
+
+        /** @var Bet $bet */
+        foreach ($user->getBets() as $bet) {
+            if ($bet->getHit() == true) {
+                $bets['hits']++;
+                $bets['good']++;
+                continue;
+            }
+
+            if ($bet->getPts() > 0)
+            {
+                $bets['good']++;
+            }
+        }
+
+        return $bets;
+    }
 }

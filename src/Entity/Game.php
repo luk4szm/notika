@@ -77,7 +77,7 @@ class Game
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gamedAdded")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gamesAdded")
      * @ORM\JoinColumn(nullable=false)
      */
     private $createdBy;

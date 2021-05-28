@@ -91,7 +91,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="createdBy")
      */
-    private $gamedAdded;
+    private $gamesAdded;
 
     /**
      * @ORM\OneToMany(targetEntity=Game::class, mappedBy="updatedBy")
@@ -116,7 +116,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->bets            = new ArrayCollection();
-        $this->gamedAdded      = new ArrayCollection();
+        $this->gamesAdded      = new ArrayCollection();
         $this->gamesUpdated    = new ArrayCollection();
         $this->classifications = new ArrayCollection();
     }
@@ -339,27 +339,27 @@ class User implements UserInterface
     /**
      * @return Collection|Game[]
      */
-    public function getGamedAdded(): Collection
+    public function getGamesAdded(): Collection
     {
-        return $this->gamedAdded;
+        return $this->gamesAdded;
     }
 
-    public function addGamedAdded(Game $gamedAdded): self
+    public function addGamesAdded(Game $gamesAdded): self
     {
-        if (!$this->gamedAdded->contains($gamedAdded)) {
-            $this->gamedAdded[] = $gamedAdded;
-            $gamedAdded->setCreatedBy($this);
+        if (!$this->gamesAdded->contains($gamesAdded)) {
+            $this->gamesAdded[] = $gamesAdded;
+            $gamesAdded->setCreatedBy($this);
         }
 
         return $this;
     }
 
-    public function removeGamedAdded(Game $gamedAdded): self
+    public function removeGamesAdded(Game $gamesAdded): self
     {
-        if ($this->gamedAdded->removeElement($gamedAdded)) {
+        if ($this->gamesAdded->removeElement($gamesAdded)) {
             // set the owning side to null (unless already changed)
-            if ($gamedAdded->getCreatedBy() === $this) {
-                $gamedAdded->setCreatedBy(null);
+            if ($gamesAdded->getCreatedBy() === $this) {
+                $gamesAdded->setCreatedBy(null);
             }
         }
 

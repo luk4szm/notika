@@ -21,34 +21,39 @@
                                 {{ user.fullName }}
                             </td>
                         </tr>
-                        <tr>
-                            <td width="30%">
-                                Typowanych spotkań:
-                            </td>
-                            <td class="text-center">
-                                <span class="fw-mid">{{ bets.amount }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="30%">
-                                Trafnych typów:
-                            </td>
-                            <td class="text-center">
-                                <span class="fw-mid">{{ bets.good }}</span>
-                                <small>{{ ((bets.good/bets.amount)*100)|number_format(1) }}%</small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="30%">
-                                Dokładnych trafień:
-                            </td>
-                            <td class="text-center">
-                                <span class="fw-mid">{{ bets.hits }}</span>
-                                <small>{{ ((bets.hits/bets.amount)*100)|number_format(1) }}%</small>
-                            </td>
-                        </tr>
+                        {% if bets.amount != 0 %}
+                            <tr>
+                                <td width="30%">
+                                    Typowanych spotkań:
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-mid">{{ bets.amount }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="30%">
+                                    Trafnych typów:
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-mid">{{ bets.good }}</span>
+                                    <small>{{ ((bets.good/bets.amount)*100)|number_format(1) }}%</small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="30%">
+                                    Dokładnych trafień:
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-mid">{{ bets.hits }}</span>
+                                    <small>{{ ((bets.hits/bets.amount)*100)|number_format(1) }}%</small>
+                                </td>
+                            </tr>
+                        {% endif %}
                         </tbody>
                     </table>
+                    {% if bets.amount == 0 %}
+                        Gracz nie typował jeszcze w żadnym spotkaniu
+                    {% endif %}
                 </div>
             </div>
         </div>

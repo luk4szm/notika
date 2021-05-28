@@ -16996,6 +16996,13 @@ body {
   font-weight: 500;
 }
 
+.navbar a {
+  color: #6b747d;
+}
+.navbar a:hover {
+  color: #3e4750;
+}
+
 .row-link {
   cursor: pointer;
 }

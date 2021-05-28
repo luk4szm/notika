@@ -44,17 +44,17 @@
             {% endif %}
 
             {% if is_granted('ROLE_ADMIN') %}
-                <div class="ms-3">
+                <div class="ms-3 fs-4">
                     <a href="{{ path('admin') }}">
-                        <img src="{{ asset('assets/svg/gear-fill.svg') }}" height="20px" alt="admin">
+                        <i class="fas fa-cogs"></i>
                     </a>
                 </div>
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
-                <div class="ms-3">
+                <div class="ms-3 fs-4">
                     <a href="{{ path('app_logout') }}">
-                        <img src="{{ asset('assets/svg/door-closed.svg') }}" height="20px" alt="logout">
+                        <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
             {% endif %}

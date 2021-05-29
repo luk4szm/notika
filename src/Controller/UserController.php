@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\BetService;
+use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,11 +34,12 @@ class UserController extends AbstractController
      * @return Response
      * @IsGranted("ROLE_USER")
      */
-    public function user_info(User $user, BetService $betService): Response
+    public function user_info(User $user, BetService $betService, UserService $userService): Response
     {
         return $this->render('user/user_info.html.twig', [
             'user' => $user,
             'bets' => $betService->calcUserBets($user),
+            'rankings' => $userService->getRankings($user),
         ]);
     }
 }

@@ -10,6 +10,8 @@ card:
   summary: Summary
   changePassword: Change password
   locale: Change language
+  currentRankings: Current rankings
+  finishedRankings: Finished rankings
 game:
   gameplay: Gameplay
   meeting: Meeting
@@ -53,11 +55,19 @@ profile:
   email: E-mail adress
   changeData: Change data
   msgOnChangeLocale: You must log in again to see the changes
+ranking:
+  position: Position
+  points: Points scored
+  effectiveness: Effectiveness
 schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games
   finished: Finished games
 user:
+  competitions: Competitions
+  predictedMatches: Predicted matches
+  typingSuccess: Typing success
+  exactHits: Exact hits
   list: User list
   profile: User profile
 modal:

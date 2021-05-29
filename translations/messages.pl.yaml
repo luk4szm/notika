@@ -10,6 +10,8 @@ card:
   summary: Podsumowanie
   changePassword: Zmień hasło
   locale: Zmień język
+  currentRankings: Bieżace konkursy
+  finishedRankings: Konkursy zakończone
 game:
   gameplay: Rozgrywki
   meeting: Spotkanie
@@ -53,11 +55,19 @@ profile:
   email: Adres e-mail
   changeData: Zmień dane
   msgOnChangeLocale: Aby zobaczyć zmiany musisz zalogować się ponownie
+ranking:
+  position: Miejsce
+  points: Zdobyte punkty
+  effectiveness: Skuteczność
 schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania
   finished: Rozegrane spotkania
 user:
+  competitions: Konkursów
+  predictedMatches: Typowanych spotkań
+  typingSuccess: Trafnych typów
+  exactHits: Dokładnych trafień
   list: Lista użytkowników
   profile: Profil użytkownika
 modal:

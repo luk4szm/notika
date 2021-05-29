@@ -5,7 +5,7 @@
                 {{ user.fullName }}
             </div>
             <div class="card-body">
-                {{ 'card.summary'|trans }}
+                <a class="" href="{{ path('user_info', {'username': user.username}) }}">{{ 'card.summary'|trans }}</a>
             </div>
         </div>
     </div>

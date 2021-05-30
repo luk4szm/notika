@@ -60,6 +60,11 @@ ranking:
   points: Zdobyte punkty
   effectiveness: Skuteczność
   averagePerGame: śr. %pts% na mecz
+  averagePoints: Średnia pkt
+  perGame: grę
+  perRound: kolejkę
+  gamesTyped: Typowanych spotkań
+  roundsTyped: kolejek
 schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania

@@ -12,13 +12,23 @@
                 <thead class="table-light" style="alignment: center">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Gracz</th>
-                    <th scope="col" class="text-center" width="100px">Punkty</th>
-                    <th scope="col" class="text-center" width="100px">Dokładne trafienia</th>
-                    <th scope="col" class="text-center" width="100px">Skuteczność</th>
-                    <th scope="col" class="text-center" width="100px">Typowanych spotkań</th>
-                    <th scope="col" class="text-center" width="100px">Średnia pkt
-                        <small>/mecz</small>
+                    <th scope="col"></th>
+                    <th scope="col" class="text-center" width="100px">
+                        {{ 'ranking.points'|trans }}
+                    </th>
+                    <th scope="col" class="text-center" width="100px">
+                        {{ 'user.exactHits'|trans }}
+                    </th>
+                    <th scope="col" class="text-center" width="100px">
+                        {{ 'ranking.effectiveness'|trans }}
+                    </th>
+                    <th scope="col" class="text-center" width="100px">
+                        {{ 'ranking.gamesTyped'|trans }}
+                        <span class="fs-7 color-gray">[{{ 'ranking.roundsTyped'|trans }}]</span>
+                    </th>
+                    <th scope="col" class="text-center" width="100px">
+                        {{ 'ranking.averagePoints'|trans }}
+                        <small>/{{ 'ranking.perGame'|trans }}</small> <span class="fs-7 color-gray">[/{{ 'ranking.perRound'|trans }}]</span>
                     </th>
                 </tr>
                 </thead>
@@ -28,7 +38,7 @@
 
                     <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
                         <td>{{ loop.index }}</td>
-                        <td class="fw-mid">
+                        <td>
                             <a class="fw-normal" href="{{ path('user_info', {'username': participant.user.username}) }}">
                                 {{ participant.user.fullName }}
                             </a>
@@ -44,6 +54,7 @@
                         </td>
                         <td class="text-center">
                             {{ participant.typedGames }}
+                            <span class="fs-7 color-gray">[{{ participant.typedRounds }}]</span>
                         </td>
                         <td class="text-center">
                             {{ average|number_format(1) }}

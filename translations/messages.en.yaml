@@ -60,6 +60,11 @@ ranking:
   points: Points scored
   effectiveness: Effectiveness
   averagePerGame: avg. %pts% per game
+  averagePoints: Average pts
+  perGame: game
+  perRound: round
+  gamesTyped: Predicted matches
+  roundsTyped: rounds
 schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games

@@ -74,6 +74,7 @@ class RankingService
 
                     if ($bet->getPts() > 0) {
                         $classification->addPts($bet->getPts());
+                        $classification->increaseScored();
                     }
 
                     if ($bet->getHit() === true) {

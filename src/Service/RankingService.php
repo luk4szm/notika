@@ -25,14 +25,14 @@ class RankingService
      */
     public function recalculate(Ranking $ranking): ?array
     {
-        $users = $this->em->getRepository(User::class)->findRankingParticipants($ranking);
+        $rankingParticipant = $this->em->getRepository(User::class)->findRankingParticipants($ranking);
 
-        if (empty($users)) {
+        if (empty($rankingParticipant)) {
             return null;
         }
 
         /** @var User $user */
-        foreach ($users as $user) {
+        foreach ($rankingParticipant as $user) {
             $rankClassification[$user->getId()] = $this->em
                 ->getRepository(Classification::class)
                 ->findOneBy([

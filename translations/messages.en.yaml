@@ -59,6 +59,7 @@ ranking:
   position: Position
   points: Points scored
   effectiveness: Effectiveness
+  averagePerGame: avg. %pts% per game
 schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games
@@ -70,6 +71,7 @@ user:
   exactHits: Exact hits
   list: User list
   profile: User profile
+  passive: The player has not participated in any competition
 modal:
   title:
     gameResult: Game result

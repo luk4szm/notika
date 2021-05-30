@@ -60,14 +60,14 @@
                         </tbody>
                     </table>
                     {% if bets.amount == 0 %}
-                        Gracz nie typował jeszcze w żadnym spotkaniu
+                        {{ 'user.passive'|trans }}
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-    {% if rankings is not null and rankings.current is not empty %}
+    {% if rankings.current is not empty %}
         <div class="card">
             <div class="card-header">
                 {{ 'card.currentRankings'|trans }}
@@ -92,7 +92,8 @@
                                             {{ 'ranking.position'|trans }}:
                                         </td>
                                         <td class="text-center">
-                                            <span class="fw-mid"></span>
+                                            <span class="fs-5 fw-mid">{{ classification.place }}</span>
+                                            <small>/{{ classification.ranking.classifications|length }}</small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -101,6 +102,7 @@
                                         </td>
                                         <td class="text-center">
                                             <span class="fw-mid">{{ classification.pts }} {{ 'game.points'|trans }}</span>
+                                            <small>{{ 'ranking.averagePerGame'|trans({'%pts%': (classification.pts/classification.typedGames)|number_format(2)}) }}</small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -108,8 +110,8 @@
                                             {{ 'user.typingSuccess'|trans }}:
                                         </td>
                                         <td class="text-center">
-                                            <span class="fw-mid"></span>
-                                            <small>%</small>
+                                            <span class="fw-mid">{{ classification.scored }}</span><small>/{{  classification.typedGames }}</small>
+                                            <small>{{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%</small>
                                         </td>
                                     </tr>
                                     <tr>
@@ -117,15 +119,15 @@
                                             {{ 'user.exactHits'|trans }}:
                                         </td>
                                         <td class="text-center">
-                                            <span class="fw-mid">{{ classification.hits }}</span>
-                                            <small>%</small>
+                                            <span class="fw-mid">{{ classification.hits }}</span><small>/{{  classification.typedGames }}</small>
+                                            <small>{{ (classification.hits / classification.typedGames * 100)|number_format(1) }}%</small>
                                         </td>
                                     </tr>
                                 {% endif %}
                                 </tbody>
                             </table>
                             {% if bets.amount == 0 %}
-                                Gracz nie typował jeszcze w żadnym spotkaniu
+                                {{ 'user.passive'|trans }}
                             {% endif %}
                         </div>
                     </div>
@@ -134,7 +136,7 @@
         </div>
     {% endif %}
 
-    {% if rankings is not null and rankings.finished is not empty %}
+    {% if rankings.finished is not empty %}
         <div class="card">
             <div class="card-header">
                 {{ 'card.finishedRankings'|trans }}
@@ -154,12 +156,25 @@
                     <tbody>
                     {% for classification in rankings.finished %}
                         <tr class="row-link" data-href="{{ path('ranking_detail', {'slug': classification.ranking.slug}) }}">
-                            <td>{{ loop.index }}</td>
-                            <td class="fw-mid">{{ classification.ranking.name }}</td>
-                            <td></td>
-                            <td></td>
-                            <td class="fw-mid text-center">{{ classification.pts }} {{ 'game.points'|trans }}</td>
-                            <td></td>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td class="fw-mid">
+                                {{ classification.ranking.name }}
+                            </td>
+                            <td class="text-center">
+
+                            </td>
+                            <td class="text-center">
+                                <span class="fs-normal fw-mid">{{ classification.place }}</span>
+                                <small>/{{ classification.ranking.classifications|length }}</small>
+                            </td>
+                            <td class="fw-mid text-center">
+                                {{ classification.pts }} {{ 'game.points'|trans }}
+                            </td>
+                            <td class="text-center">
+                                {{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -167,8 +182,4 @@
             </div>
         </div>
     {% endif %}
-
-    {% for ranking in user.classifications %}
-        {{ dump(ranking) }}
-    {% endfor %}
 {% endblock %}

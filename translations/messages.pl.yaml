@@ -59,6 +59,7 @@ ranking:
   position: Miejsce
   points: Zdobyte punkty
   effectiveness: Skuteczność
+  averagePerGame: śr. %pts% na mecz
 schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania
@@ -70,6 +71,7 @@ user:
   exactHits: Dokładnych trafień
   list: Lista użytkowników
   profile: Profil użytkownika
+  passive: Gracz nie brał udziału w żadnym konkursie
 modal:
   title:
     gameResult: Wynik spotkania

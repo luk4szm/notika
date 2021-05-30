@@ -1,63 +1,63 @@
 .ribbon-wrapper-2 {
-  width: 108px;
-  height: 108px;
-  overflow: hidden;
-  position: absolute;
-  top: -6px;
-  right: -6px;
+   width: 108px;
+   height: 108px;
+   overflow: hidden;
+   position: absolute;
+   top: -6px;
+   right: -6px;
 }
 
 .ribbon-2 {
-  font: bold 15px Sans-Serif;
-  line-height: 18px;
-  color: #333;
-  text-align: center;
-  text-transform: uppercase;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  position: relative;
-  padding: 7px 0;
-  left: -4px;
-  top: 26px;
-  width: 150px;
-  background-color: #6daaab;
-  color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.5px;
-  box-shadow: -3px 5px 6px -5px rgba(0, 0, 0, 0.5);
+   font: bold 15px Sans-Serif;
+   line-height: 18px;
+   color: #333;
+   text-align: center;
+   text-transform: uppercase;
+   -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   position: relative;
+   padding: 7px 0;
+   left: -4px;
+   top: 26px;
+   width: 150px;
+   background-color: #6daaab;
+   color: #fff;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   letter-spacing: 0.5px;
+   box-shadow: -3px 5px 6px -5px rgba(0, 0, 0, 0.5);
 }
 
 .ribbon-2:before, .ribbon-2:after {
-  content: "";
-  border-top: 4px solid #4e7c7d;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  position: absolute;
-  bottom: -4px;
+   content: "";
+   border-top: 4px solid #4e7c7d;
+   border-left: 4px solid transparent;
+   border-right: 4px solid transparent;
+   position: absolute;
+   bottom: -4px;
 }
 
 .ribbon-2:before {
-  content: "";
-  position: absolute;
-  left: 0px;
-  top: 100%;
-  z-index: -1;
-  border-left: 4px solid #4e7c7d;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-top: 4px solid #4e7c7d;
+   content: "";
+   position: absolute;
+   left: 0px;
+   top: 100%;
+   z-index: -1;
+   border-left: 4px solid #4e7c7d;
+   border-right: 4px solid transparent;
+   border-bottom: 4px solid transparent;
+   border-top: 4px solid #4e7c7d;
 }
 
 .ribbon-2:after {
-  content: "";
-  position: absolute;
-  right: 7px;
-  top: 100%;
-  z-index: -1;
-  border-left: 4px solid transparent;
-  border-right: 4px solid #4e7c7d;
-  border-bottom: 4px solid transparent;
-  border-top: 4px solid #4e7c7d;
+   content: "";
+   position: absolute;
+   right: 7px;
+   top: 100%;
+   z-index: -1;
+   border-left: 4px solid transparent;
+   border-right: 4px solid #4e7c7d;
+   border-bottom: 4px solid transparent;
+   border-top: 4px solid #4e7c7d;
 }

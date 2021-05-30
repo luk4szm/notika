@@ -9,15 +9,17 @@
         </div>
         <div class="card-body">
             <table class="table table-sm">
-                <thead class="table-light">
-                <tr>
+                <thead class="table-light" style="alignment: center">
+                <tr class="align-middle">
                     <th scope="col">#</th>
                     <th scope="col">Gracz</th>
-                    <th scope="col">Punkty</th>
-                    <th scope="col">Trafienia</th>
-                    <th scope="col">Skuteczność</th>
-                    <th scope="col">Typowanych spotkań</th>
-                    <th scope="col">Średnia pkt</th>
+                    <th scope="col" class="text-center" width="100px">Punkty</th>
+                    <th scope="col" class="text-center" width="100px">Dokładne trafienia</th>
+                    <th scope="col" class="text-center" width="100px">Skuteczność</th>
+                    <th scope="col" class="text-center" width="100px">Typowanych spotkań</th>
+                    <th scope="col" class="text-center" width="100px">Średnia pkt
+                        <small>/mecz</small>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,12 +28,26 @@
 
                     <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
                         <td>{{ loop.index }}</td>
-                        <td class="fw-mid">{{ participant.user.username }}</td>
-                        <td class="fw-mid">{{ participant.pts|number_format(1) }}</td>
-                        <td>{{ participant.hits }}</td>
-                        <td></td>
-                        <td>{{ participant.typedGames }}</td>
-                        <td>{{ average|number_format(1) }}</td>
+                        <td class="fw-mid">
+                            <a class="fw-normal" href="{{ path('user_info', {'username': participant.user.username}) }}">
+                                {{ participant.user.fullName }}
+                            </a>
+                        </td>
+                        <td class="fw-mid text-center">
+                            {{ participant.pts|number_format(1) }}
+                        </td>
+                        <td class="text-center">
+                            {{ participant.hits }}
+                        </td>
+                        <td class="text-center">
+                            {{ (participant.scored / participant.typedGames * 100)|number_format(1) }}%
+                        </td>
+                        <td class="text-center">
+                            {{ participant.typedGames }}
+                        </td>
+                        <td class="text-center">
+                            {{ average|number_format(1) }}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

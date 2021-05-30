@@ -18,6 +18,11 @@ class Classification
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $place = 0;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $pts = 0;
@@ -72,6 +77,18 @@ class Classification
     public function getPts(): ?float
     {
         return $this->pts;
+    }
+
+    public function getPlace(): ?int
+    {
+        return $this->place;
+    }
+
+    public function setPlace(int $place): self
+    {
+        $this->place = $place;
+
+        return $this;
     }
 
     public function setPts(float $pts): self

@@ -93,4 +93,36 @@ class RankingService
 
         return $rankClassification;
     }
+
+    /**
+     * Set the order of ranking participants according to the rules
+     * @param Ranking $ranking
+     * @return array|null
+     */
+    public function setOrder(Ranking $ranking): ?array
+    {
+        if (empty($ranking->getClassifications())) {
+            return null;
+        }
+
+        $classifications = $ranking->getClassifications()->toArray();
+
+        usort($classifications, function (Classification $userA, Classification $userB): int {
+            return
+                ($userB->getPts() <=> $userA->getPts()) * 1000 + //pts DESC
+                ($userB->getHits() <=> $userA->getHits()) * 100 + //hits DESC
+                ($userB->getScored() / $userB->getTypedGames() <=> $userA->getScored() / $userA->getTypedGames()) * 10 + //efficient DESC
+                ($userA->getTypedGames() <=> $userB->getTypedGames()); //typed games ASC
+        });
+
+        $place = 1;
+        /** @var Classification $classification */
+        foreach ($classifications as $classification) {
+            $classification->setPlace($place++);
+        }
+
+        $this->em->flush();
+
+        return $classifications;
+    }
 }

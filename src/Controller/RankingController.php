@@ -38,6 +38,7 @@ class RankingController extends AbstractController
     public function recalculate(Ranking $ranking): Response
     {
         $this->rankingService->recalculate($ranking);
+        $this->rankingService->setOrder($ranking);
 
         return $this->redirectToRoute('ranking_detail', ['slug' => $ranking->getSlug()]);
     }

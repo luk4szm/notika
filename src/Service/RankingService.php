@@ -53,6 +53,7 @@ class RankingService
                                ->setTypedRounds(0)
                                ->setTypedGames(0)
                                ->setHits(0)
+                               ->setScored(0)
                                ->setUpdatedAt(new \DateTime());
             }
 

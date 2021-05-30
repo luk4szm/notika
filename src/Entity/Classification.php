@@ -25,6 +25,11 @@ class Classification
     /**
      * @ORM\Column(type="integer")
      */
+    private $scored = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $hits = 0;
 
     /**
@@ -79,6 +84,25 @@ class Classification
     public function addPts(float $pts): self
     {
         $this->pts = $this->getPts() + $pts;
+
+        return $this;
+    }
+
+    public function getScored(): ?int
+    {
+        return $this->scored;
+    }
+
+    public function setScored(int $scored): self
+    {
+        $this->scored = $scored;
+
+        return $this;
+    }
+
+    public function increaseScored(): self
+    {
+        $this->scored++;
 
         return $this;
     }

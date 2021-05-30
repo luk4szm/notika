@@ -73,12 +73,16 @@ body {
    &-normal {
       font-size: 1rem;
    }
-}
 
-.fs-0 {
-   font-size: $h0-font-size;
-   font-weight: $font-weight-light;
-   line-height: 4rem;
+   &-0 {
+      font-size: $h0-font-size;
+      font-weight: $font-weight-light;
+      line-height: 4rem;
+   }
+
+   &-7 {
+      font-size: 0.75rem;
+   }
 }
 
 .fw {

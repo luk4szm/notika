@@ -64,6 +64,17 @@ schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games
   finished: Finished games
+table:
+  team: Team
+  played: Played
+  won: Won
+  drawn: Drawn
+  lost: Lost
+  goals+: Gf
+  goals-: Ga
+  goalsDiff: Gd
+  points: Points
+  shape: Shape
 user:
   competitions: Competitions
   predictedMatches: Predicted matches

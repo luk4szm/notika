@@ -64,6 +64,17 @@ schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania
   finished: Rozegrane spotkania
+table:
+  team: Drużyna
+  played: Mecze
+  won: Wygrane
+  drawn: Remisy
+  lost: Przegrane
+  goals+: Br+
+  goals-: Br+
+  goalsDiff: Br+/-
+  points: Punkty
+  shape: Forma
 user:
   competitions: Konkursów
   predictedMatches: Typowanych spotkań

@@ -11,33 +11,42 @@
             <table class="table table-sm">
                 <thead class="table-light">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Team</th>
-                    <th scope="col">Mecze</th>
-                    <th scope="col">Wygrane</th>
-                    <th scope="col">Remisy</th>
-                    <th scope="col">Przegrane</th>
-                    <th scope="col">Br+</th>
-                    <th scope="col">Br+</th>
-                    <th scope="col">Br+/-</th>
-                    <th scope="col">Punkty</th>
-                    <th scope="col">Forma</th>
+                    <th class="text-center" scope="col">#</th>
+                    <th scope="col">{{ 'table.team'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.played'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.won'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.drawn'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.lost'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.goals+'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.goals-'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.goalsDiff'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.points'|trans }}</th>
+                    <th class="text-center" scope="col">{{ 'table.shape'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for participant in table %}
                     <tr class="row-link" data-href="{{ path('team_detail', {'slug': participant.team.slug}) }}">
-                        <td>{{ loop.index }}</td>
+                        <td class="text-center">{{ loop.index }}</td>
                         <td class="fw-mid">{{ participant.team.name }}</td>
-                        <td>{{ participant.games }}</td>
-                        <td>{{ participant.won }}</td>
-                        <td>{{ participant.drawn }}</td>
-                        <td>{{ participant.lost }}</td>
-                        <td>{{ participant.goalsFor }}</td>
-                        <td>{{ participant.goalsAgainst }}</td>
-                        <td>{{ participant.goalsFor - participant.goalsAgainst }}</td>
-                        <td>{{ participant.points }}</td>
-                        <td></td>
+                        <td class="text-center">{{ participant.games }}</td>
+                        <td class="text-center">
+                            <span class="fw-mid">{{ participant.won }}</span>
+                            <span class="fs-7 color-gray">[{{ (participant.won/participant.games*100)|number_format }}%]</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="fw-mid">{{ participant.drawn }}</span>
+                            <span class="fs-7 color-gray">[{{ (participant.drawn/participant.games*100)|number_format }}%]</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="fw-mid">{{ participant.lost }}</span>
+                            <span class="fs-7 color-gray">[{{ (participant.lost/participant.games*100)|number_format }}%]</span>
+                        </td>
+                        <td class="text-center">{{ participant.goalsFor }}</td>
+                        <td class="text-center">{{ participant.goalsAgainst }}</td>
+                        <td class="text-center">{{ participant.goalsFor - participant.goalsAgainst }}</td>
+                        <td class="text-center fw-mid">{{ participant.points }}</td>
+                        <td class="text-center"></td>
                     </tr>
                 {% endfor %}
                 </tbody>

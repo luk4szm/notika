@@ -16985,11 +16985,13 @@ body {
 .fs-normal {
   font-size: 1rem;
 }
-
 .fs-0 {
   font-size: 4.275rem;
   font-weight: 300;
   line-height: 4rem;
+}
+.fs-7 {
+  font-size: 0.75rem;
 }
 
 .fw-mid {

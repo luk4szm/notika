@@ -17040,7 +17040,7 @@ input.matchScoresModal {
   font-size: 28px;
 }
 
-tr td {
+tr, td {
   vertical-align: middle;
 }
 

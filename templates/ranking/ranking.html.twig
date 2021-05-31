@@ -33,7 +33,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for participant in ranking.classifications %}
+                {% for participant in ranking.classifications|sort((a, b) => a.place <=> b.place) %}
                     <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
                         <td>{{ loop.index }}</td>
                         <td>

@@ -65,6 +65,7 @@ ranking:
   perRound: round
   gamesTyped: Predicted matches
   roundsTyped: rounds
+  notStarted: The game hasn't started yet
 schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games

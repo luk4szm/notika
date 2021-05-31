@@ -8,60 +8,69 @@
             {{ ranking.name }}
         </div>
         <div class="card-body">
-            <table class="table table-sm">
-                <thead class="table-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"></th>
-                    <th scope="col" class="text-center" width="100px">
-                        {{ 'ranking.points'|trans }}
-                    </th>
-                    <th scope="col" class="text-center" width="100px">
-                        {{ 'user.exactHits'|trans }}
-                    </th>
-                    <th scope="col" class="text-center" width="100px">
-                        {{ 'ranking.effectiveness'|trans }}
-                    </th>
-                    <th scope="col" class="text-center" width="100px">
-                        {{ 'ranking.gamesTyped'|trans }}
-                        <span class="fs-7 color-gray">[{{ 'ranking.roundsTyped'|trans }}]</span>
-                    </th>
-                    <th scope="col" class="text-center" width="100px">
-                        {{ 'ranking.averagePoints'|trans }}
-                        <small>/{{ 'ranking.perGame'|trans }}</small> <span class="fs-7 color-gray">[/{{ 'ranking.perRound'|trans }}]</span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for participant in ranking.classifications|sort((a, b) => a.place <=> b.place) %}
-                    <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
-                        <td>{{ loop.index }}</td>
-                        <td>
-                            <a class="fw-normal" href="{{ path('user_info', {'username': participant.user.username}) }}">
-                                {{ participant.user.fullName }}
-                            </a>
-                        </td>
-                        <td class="fw-mid text-center">
-                            {{ participant.pts|number_format(1) }}
-                        </td>
-                        <td class="text-center">
-                            {{ participant.hits }}
-                        </td>
-                        <td class="text-center">
-                            {{ (participant.scored / participant.typedGames * 100)|number_format(1) }}%
-                        </td>
-                        <td class="text-center">
-                            {{ participant.typedGames }}
-                            <span class="fs-7 color-gray">[{{ participant.typedRounds }}]</span>
-                        </td>
-                        <td class="text-center">
-                            {{ (participant.pts / participant.typedGames)|number_format(2) }}
-                            <span class="fs-7 color-gray">[{{ (participant.pts / participant.typedRounds)|number_format(2) }}]</span>
-                        </td>
+            {% if ranking.classifications is not empty %}
+                <table class="table table-sm">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"></th>
+                        <th scope="col" class="text-center" width="100px">
+                            {{ 'ranking.points'|trans }}
+                        </th>
+                        <th scope="col" class="text-center" width="100px">
+                            {{ 'user.exactHits'|trans }}
+                        </th>
+                        <th scope="col" class="text-center" width="100px">
+                            {{ 'ranking.effectiveness'|trans }}
+                        </th>
+                        <th scope="col" class="text-center" width="100px">
+                            {{ 'ranking.gamesTyped'|trans }}
+                            <span class="fs-7 color-gray">[{{ 'ranking.roundsTyped'|trans }}]</span>
+                        </th>
+                        <th scope="col" class="text-center" width="100px">
+                            {{ 'ranking.averagePoints'|trans }}
+                            <small>/{{ 'ranking.perGame'|trans }}</small>
+                            <span class="fs-7 color-gray">[/{{ 'ranking.perRound'|trans }}]</span>
+                        </th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for participant in ranking.classifications|sort((a, b) => a.place <=> b.place) %}
+                        <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
+                            <td>{{ loop.index }}</td>
+                            <td>
+                                <a class="fw-normal" href="{{ path('user_info', {'username': participant.user.username}) }}">
+                                    {{ participant.user.fullName }}
+                                </a>
+                            </td>
+                            <td class="fw-mid text-center">
+                                {{ participant.pts|number_format(1) }}
+                            </td>
+                            <td class="text-center">
+                                {{ participant.hits }}
+                            </td>
+                            <td class="text-center">
+                                {{ (participant.scored / participant.typedGames * 100)|number_format(1) }}%
+                            </td>
+                            <td class="text-center">
+                                {{ participant.typedGames }}
+                                <span class="fs-7 color-gray">[{{ participant.typedRounds }}]</span>
+                            </td>
+                            <td class="text-center">
+                                {{ (participant.pts / participant.typedGames)|number_format(2) }}
+                                <span class="fs-7 color-gray">[{{ (participant.pts / participant.typedRounds)|number_format(2) }}]</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="row-cols-auto text-center">
+                    <div class="m-2 p-2">
+                        {{ 'ranking.notStarted'|trans }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

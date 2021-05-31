@@ -65,6 +65,7 @@ ranking:
   perRound: kolejkę
   gamesTyped: Typowanych spotkań
   roundsTyped: kolejek
+  notStarted: Zabawa jeszcze się nie rozpoczęła
 schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania

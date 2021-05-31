@@ -23,7 +23,7 @@
                             <tbody>
                             {% for game in missingResults %}
                                 <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">
-                                    <td>{{ game.season.league.code }}</td>
+                                    <td>{{ game.season.league.name }}</td>
                                     <td>{{ game.date|date("d.m H:i") }}</td>
                                     <td class="text-center">
                                         <span class="fw-mid">{{ game.home.name }}</span>

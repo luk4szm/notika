@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col text-center">
                                 <div class="card bg-danger-opacity text-white mt-2 mb-3 p-2 fw-mid">
-                                    Spotkanie to nie jest brane pod uwagę w rankingu
+                                    {{ 'game.notCounted'|trans }}
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                             <canvas id="betsChart" width="100%" height="80%"></canvas>
                             {% if date() > game.date %}
                                 <div class="mt-4  text-center">
-                                    Złożonych typów: <span class="fw-mid">{{ game.bets|length }}</span>
+                                    {{ 'game.betsSaved'|trans }}: <span class="fw-mid">{{ game.bets|length }}</span>
                                 </div>
                             {% endif %}
                         </div>
@@ -157,12 +157,10 @@
                             <div id="betsCard">
                                 {% if date() < game.date %}
                                     {% if game.bets is not empty %}
-                                        Zapisanych typów na tę chwilę: <span class="fw-mid">{{ game.bets|length }}</span>.<br>
-                                        Szczegóły dot. złożonych typów uczestników zabawy pozostaną ukryte do momentu rozpoczęcia spotkania.
-                                        <br>
-                                        Do tego czasu widoczny będzie jedynie ich procentowy rozkład.
+                                        {{ 'game.betsSavedSoFar'|trans }}: <span class="fw-mid">{{ game.bets|length }}</span>.<br>
+                                        {{ 'game.betsHiddenDetails'|trans }}
                                     {% else %}
-                                        Nie mamy jeszcze zapisanych typów na to spotkanie :-(
+                                        {{ 'game.noBets'|trans }}
                                     {% endif %}
                                 {% else %}
                                     {% if game.bets is not empty %}
@@ -171,9 +169,9 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col"></th>
-                                                <th scope="col" style="width: 60px">Typ</th>
-                                                <th scope="col" style="width: 60px">Pkt</th>
-                                                <th scope="col" style="width: 130px" class="text-end">Czas typowania</th>
+                                                <th class="text-center" scope="col" style="width: 60px">{{ 'game.bet'|trans }}</th>
+                                                <th class="text-center" scope="col" style="width: 60px">{{ 'table.points'|trans }}</th>
+                                                <th class="text-end" scope="col" style="width: 130px" class="text-end">{{ 'game.betTime'|trans }}</th>
                                                 <th scope="col" style="width: 30px"></th>
                                             </tr>
                                             </thead>
@@ -182,8 +180,8 @@
                                                 <tr>
                                                     <td>{{ loop.index }}</td>
                                                     <td class="fw-mid">{{ bet.user.fullName }}</td>
-                                                    <td>{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>
-                                                    <td>
+                                                    <td class="text-center">{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>
+                                                    <td class="text-center">
                                                         {% if bet.pts is not null %}
                                                             {% set class = bet.pts > 0 ? 'fw-mid' : 'color-gray' %}
                                                             <span class="{{ class }}">{{ bet.pts|number_format(1) }}</span>
@@ -193,7 +191,7 @@
                                                     <td class="text-center">
                                                         {% if bet.updatedAt is not null %}
                                                             <i class="fas fa-info-circle color-gray"
-                                                               title="Edytowany: {{ bet.updatedAt|date("d.m.Y H:i") }}"></i>
+                                                               title="{{ 'game.betEdited'|trans }}: {{ bet.updatedAt|date("d.m.Y H:i") }}"></i>
                                                         {% endif %}
                                                     </td>
                                                 </tr>
@@ -273,7 +271,7 @@
         var gtxChart = new Chart(gtx, {
             type: 'bar',
             data: {
-                labels: ['Rozkład typowań [%]'],
+                labels: ['{{ 'game.betsDistribution'|trans }} [%]'],
                 datasets: [{
                     label: '{{ game.home.name }}',
                     data: [{{ betsDistribution.home|default(0) }}],
@@ -281,7 +279,7 @@
                     backgroundColor: 'rgb(88, 214, 141, 0.9)',
                     tension: 0.1
                 }, {
-                    label: 'Remis',
+                    label: '{{ 'table.drawn'|trans }}',
                     data: [{{ betsDistribution.draw|default(0) }}],
                     fill: false,
                     backgroundColor: 'rgb(247, 220, 111, 0.9)',

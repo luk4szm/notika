@@ -15,7 +15,15 @@ card:
 game:
   gameplay: Rozgrywki
   meeting: Spotkanie
+  bet: Typ
+  betTime: Czas typowania
+  betEdited: Edytowany
   bets: Typowania
+  betsSaved: Zapisanych typów
+  betsSavedSoFar: Zapisanych typów do tej pory
+  betsDistribution: Rozkład typów
+  betsHiddenDetails: Szczegóły dot. złożonych typów pozostaną ukryte do momentu rozpoczęcia spotkania.<br>Do tego czasu widoczny będzie jedynie ich procentowy rozkład.
+  noBets: Nie mamy jeszcze zapisanych typów na to spotkanie :-(
   round: Runda
   date: Data
   time: godz.
@@ -28,6 +36,7 @@ game:
   inProgress: spotkanie trwa
   addResult: dodaj wynik spotkania
   missingResult: czekamy na wynik
+  notCounted: Spotkanie to nie jest brane pod uwagę w rankingu
 general:
   none: brak
 index:

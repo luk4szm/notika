@@ -15,7 +15,15 @@ card:
 game:
   gameplay: Gameplay
   meeting: Meeting
+  bet: Bet
+  betTime: Prediction time
+  betEdited: Edited
   bets: Bets
+  betsSaved: Saved predictions
+  betsSavedSoFar: Saved predictions so far
+  betsDistribution: Distribution of predictions
+  betsHiddenDetails: Details of saved predictions will remain hidden until the game starts.<br>Until then, only their percentage distribution will be visible.
+  noBets: We don't have any predictions for this game yet :-(
   round: Round
   date: Date
   time: ""
@@ -28,6 +36,7 @@ game:
   inProgress: game in progress
   addResult: add game result
   missingResult: we're waiting for result
+  notCounted: This meeting is not included in the ranking
 general:
   none: none
 index:

@@ -54,11 +54,13 @@
                             </td>
                             <td class="text-center">
                                 {{ participant.typedGames }}
-                                <span class="fs-7 color-gray">[{{ participant.typedRounds }}]</span>
+                                <span class="fs-7 color-gray">[{{ participant.typedRounds|length }}]</span>
                             </td>
                             <td class="text-center">
                                 {{ (participant.pts / participant.typedGames)|number_format(2) }}
-                                <span class="fs-7 color-gray">[{{ (participant.pts / participant.typedRounds)|number_format(2) }}]</span>
+                                <span class="fs-7 color-gray">
+                                    [{{ (participant.pts / participant.typedRounds|length)|number_format(2) }}]
+                                </span>
                             </td>
                         </tr>
                     {% endfor %}

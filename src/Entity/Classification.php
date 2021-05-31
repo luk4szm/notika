@@ -38,9 +38,9 @@ class Classification
     private $hits = 0;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json")
      */
-    private $typedRounds = 0;
+    private $typedRounds = [];
 
     /**
      * @ORM\Column(type="integer")
@@ -143,14 +143,21 @@ class Classification
         return $this;
     }
 
-    public function getTypedRounds(): ?int
+    public function getTypedRounds(): ?array
     {
         return $this->typedRounds;
     }
 
-    public function setTypedRounds(int $typedRounds): self
+    public function setTypedRounds(array $typedRounds): self
     {
         $this->typedRounds = $typedRounds;
+
+        return $this;
+    }
+
+    public function addTypedRound(int $id): self
+    {
+        array_push($this->typedRounds, $id);
 
         return $this;
     }

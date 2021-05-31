@@ -39,7 +39,6 @@ class RankingService
                                 'user'    => $user,
                                 'ranking' => $ranking,
                             ]);
-            $userTypedRounds[$user->getId()]    = [];
 
             if ($rankClassification[$user->getId()] === null) {
                 $rankClassification[$user->getId()] = (new Classification())
@@ -50,7 +49,7 @@ class RankingService
                 /** @var Classification $classification */
                 $classification = $rankClassification[$user->getId()];
                 $classification->setPts(0)
-                               ->setTypedRounds(0)
+                               ->setTypedRounds([])
                                ->setTypedGames(0)
                                ->setHits(0)
                                ->setScored(0)
@@ -68,8 +67,8 @@ class RankingService
                     /** @var Classification $classification */
                     $classification = $rankClassification[$user->getId()];
 
-                    if (!in_array($game->getRound(), $userTypedRounds[$user->getId()])) {
-                        $userTypedRounds[$user->getId()][] = $game->getRound();
+                    if (!in_array($game->getRound()->getId(), $classification->getTypedRounds())) {
+                        $classification->addTypedRound($game->getRound()->getId());
                         $classification->increaseTypedRounds();
                     }
 
@@ -116,9 +115,9 @@ class RankingService
                         ->em
                         ->getRepository(Classification::class)
                         ->findOneBy([
-                                     'user'    => $user,
-                                     'ranking' => $ranking,
-                                 ]);
+                                        'user'    => $user,
+                                        'ranking' => $ranking,
+                                    ]);
 
                     if (!$classification) {
                         $classification = (new Classification())
@@ -129,7 +128,10 @@ class RankingService
                         $this->em->persist($classification);
                     }
 
-                    //TODO increasing typed ROUNDs
+                    if (!in_array($game->getRound()->getId(), $classification->getTypedRounds())) {
+                        $classification->addTypedRound($game->getRound()->getId());
+                        $classification->increaseTypedRounds();
+                    }
 
                     if ($bet->getPts() > 0) {
                         $classification->addPts($bet->getPts());

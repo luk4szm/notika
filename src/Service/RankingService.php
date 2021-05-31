@@ -96,6 +96,63 @@ class RankingService
     }
 
     /**
+     * Calculate points from single game
+     * @param Game $game
+     * @return array
+     * @throws \Exception
+     */
+    public function calculateFromGame(Game $game): array
+    {
+        $rankings = $this->selectDependentRankings($game);
+        $bets     = 0;
+
+        foreach ($rankings as $ranking) {
+            foreach ($game->getBets() as $bet) {
+                if ($bet->getPts() !== null) {
+                    $user = $bet->getUser();
+
+                    /** @var Classification $classification */
+                    $classification = $this
+                        ->em
+                        ->getRepository(Classification::class)
+                        ->findOneBy([
+                                     'user'    => $user,
+                                     'ranking' => $ranking,
+                                 ]);
+
+                    if (!$classification) {
+                        $classification = (new Classification())
+                            ->setUser($user)
+                            ->setRanking($ranking)
+                            ->setCreatedAt(new \DateTime());
+
+                        $this->em->persist($classification);
+                    }
+
+                    //TODO increasing typed ROUNDs
+
+                    if ($bet->getPts() > 0) {
+                        $classification->addPts($bet->getPts());
+                        $classification->increaseScored();
+                    }
+
+                    if ($bet->getHit() === true) {
+                        $classification->increaseHit();
+                    }
+
+                    $classification->increaseTypedGames();
+
+                    $bets++;
+                }
+            }
+        }
+
+        $this->em->flush();
+
+        return [count($rankings), $bets];
+    }
+
+    /**
      * Set the order of ranking participants according to the rules
      * @param Ranking $ranking
      * @return array|null
@@ -125,5 +182,15 @@ class RankingService
         $this->em->flush();
 
         return $classifications;
+    }
+
+    /**
+     * Select dependant rankings for specified game
+     * @param Game $game
+     * @return array
+     */
+    public function selectDependentRankings(Game $game): array
+    {
+        return $game->getSeason()->getRankings()->toArray();
     }
 }

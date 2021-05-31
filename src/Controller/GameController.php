@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Service\GameService;
+use App\Service\RankingService;
 use App\Service\ScheduleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -18,15 +19,18 @@ class GameController extends AbstractController
     private $em;
     private $gameService;
     private $scheduleService;
+    private $rankingService;
 
     public function __construct(
         GameService $gameService,
         ScheduleService $scheduleService,
+        RankingService $rankingService,
         EntityManagerInterface $em
     )
     {
         $this->gameService     = $gameService;
         $this->scheduleService = $scheduleService;
+        $this->rankingService  = $rankingService;
         $this->em              = $em;
     }
 
@@ -75,6 +79,14 @@ class GameController extends AbstractController
 
         $this->gameService->saveGameResult($game, $this->getUser(), json_decode($request->request->get('data'), true));
         $this->gameService->calcBetPoints($game);
+        try {
+            $this->rankingService->calculateFromGame($game);
+            foreach ($this->rankingService->selectDependentRankings($game) as $ranking) {
+                $this->rankingService->setOrder($ranking);
+            }
+        } catch (\Exception $exception) {
+            return $this->json($exception->getMessage(), 500);
+        }
 
         return $this->json(['success']);
     }

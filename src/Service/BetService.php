@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Bet;
+use App\Entity\Game;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -60,5 +61,46 @@ class BetService
         }
 
         return $bets;
+    }
+
+    /**
+     * Generate random bets for all users for specified games
+     * @return bool
+     * @throws \Exception
+     */
+    public function generateBets()
+    {
+        $users = $this->em->getRepository(User::class)->findAll();
+        $games = $this->em->getRepository(Game::class)->findBy(['goalsHome' => null]);
+
+        /** @var User $user */
+        foreach ($users as $user) {
+            /** @var Game $game */
+            foreach ($games as $game) {
+                $bet = $this->em
+                    ->getRepository(Bet::class)
+                    ->findBy([
+                                 'user' => $user,
+                                 'game' => $game,
+                             ]);
+
+                if ($bet) {
+                    continue;
+                }
+
+                $bet = new Bet();
+                $bet->setUser($user)
+                    ->setGame($game)
+                    ->setGoalsHome(rand(0, 4))
+                    ->setGoalsGuest(rand(0, 4))
+                    ->setCreatedAt(new \DateTime());
+
+                $this->em->persist($bet);
+            }
+        }
+
+        $this->em->flush();
+
+        return true;
     }
 }

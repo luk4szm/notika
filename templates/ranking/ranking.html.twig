@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <table class="table table-sm">
-                <thead class="table-light" style="alignment: center">
+                <thead class="table-light">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col"></th>
@@ -34,8 +34,6 @@
                 </thead>
                 <tbody>
                 {% for participant in ranking.classifications %}
-                    {% set average = participant.pts / participant.typedGames %}
-
                     <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
                         <td>{{ loop.index }}</td>
                         <td>
@@ -57,7 +55,7 @@
                             <span class="fs-7 color-gray">[{{ participant.typedRounds }}]</span>
                         </td>
                         <td class="text-center">
-                            {{ average|number_format(1) }}
+                            {{ (participant.pts / participant.typedGames)|number_format(1) }}
                         </td>
                     </tr>
                 {% endfor %}

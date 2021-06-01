@@ -88,8 +88,9 @@ class RankingService
 
         foreach ($rankClassification as $classification) {
             $this->em->persist($classification);
-            $this->em->flush();
         }
+
+        $this->em->flush();
 
         return $rankClassification;
     }

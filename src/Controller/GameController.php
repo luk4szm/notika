@@ -48,6 +48,7 @@ class GameController extends AbstractController
             'game'             => $game,
             'roundSchedule'    => $roundSchedule,
             'betsDistribution' => $this->gameService->getPercentageBetDistribution($game),
+            'betsStats'        => $this->gameService->getBetStats($game),
             'userBet'          => $this->gameService->getUserBet($game),
         ]);
     }

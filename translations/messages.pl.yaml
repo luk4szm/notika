@@ -19,6 +19,7 @@ game:
   betTime: Czas typowania
   betEdited: Edytowany
   bets: Typowania
+  betseffectiveness: Skuteczność
   betsSaved: Zapisanych typów
   betsSavedSoFar: Zapisanych typów do tej pory
   betsDistribution: Rozkład typów

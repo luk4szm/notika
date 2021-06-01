@@ -19,6 +19,7 @@ game:
   betTime: Prediction time
   betEdited: Edited
   bets: Bets
+  betseffectiveness: Effectiveness
   betsSaved: Saved predictions
   betsSavedSoFar: Saved predictions so far
   betsDistribution: Distribution of predictions

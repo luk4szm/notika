@@ -126,6 +126,43 @@ class GameService
     }
 
     /**
+     * Returns betting statistics for the specified game
+     * @param Game $game
+     * @return array|null
+     */
+    public function getBetStats(Game $game): ?array
+    {
+        if (!$game->getBets()->count()) {
+            return null;
+        }
+
+        if (!$game->getGoalsHome() && !$game->getGoalsGuest()) {
+            return null;
+        }
+
+        $hits   = 0;
+        $scored = 0;
+        $pts    = 0;
+        /** @var Bet $bet */
+        foreach ($game->getBets() as $bet) {
+            if ($bet->getHit()) {
+                $hits++;
+            }
+
+            if ($bet->getPts() > 0) {
+                $scored++;
+                $pts += $bet->getPts();
+            }
+        }
+
+        return [
+            'scored' => $scored,
+            'hits'   => $hits,
+            'avgPts' => $pts / $game->getBets()->count(),
+        ];
+    }
+
+    /**
      * Save game result
      * @param Game $game
      * @param User $user

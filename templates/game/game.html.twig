@@ -6,9 +6,9 @@
     <div id="gameInfo">
         <div class="card">
             {% if game.isAwarded %}
-            <div class="ribbon-wrapper-2">
-                <div class="ribbon-2">BONUS!</div>
-            </div>
+                <div class="ribbon-wrapper-2">
+                    <div class="ribbon-2">BONUS!</div>
+                </div>
             {% endif %}
             <div class="card-header text-center">
                 {{ game.home.name }} vs. {{ game.guest.name }}
@@ -148,8 +148,16 @@
                         <div class="d-none d-lg-block col-lg-3">
                             <canvas id="betsChart" width="100%" height="80%"></canvas>
                             {% if date() > game.date %}
+                                {% set effectiveness = betsStats.scored / game.bets|length * 100 %}
                                 <div class="mt-4  text-center">
-                                    {{ 'game.betsSaved'|trans }}: <span class="fw-mid">{{ game.bets|length }}</span>
+                                    {{ 'game.betsSaved'|trans }}:
+                                    <span class="fw-mid">{{ game.bets|length }}</span><br>
+                                    {{ 'game.betseffectiveness'|trans }}:
+                                    <span class="fw-mid">{{ effectiveness|number_format(1) }}%</span><br>
+                                    {{ 'user.exactHits'|trans }}:
+                                    <span class="fw-mid">{{ betsStats.hits }}</span><br>
+                                    {{ 'ranking.averagePoints'|trans }}:
+                                    <span class="fw-mid">{{ betsStats.avgPts|number_format(2) }}</span><br>
                                 </div>
                             {% endif %}
                         </div>
@@ -158,47 +166,46 @@
                                 {% if date() < game.date %}
                                     {% if game.bets is not empty %}
                                         {{ 'game.betsSavedSoFar'|trans }}: <span class="fw-mid">{{ game.bets|length }}</span>.<br>
-                                        {{ 'game.betsHiddenDetails'|trans }}
+                                        {{ 'game.betsHiddenDetails'|trans|raw }}
                                     {% else %}
                                         {{ 'game.noBets'|trans }}
                                     {% endif %}
                                 {% else %}
-                                    {% if game.bets is not empty %}
-                                        <table id="betsTable" class="table table-sm">
-                                            <thead class="table-light">
+                                    <table id="betsTable" class="table table-sm">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col"></th>
+                                            <th class="text-center" scope="col" style="width: 60px">{{ 'game.bet'|trans }}</th>
+                                            <th class="text-center" scope="col" style="width: 60px">{{ 'table.points'|trans }}</th>
+                                            <th class="text-end" scope="col" style="width: 130px"
+                                                class="text-end">{{ 'game.betTime'|trans }}</th>
+                                            <th scope="col" style="width: 30px"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="bets_list_all">
+                                        {% for bet in game.bets|sort((a, b) => a.pts < b.pts) %}
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col"></th>
-                                                <th class="text-center" scope="col" style="width: 60px">{{ 'game.bet'|trans }}</th>
-                                                <th class="text-center" scope="col" style="width: 60px">{{ 'table.points'|trans }}</th>
-                                                <th class="text-end" scope="col" style="width: 130px" class="text-end">{{ 'game.betTime'|trans }}</th>
-                                                <th scope="col" style="width: 30px"></th>
+                                                <td>{{ loop.index }}</td>
+                                                <td class="fw-mid">{{ bet.user.fullName }}</td>
+                                                <td class="text-center">{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>
+                                                <td class="text-center">
+                                                    {% if bet.pts is not null %}
+                                                        {% set class = bet.pts > 0 ? 'fw-mid' : 'color-gray' %}
+                                                        <span class="{{ class }}">{{ bet.pts|number_format(1) }}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-end">{{ bet.createdAt|date("d.m.Y H:i") }}</td>
+                                                <td class="text-center">
+                                                    {% if bet.updatedAt is not null %}
+                                                        <i class="fas fa-info-circle color-gray"
+                                                           title="{{ 'game.betEdited'|trans }}: {{ bet.updatedAt|date("d.m.Y H:i") }}"></i>
+                                                    {% endif %}
+                                                </td>
                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for bet in game.bets|sort((a, b) => a.pts < b.pts) %}
-                                                <tr>
-                                                    <td>{{ loop.index }}</td>
-                                                    <td class="fw-mid">{{ bet.user.fullName }}</td>
-                                                    <td class="text-center">{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>
-                                                    <td class="text-center">
-                                                        {% if bet.pts is not null %}
-                                                            {% set class = bet.pts > 0 ? 'fw-mid' : 'color-gray' %}
-                                                            <span class="{{ class }}">{{ bet.pts|number_format(1) }}</span>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td class="text-end">{{ bet.createdAt|date("d.m.Y H:i") }}</td>
-                                                    <td class="text-center">
-                                                        {% if bet.updatedAt is not null %}
-                                                            <i class="fas fa-info-circle color-gray"
-                                                               title="{{ 'game.betEdited'|trans }}: {{ bet.updatedAt|date("d.m.Y H:i") }}"></i>
-                                                        {% endif %}
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
                                 {% endif %}
                             </div>
                         </div>

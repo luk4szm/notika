@@ -136,7 +136,7 @@ class GameService
             return null;
         }
 
-        if (!$game->getGoalsHome() && !$game->getGoalsGuest()) {
+        if ($game->getGoalsHome() === null && $game->getGoalsGuest() === null) {
             return null;
         }
 

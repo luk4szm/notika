@@ -14,7 +14,7 @@ class ScheduleService
     public function __construct(EntityManagerInterface $em)
     {
         $this->em  = $em;
-        $this->now = (new \DateTime("2021-02-06 20:34:00"));
+        $this->now = new \DateTime();
     }
 
     /**

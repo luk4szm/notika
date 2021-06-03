@@ -60,6 +60,14 @@ class RankingService
 
         /** @var Game $game */
         foreach ($ranking->getSeason()->getGames() as $game) {
+            if ($ranking->getStartRound() && $ranking->getEndRound()) {
+                if ($game->getRound()->getOrdinal() < $ranking->getStartRound() ||
+                    $game->getRound()->getOrdinal() > $ranking->getEndRound()
+                ) {
+                    continue;
+                }
+            }
+
             foreach ($game->getBets() as $bet) {
                 if ($bet->getPts() !== null) {
                     $user = $bet->getUser();

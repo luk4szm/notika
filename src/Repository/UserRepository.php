@@ -44,15 +44,29 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     public function findRankingParticipants(Ranking $ranking): ?array
     {
-        return $this->createQueryBuilder('u')
-                    ->leftJoin('u.bets', 'b')
-                    ->leftJoin('b.game', 'g')
-                    ->leftJoin('g.season', 's')
-                    ->leftJoin('s.rankings', 'r')
-                    ->andWhere('r.id = :id')
-                    ->setParameter('id', $ranking->getId())
-                    ->getQuery()
-                    ->getResult();
+        $qb = $this->createQueryBuilder('u')
+                   ->leftJoin('u.bets', 'b')
+                   ->leftJoin('b.game', 'g')
+                   ->leftJoin('g.season', 's')
+                   ->leftJoin('s.rankings', 'r')
+                   ->andWhere('r.id = :id')
+                   ->setParameter('id', $ranking->getId());
+
+        if ($ranking->getStartRound() && $ranking->getEndRound()) {
+            $qb->leftJoin('g.round', 'rd');
+        }
+
+        if ($ranking->getStartRound()) {
+            $qb->andWhere('rd.ordinal >= :start')
+               ->setParameter('start', $ranking->getStartRound());
+        }
+
+        if ($ranking->getEndRound()) {
+            $qb->andWhere('rd.ordinal <= :end')
+               ->setParameter('end', $ranking->getEndRound());
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     // /**

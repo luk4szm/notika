@@ -115,6 +115,14 @@ class RankingService
         $bets     = 0;
 
         foreach ($rankings as $ranking) {
+            if ($ranking->getStartRound() && $ranking->getEndRound()) {
+                if ($game->getRound()->getOrdinal() < $ranking->getStartRound() ||
+                    $game->getRound()->getOrdinal() > $ranking->getEndRound()
+                ) {
+                    continue;
+                }
+            }
+
             foreach ($game->getBets() as $bet) {
                 if ($bet->getPts() !== null) {
                     $user = $bet->getUser();

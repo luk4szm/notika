@@ -98,6 +98,10 @@ body {
 }
 
 .team-logo {
+   &-table {
+      max-height: 16px;
+   }
+
    img {
       max-width: 200px;
       max-height: 150px;

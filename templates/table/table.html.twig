@@ -12,6 +12,7 @@
                 <thead class="table-light">
                 <tr>
                     <th class="text-center" scope="col">#</th>
+                    <th class="text-center" scope="col" width="1px"></th>
                     <th scope="col">{{ 'table.team'|trans }}</th>
                     <th class="text-center" scope="col">{{ 'table.played'|trans }}</th>
                     <th class="text-center" scope="col">{{ 'table.won'|trans }}</th>
@@ -28,6 +29,10 @@
                 {% for participant in table %}
                     <tr class="row-link" data-href="{{ path('team_detail', {'slug': participant.team.slug}) }}">
                         <td class="text-center">{{ loop.index }}</td>
+                        <td class="text-center">
+                            <img src="{{ asset('assets/team/' ~ participant.team.id ~ '.png') }}"
+                                 class="team-logo-table" alt="{{ participant.team.name }}">
+                        </td>
                         <td class="fw-mid">{{ participant.team.name }}</td>
                         <td class="text-center">{{ participant.games }}</td>
                         <td class="text-center">

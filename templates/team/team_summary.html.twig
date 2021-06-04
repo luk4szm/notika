@@ -1,0 +1,52 @@
+{% extends 'team/index.html.twig' %}
+
+{% block title %}Team - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            {{ 'card.summary'|trans }}
+        </div>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0 item-logo team-logo">
+                    <img class="mx-5 my-3" src="{{ asset('assets/team/' ~ team.id ~ '.png') }}" alt="{{ team.name }}">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <table class="table table-sm">
+                        <tbody>
+                        <tr>
+                            <td class="fs-4 fw-mid" width="30%" colspan="2">
+                                {{ team.name }}
+                            </td>
+                        </tr>
+                        {% if team.gamesAll|length != 0 %}
+                            <tr>
+                                <td width="30%">
+                                    {{ 'team.gameplays'|trans }}:
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-mid">{{ team.tables|length }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="30%">
+                                    {{ 'team.playedMatches'|trans }}:
+                                </td>
+                                <td class="text-center">
+                                    <span class="fw-mid">{{ team.gamesAll|length }}</span>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    {% if team.tables|length == 0 %}
+                        <div class="mt-3">
+                            {{ 'team.passive'|trans({'%team%': team.name}) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

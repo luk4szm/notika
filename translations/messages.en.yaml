@@ -1,5 +1,6 @@
 breadcump:
   user: User
+  team: Team
 bet:
   your: Your bet
   change: change bet
@@ -91,6 +92,10 @@ table:
   goalsDiff: Gd
   points: Points
   shape: Shape
+team:
+  gameplays: Gameplays
+  playedMatches: Played matches
+  passive: "%team% has not participated in any tournament"
 user:
   competitions: Competitions
   predictedMatches: Predicted matches

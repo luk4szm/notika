@@ -1,5 +1,6 @@
 breadcump:
   user: Użytkownik
+  team: Drużyna
 bet:
   your: Twój typ
   change: zmień typ
@@ -91,6 +92,10 @@ table:
   goalsDiff: Br+/-
   points: Punkty
   shape: Forma
+team:
+  gameplays: Rozgrywek
+  playedMatches: Rozegranych spotkań
+  passive: "%team% nie brał udział w żadnym turnieju"
 user:
   competitions: Konkursów
   predictedMatches: Typowanych spotkań

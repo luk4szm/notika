@@ -33,7 +33,8 @@ class CopyGamesCommand extends Command
         $this
             ->setDescription(self::$defaultDescription)
             ->addArgument('tableName', InputArgument::REQUIRED, 'dbName with data')
-            ->addArgument('idOffset', InputArgument::REQUIRED, 'value add to id');
+            ->addArgument('idOffset', InputArgument::REQUIRED, 'value add to id')
+            ->addArgument('season', InputArgument::REQUIRED, 'season_id');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -64,12 +65,10 @@ class CopyGamesCommand extends Command
             $new = new Game();
             $new->setId($game['ID'] + $input->getArgument('idOffset'))
                 ->setCreatedAt(new \DateTime($game['dAddM']))
-                ->setUpdatedAt(new \DateTime($game['dAddR']))
                 ->setCreatedBy($this->entityManager->getRepository(User::class)->find($game['uAddM']))
-                ->setUpdatedBy($this->entityManager->getRepository(User::class)->find($game['uAddR']))
                 ->setHome($this->entityManager->getRepository(Team::class)->find($game['home']))
                 ->setGuest($this->entityManager->getRepository(Team::class)->find($game['guest']))
-                ->setSeason($this->entityManager->getRepository(Season::class)->findOneBy(['year' => $game['season']]))
+                ->setSeason($this->entityManager->getRepository(Season::class)->findOneBy($input->getArgument('season')))
                 ->setRoundNr($game['kol'])
                 ->setIsCounted($game['counted'])
                 ->setIsAwarded($game['bonus'])
@@ -77,6 +76,14 @@ class CopyGamesCommand extends Command
                 ->setGoalsHome($game['goalsHome'])
                 ->setGoalsGuest($game['goalsGuest'])
                 ->setDescription($game['uwagi']);
+
+            if ($game['uAddR']) {
+                $new->setUpdatedBy($this->entityManager->getRepository(User::class)->find($game['uAddR']));
+            }
+
+            if ($game['dAddR']) {
+                $new->setUpdatedAt(new \DateTime($game['dAddR']));
+            }
 
             $this->entityManager->persist($new);
 

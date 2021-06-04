@@ -192,7 +192,8 @@
                                         </thead>
                                         <tbody id="bets_list_all">
                                         {% for bet in game.bets|sort((a, b) => a.pts < b.pts) %}
-                                            <tr>
+                                            <tr class="row-link{% if bet.user.id == app.user.id %} logged-user{% endif %}"
+                                                data-href="{{ path('user_info', {'username': bet.user.username}) }}">
                                                 <td>{{ loop.index }}</td>
                                                 <td class="fw-mid">{{ bet.user.fullName }}</td>
                                                 <td class="text-center">{{ bet.goalsHome }} : {{ bet.goalsGuest }}</td>

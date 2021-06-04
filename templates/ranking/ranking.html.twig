@@ -36,7 +36,8 @@
                     </thead>
                     <tbody>
                     {% for participant in ranking.classifications|sort((a, b) => a.place <=> b.place) %}
-                        <tr class="row-link" data-href="{{ path('user_info', {'username': participant.user.username}) }}">
+                        <tr class="row-link{% if participant.user.id == app.user.id %} logged-user{% endif %}"
+                            data-href="{{ path('user_info', {'username': participant.user.username}) }}">
                             <td>{{ loop.index }}</td>
                             <td>
                                 <a class="fw-normal" href="{{ path('user_info', {'username': participant.user.username}) }}">

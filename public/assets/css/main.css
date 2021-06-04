@@ -17060,4 +17060,12 @@ table tr:last-child td {
   border-bottom: 0;
 }
 
+.table tr.logged-user {
+  background-color: rgba(0, 222, 0, 0.05);
+}
+
+.table tr:hover.logged-user {
+  background-color: rgba(0, 222, 0, 0.18);
+}
+
 /*# sourceMappingURL=main.css.map */

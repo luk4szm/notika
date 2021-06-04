@@ -17018,6 +17018,10 @@ body {
   background-color: rgba(164, 164, 164, 0.15);
 }
 
+.table-sm {
+  margin-bottom: 0;
+}
+
 .toast {
   max-width: 250px;
   position: absolute;
@@ -17042,6 +17046,10 @@ input.matchScoresModal {
 
 tr, td {
   vertical-align: middle;
+}
+
+table tr:last-child td {
+  border-bottom: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

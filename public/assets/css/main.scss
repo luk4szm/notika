@@ -97,6 +97,13 @@ body {
    text-align: center;
 }
 
+.team-logo {
+   img {
+      max-width: 200px;
+      max-height: 150px;
+   }
+}
+
 .navbar {
    a {
       color: #6b747d;
@@ -146,5 +153,5 @@ tr, td {
 }
 
 table tr:last-child td {
-  border-bottom: 0;
+   border-bottom: 0;
 }

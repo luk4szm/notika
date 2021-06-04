@@ -25,8 +25,11 @@
                         </div>
                     {% endif %}
                     <div class="row">
-                        <div class="col-sm-12 col-lg-4">
-
+                        <div class="col-sm-12 col-lg-4 d-flex align-items-center justify-content-center">
+                            <div class="team-logo">
+                                <img src="{{ asset('assets/team/' ~ game.home.id ~ '.png') }}"
+                                     alt="{{ game.home.name }}">
+                            </div>
                         </div>
                         <div class="col-sm-12 col-lg-4">
                             <table class="table table-sm">
@@ -120,7 +123,11 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col-sm-12 col-lg-4">
+                        <div class="col-sm-12 col-lg-4 d-flex align-items-center justify-content-center">
+                            <div class="team-logo">
+                                <img src="{{ asset('assets/team/' ~ game.guest.id ~ '.png') }}"
+                                     alt="{{ game.guest.name }}">
+                            </div>
                         </div>
                     </div>
                     {% if game.description is not null %}

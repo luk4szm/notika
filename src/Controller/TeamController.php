@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Game;
 use App\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,19 +13,10 @@ class TeamController extends AbstractController
     /**
      * @Route("/team/{slug}", name="team_detail")
      * @param Team $team
-     * @param EntityManagerInterface $em
      * @return Response
      */
-    public function index(Team $team, EntityManagerInterface $em): Response
+    public function index(Team $team): Response
     {
-        if (!$team) {
-            /** @var string $name */
-            throw $this->createNotFoundException(sprintf("Nie znaleziono drużyny o podanej nazwie {{ slug }}"));
-        }
-
-        $repo = $em->getRepository(Game::class);
-        $team->gamesAll = $repo->findTeamGames($team);
-
         return $this->render('team/team_summary.html.twig', [
             'team' => $team
         ]);

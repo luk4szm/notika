@@ -56,6 +56,8 @@ class Team
      */
     private $gamesGuest;
 
+    private $gamesAll;
+
     /**
      * @ORM\Column(type="string", length=2, nullable=true)
      */
@@ -70,6 +72,7 @@ class Team
     {
         $this->gamesHome = new ArrayCollection();
         $this->gamesGuest = new ArrayCollection();
+        $this->gamesAll = new ArrayCollection();
         $this->tables = new ArrayCollection();
     }
 
@@ -208,6 +211,13 @@ class Team
         }
 
         return $this;
+    }
+
+    public function getGamesAll(): Collection
+    {
+        return $this->gamesAll = new ArrayCollection(
+            array_merge($this->gamesHome->toArray(), $this->gamesGuest->toArray())
+        );
     }
 
     /**

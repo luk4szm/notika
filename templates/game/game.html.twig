@@ -177,7 +177,9 @@
                                         {{ 'game.betsSavedSoFar'|trans }}: <span class="fw-mid">{{ game.bets|length }}</span>.<br>
                                         {{ 'game.betsHiddenDetails'|trans|raw }}
                                     {% else %}
-                                        {{ 'game.noBets'|trans }}
+                                        <div class="text-center">
+                                            {{ 'game.noBets'|trans }}
+                                        </div>
                                     {% endif %}
                                 {% else %}
                                     <table id="betsTable" class="table table-sm">

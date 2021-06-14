@@ -85,6 +85,7 @@ class BetController extends AbstractController
 
     /**
      * @Route("/bet/generate", name="bet_generate")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function betGenerate(): Response
     {

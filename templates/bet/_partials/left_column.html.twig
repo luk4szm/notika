@@ -1,0 +1,45 @@
+<div class="col-lg-3">
+    <div class="col-sticky-top">
+        {% if seasons is not empty %}
+            {% for season in seasons %}
+                {% set missingBetsCount = count_missing_bets(season) %}
+                <div class="card">
+                    <div class="card-header">
+                        {{ season.league.name }}
+                    </div>
+                    <div class="card-body">
+                        <table class="w-100">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a class="menu-link" href="{{ path('current_bets', {'season': season.slug}) }}">
+                                        {{ 'schedule.upcoming'|trans }}
+                                    </a>
+                                </td>
+                                <td class="text-end">
+                                    <span class="badge badge-menu {{ missingBetsCount ? 'bg-warning' : 'bg-light' }} text-dark">
+                                        {{ missingBetsCount }}
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div class="text-center">
+                            {# todo subscription #} subscription info
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <div class="card-header">
+                    {{ 'game.bets'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ 'season.inactive'|trans }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

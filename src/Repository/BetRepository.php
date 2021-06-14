@@ -42,6 +42,7 @@ class BetRepository extends ServiceEntityRepository
     }
 
     /**
+     * Returns arrays with the id's of all matches with the missing type
      * @param User|null $user
      * @return array
      * @throws \Doctrine\DBAL\Driver\Exception
@@ -53,7 +54,7 @@ class BetRepository extends ServiceEntityRepository
 
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT t1.* FROM (
+        $sql = "SELECT t1.id FROM (
                     SELECT m.*
                     FROM game m
                     WHERE m.date > :date
@@ -72,6 +73,6 @@ class BetRepository extends ServiceEntityRepository
         $stmt->bindValue('user', $user->getId());
         $stmt->execute();
 
-        return $stmt->fetchAllAssociative();
+        return $stmt->fetchFirstColumn();
     }
 }

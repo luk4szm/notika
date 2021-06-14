@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Bet;
 use App\Entity\Game;
 use App\Entity\Round;
+use App\Entity\Season;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -123,6 +124,36 @@ class GameService
             'draw'  => number_format($bets['draw'] / $game->getBets()->count() * 100, 1),
             'guest' => number_format($bets['guest'] / $game->getBets()->count() * 100, 1),
         ];
+    }
+
+    /**
+     * Return array of Game entities with missing bets for logged user
+     * @param Season|null $season
+     * @return array
+     */
+    public function getUserMissingBets(Season $season = null): array
+    {
+        $gamesIds = $this->em->getRepository(Bet::class)->findUserMissingBets();
+        $games    = [];
+
+        foreach ($gamesIds as $key => $id) {
+            $game = $this->em->getRepository(Game::class)->find($id);
+
+            if (isset($season) && $game->getSeason() !== $season) {
+                continue;
+            }
+
+            $games[] = $game;
+        }
+
+        return $games;
+    }
+
+    public function countUserMissingBets(Season $season = null): int
+    {
+        $games = $this->getUserMissingBets($season);
+
+        return count($games);
     }
 
     /**

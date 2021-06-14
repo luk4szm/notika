@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    $(".row-link").click(function () {
-        window.location = $(this).data("href");
+    $(".row-link td:not(.unclickable)").click(function () {
+        window.location = $(this).parent().data("href");
     });
 });

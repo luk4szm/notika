@@ -1,0 +1,79 @@
+{% extends 'bet/index.html.twig' %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            All missing bets
+        </div>
+        <div class="card-body">
+            {% if games is not empty %}
+                <form method="post" name="bets">
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" width></th>
+                            <th scope="col">Rozgrywki</th>
+                            <th scope="col">{{ 'game.date'|trans }}</th>
+                            <th scope="col" class="text-end">{{ 'game.home'|trans }}</th>
+                            <th scope="col" width="50px"></th>
+                            <th scope="col" width="5px"></th>
+                            <th scope="col" width="50px"></th>
+                            <th scope="col">{{ 'game.guest'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for game in games %}
+                            {% set userBet = get_user_bet(game) %}
+                            <tr class="row-link" data-href="{{ path('game_detail', {'id': game.id}) }}">
+                                <td>{{ loop.index }}</td>
+                                <td>{% if game.isAwarded %}&#9917;{% endif %}</td>
+                                <td>{{ game.season.league.name }}</td>
+                                <td>{{ game.date|date("Y-m-d H:i") }}</td>
+                                <td class="text-end">{{ game.home.name }}</td>
+                                <td class="text-center unclickable d-flex justify-content-end">
+                                    <input type="text" class="form-control matchScore" maxlength="1" autocomplete="off"
+                                           name="{{ game.id }}[goalsHome]" value="{{ userBet.goalsHome|default(null) }}" pattern="\d*">
+                                </td>
+                                <td class="text-center fw-mid">:</td>
+                                <td class="text-center unclickable d-flex justify-content-start">
+                                    <input type="text" class="form-control matchScore" maxlength="1" autocomplete="off"
+                                           name="{{ game.id }}[goalsGuest]" value="{{ userBet.goalsGuest|default(null) }}" pattern="\d*">
+                                </td>
+                                <td class="text-start">{{ game.guest.name }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-primary" type="submit" name="save-bets">Zapisz swoje typy</button>
+                    </div>
+                </form>
+            {% else %}
+                <div class="row-cols-auto text-center">
+                    <div class="m-2 p-2">
+                        {{ 'bet.noMissing'|trans }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block modals %}
+    <div id="betSaveConfirm" class="toast">
+        <div class="toast-body text-center">
+            {{ 'bet.saved'|trans }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJs %}
+    <script type="text/javascript">
+        {% if newBets %}
+        $(document).ready(function () {
+            $('#betSaveConfirm').toast('show');
+        });
+        {% endif %}
+    </script>
+{% endblock %}

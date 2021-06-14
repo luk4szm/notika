@@ -5,6 +5,8 @@ bet:
   your: Twój typ
   change: zmień typ
   make: zapisz typ
+  missing: Brakujące typy
+  noMissing: Brak spotkań bez podanych typów
   saved: Twój typ został zapisany
   notSaved: Twój typ NIE został zapisany
 card:
@@ -81,6 +83,8 @@ schedule:
   ongoing: Spotkania w toku
   upcoming: Zaplanowane spotkania
   finished: Rozegrane spotkania
+season:
+  inactive: Brak aktywnych sezonów
 table:
   team: Drużyna
   played: Mecze

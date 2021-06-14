@@ -27,7 +27,7 @@
             {% if is_granted('ROLE_USER') %}
                 <div class="row row-cols-lg-auto align-items-center">
                     <div class="col-12 d-flex mx-5">
-                        <a href="/" class="btn btn-outline-success me-2 btn-bet px-4" role="button">{{ 'menu.bet'|trans }}
+                        <a href="{{ path('current_bets') }}" class="btn btn-outline-success me-2 btn-bet px-4" role="button">{{ 'menu.bet'|trans }}
                             &nbsp;<span class="badge bg-success">{{ app.session.get('userMissingBets') }}</span></a>
                     </div>
                 </div>

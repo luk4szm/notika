@@ -87,6 +87,23 @@ class GameRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find upcoming games for specified season
+     * @param Season $season
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findUpcomingGames(Season $season)
+    {
+        return $this->createQueryBuilder('g')
+                    ->andWhere('g.season = :season')
+                    ->setParameter('season', $season)
+                    ->andWhere('g.date > :val')
+                    ->setParameter('val', (new \DateTime()))
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    /**
      * Find all games with missing result
      * @return mixed
      * @throws \Exception

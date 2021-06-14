@@ -2,13 +2,25 @@
 
 namespace App\Twig;
 
+use App\Entity\Game;
 use App\Entity\Round;
+use App\Entity\Season;
+use App\Service\GameService;
+use Doctrine\ORM\EntityManagerInterface;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+    private $seasonRepo;
+    private $gameService;
+
+    public function __construct(EntityManagerInterface $em, GameService $gameService)
+    {
+        $this->seasonRepo  = $em->getRepository(Season::class);
+        $this->gameService = $gameService;
+    }
+
     public function getFilters(): array
     {
         return [
@@ -23,6 +35,9 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('round_name', [$this, 'getRoundName']),
+            new TwigFunction('get_active_seasons', [$this, 'getActiveSeasons']),
+            new TwigFunction('count_missing_bets', [$this, 'countMissingBets']),
+            new TwigFunction('get_user_bet', [$this, 'getUserBet']),
         ];
     }
 
@@ -33,5 +48,20 @@ class AppExtension extends AbstractExtension
         } else {
             return '#' . $round->getOrdinal();
         }
+    }
+
+    public function getActiveSeasons()
+    {
+        return $this->seasonRepo->findActiveSeasons();
+    }
+
+    public function countMissingBets(Season $season)
+    {
+        return $this->gameService->countUserMissingBets($season);
+    }
+
+    public function getUserBet(Game $game)
+    {
+        return $this->gameService->getUserBet($game);
     }
 }

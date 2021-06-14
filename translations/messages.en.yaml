@@ -5,6 +5,8 @@ bet:
   your: Your bet
   change: change bet
   make: make bet
+  missing: Missing bets
+  noMissing: No matches with no given bets
   saved: Your prediction has been saved
   notSaved: Your prediction hasn't been saved
 card:
@@ -81,6 +83,8 @@ schedule:
   ongoing: Ongoing games
   upcoming: Upcoming games
   finished: Finished games
+season:
+  inactive: There are no active seasons
 table:
   team: Team
   played: Played

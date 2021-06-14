@@ -16932,6 +16932,10 @@ body {
   background-color: #f9f9f9;
 }
 
+.badge-menu {
+  font-size: 0.95em;
+}
+
 .bg-success-opacity {
   background: rgba(0, 222, 0, 0.08);
 }
@@ -17010,6 +17014,25 @@ body {
 .team-logo img {
   max-width: 200px;
   max-height: 150px;
+}
+
+.matchScore {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: #000;
+}
+.menu-link:hover {
+  color: #000;
+  text-decoration: underline;
 }
 
 .navbar a {

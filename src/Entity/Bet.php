@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BetRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=BetRepository::class)
@@ -100,7 +101,7 @@ class Bet
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
 

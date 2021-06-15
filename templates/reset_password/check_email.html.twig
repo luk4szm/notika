@@ -10,35 +10,24 @@
     <![endif]-->
 {% endblock %}
 
-{% block desktop_menu %}
-{% endblock %}
-
-{% block mobile_menu %}
-{% endblock %}
-
-{% block footer %}
-{% endblock %}
-
-{% block content %}
-    <div class="login-content">
-        <!-- Forgot Password -->
-        <div class="nk-block toggled" id="l-forget-password">
-
-            <div class="nk-form">
-                <p class="text-left">O ile na podany adres zostało utworzone konto to właśnie został wysłany link dzięki któremu zresetujesz
-                    swoje hasło.
-                    Link ten straci ważność w ciągu {{ tokenLifetime|date('g') }} godzin.
-                    Jeśli wiadomość nie dotarła sprawdź spam folder lub też <a href="{{ path('app_forgot_password_request') }}">spróbuj
-                        ponownie</a>.</p>
+{% block body %}
+    <div class="position-relative" style="height: 88vh">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="card" style="width: 350px">
+                <div class="card-header">
+                    Przypomnij hasło
+                </div>
+                <div class="card-body">
+                    <p>O ile na podany adres zostało utworzone konto to właśnie został wysłany link dzięki któremu zresetujesz swoje hasło.
+                        Link ten straci ważność w ciągu {{ tokenLifetime|date('g') }} godzin.
+                        Jeśli wiadomość nie dotarła sprawdź spam folder lub też <a href="{{ path('app_forgot_password_request') }}">spróbuj
+                            ponownie</a>.</p>
+                </div>
             </div>
 
-            <div class="nk-navigation nk-lg-ic">
-                <a href="{{ path('app_login') }}" data-ma-block="#l-login">
-                    <i class="notika-icon notika-right-arrow"></i>
-                    <span>Zaloguj</span>
-                </a>
-            </div>
-
+            <a href="{{ path('app_login') }}">
+                <span>Zaloguj</span>
+            </a>
         </div>
     </div>
 {% endblock %}

@@ -65,8 +65,7 @@ class CopyBetsCommand extends Command
             $hit = $game->getGoalsHome() == $bet['gHome'] && $game->getGoalsGuest() == $bet['gGuest'];
 
             $new = new Bet();
-            $new->setId($bet['ID'] + $input->getArgument('idOffset'))
-                ->setCreatedAt(new \DateTime($bet['modify']))
+            $new->setCreatedAt(new \DateTime($bet['modify']))
                 ->setUser($this->entityManager->getRepository(User::class)->find($bet['typer']))
                 ->setGame($game)
                 ->setGoalsHome($bet['gHome'])

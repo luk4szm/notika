@@ -106,7 +106,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $locale;
+    private $locale = "pl";
 
     /**
      * @ORM\OneToMany(targetEntity=Classification::class, mappedBy="user", orphanRemoval=true)

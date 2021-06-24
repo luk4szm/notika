@@ -62,8 +62,10 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-			$this->addFlash('success', 'Konto zostało utworzone.');
-			$this->addFlash('success', 'Na podany e-mail został wysłany link aktywacyjny');
+			$this->addFlash(
+			    'success',
+                'Konto zostało utworzone.<br>Na podany e-mail został wysłany link aktywacyjny'
+            );
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

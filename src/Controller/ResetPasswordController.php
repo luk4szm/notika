@@ -160,7 +160,7 @@ class ResetPasswordController extends AbstractController
 		}
 
 		$email = (new TemplatedEmail())
-			->from(new Address('lukasz.mikowski@gmail.com', 'Mensański Typer Bot'))
+			->from(new Address('typer@mikowski.pl', 'Mensański Typer'))
 			->to($user->getEmail())
 			->subject('Resetowanie hasła w Mensańskim Typerze')
 			->htmlTemplate('reset_password/email.html.twig')

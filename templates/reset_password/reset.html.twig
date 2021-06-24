@@ -16,7 +16,7 @@
             <div class="card" style="width: 300px">
                 <div class="card-header">
                     Zresetuj hasło
-                </div>t
+                </div>
                 <div class="card-body">
                     <form method="post">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -37,7 +37,7 @@
                     </form>
                 </div>
             </div>
-
+            {% endif %}
 
             <div class="nk-block toggled" id="l-forget-password">
 

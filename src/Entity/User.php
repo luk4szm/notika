@@ -40,7 +40,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(type="string", length=191, nullable=true, unique=true)
      */
     private $email;
 

@@ -37,7 +37,14 @@ class RegistrationFormType extends AbstractType
 					]),
 				],
 			])
-			->add('email', EmailType::class)
+			->add('email', EmailType::class, [
+			    'constraints' => [
+			        new Length([
+			           'max' => 191,
+                       'maxMessage' => 'Adres e-mail może mieć maksymalnie 191 znaków'
+                    ]),
+                ],
+            ])
 			->add('member', CheckboxType::class, [
 			    'required' => false,
             ]);

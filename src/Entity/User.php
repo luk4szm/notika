@@ -60,11 +60,6 @@ class User implements UserInterface
     private $active;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $nation;
-
-    /**
      * @ORM\Column(type="string", length=2)
      */
     private $language;
@@ -243,18 +238,6 @@ class User implements UserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
-
-        return $this;
-    }
-
-    public function getNation(): ?int
-    {
-        return $this->nation;
-    }
-
-    public function setNation(int $nation): self
-    {
-        $this->nation = $nation;
 
         return $this;
     }

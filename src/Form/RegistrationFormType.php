@@ -38,7 +38,9 @@ class RegistrationFormType extends AbstractType
 				],
 			])
 			->add('email', EmailType::class)
-			->add('member', CheckboxType::class);
+			->add('member', CheckboxType::class, [
+			    'required' => false,
+            ]);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

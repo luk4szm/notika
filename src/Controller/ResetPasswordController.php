@@ -111,12 +111,14 @@ class ResetPasswordController extends AbstractController
 			$this->resetPasswordHelper->removeResetRequest($token);
 
 			// Encode the plain password, and set it.
-			$encodedPassword = $passwordEncoder->encodePassword(
+            /** @var User $user */
+            $encodedPassword = $passwordEncoder->encodePassword(
 				$user,
 				$form->get('plainPassword')->getData()
 			);
 
 			$user->setPassword($encodedPassword);
+			$user->setIsVerified(true);
 			$this->getDoctrine()->getManager()->flush();
 
 			// The session is cleaned up after the password has been changed.

@@ -67,119 +67,125 @@
         </div>
     </div>
 
-    {% if rankings.current is not empty %}
-        <div class="card">
-            <div class="card-header">
-                {{ 'card.currentRankings'|trans }}
-            </div>
-            <div class="card-body">
-                {% for classification in rankings.current %}
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="flex-shrink-0 item-logo">
-                            <img class="mx-5 my-3 user-profile-img" src="" alt="">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <table class="table table-sm">
-                                <tbody>
-                                <tr>
-                                    <td class="fs-4 fw-mid" width="30%" colspan="2">
-                                        {{ classification.ranking.name }}
-                                    </td>
-                                </tr>
-                                {% if bets.amount != 0 %}
+    {% if rankings is not empty %}
+        {% if rankings.current is not empty %}
+            <div class="card">
+                <div class="card-header">
+                    {{ 'card.currentRankings'|trans }}
+                </div>
+                <div class="card-body">
+                    {% for classification in rankings.current %}
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="flex-shrink-0 item-logo">
+                                <img class="mx-5 my-3 user-profile-img" src="" alt="">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <table class="table table-sm">
+                                    <tbody>
                                     <tr>
-                                        <td width="30%">
-                                            {{ 'ranking.position'|trans }}:
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fs-5 fw-mid">{{ classification.place }}</span>
-                                            <small>/{{ classification.ranking.classifications|length }}</small>
+                                        <td class="fs-4 fw-mid" width="30%" colspan="2">
+                                            {{ classification.ranking.name }}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td width="30%">
-                                            {{ 'ranking.points'|trans }}:
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fw-mid">{{ classification.pts }} {{ 'game.points'|trans }}</span>
-                                            <small>{{ 'ranking.averagePerGame'|trans({'%pts%': (classification.pts/classification.typedGames)|number_format(2)}) }}</small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%">
-                                            {{ 'user.typingSuccess'|trans }}:
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fw-mid">{{ classification.scored }}</span><small>/{{  classification.typedGames }}</small>
-                                            <small>{{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%</small>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%">
-                                            {{ 'user.exactHits'|trans }}:
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="fw-mid">{{ classification.hits }}</span><small>/{{  classification.typedGames }}</small>
-                                            <small>{{ (classification.hits / classification.typedGames * 100)|number_format(1) }}%</small>
-                                        </td>
-                                    </tr>
+                                    {% if bets.amount != 0 %}
+                                        <tr>
+                                            <td width="30%">
+                                                {{ 'ranking.position'|trans }}:
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fs-5 fw-mid">{{ classification.place }}</span>
+                                                <small>/{{ classification.ranking.classifications|length }}</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">
+                                                {{ 'ranking.points'|trans }}:
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fw-mid">{{ classification.pts }} {{ 'game.points'|trans }}</span>
+                                                <small>{{ 'ranking.averagePerGame'|trans({'%pts%': (classification.pts/classification.typedGames)|number_format(2)}) }}</small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">
+                                                {{ 'user.typingSuccess'|trans }}:
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fw-mid">{{ classification.scored }}</span>
+                                                <small>/{{ classification.typedGames }}</small>
+                                                <small>{{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%
+                                                </small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">
+                                                {{ 'user.exactHits'|trans }}:
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fw-mid">{{ classification.hits }}</span>
+                                                <small>/{{ classification.typedGames }}</small>
+                                                <small>{{ (classification.hits / classification.typedGames * 100)|number_format(1) }}%
+                                                </small>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                                {% if bets.amount == 0 %}
+                                    {{ 'user.passive'|trans }}
                                 {% endif %}
-                                </tbody>
-                            </table>
-                            {% if bets.amount == 0 %}
-                                {{ 'user.passive'|trans }}
-                            {% endif %}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
-    {% if rankings.finished is not empty %}
-        <div class="card">
-            <div class="card-header">
-                {{ 'card.finishedRankings'|trans }}
-            </div>
-            <div class="card-body">
-                <table class="table table-sm">
-                    <thead class="table-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col" class="text-center">{{ 'ranking.position'|trans }}</th>
-                        <th scope="col" class="text-center">{{ 'ranking.points'|trans }}</th>
-                        <th scope="col" class="text-center">{{ 'ranking.effectiveness'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for classification in rankings.finished %}
-                        <tr class="row-link" data-href="{{ path('ranking_detail', {'slug': classification.ranking.slug}) }}">
-                            <td>
-                                {{ loop.index }}
-                            </td>
-                            <td class="fw-mid">
-                                {{ classification.ranking.name }}
-                            </td>
-                            <td class="text-center">
-
-                            </td>
-                            <td class="text-center">
-                                <span class="fs-normal fw-mid">{{ classification.place }}</span>
-                                <small>/{{ classification.ranking.classifications|length }}</small>
-                            </td>
-                            <td class="fw-mid text-center">
-                                {{ classification.pts }} {{ 'game.points'|trans }}
-                            </td>
-                            <td class="text-center">
-                                {{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%
-                            </td>
-                        </tr>
                     {% endfor %}
-                    </tbody>
-                </table>
+                </div>
             </div>
-        </div>
+        {% endif %}
+
+        {% if rankings.finished is not empty %}
+            <div class="card">
+                <div class="card-header">
+                    {{ 'card.finishedRankings'|trans }}
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col" class="text-center">{{ 'ranking.position'|trans }}</th>
+                            <th scope="col" class="text-center">{{ 'ranking.points'|trans }}</th>
+                            <th scope="col" class="text-center">{{ 'ranking.effectiveness'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for classification in rankings.finished %}
+                            <tr class="row-link" data-href="{{ path('ranking_detail', {'slug': classification.ranking.slug}) }}">
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+                                <td class="fw-mid">
+                                    {{ classification.ranking.name }}
+                                </td>
+                                <td class="text-center">
+
+                                </td>
+                                <td class="text-center">
+                                    <span class="fs-normal fw-mid">{{ classification.place }}</span>
+                                    <small>/{{ classification.ranking.classifications|length }}</small>
+                                </td>
+                                <td class="fw-mid text-center">
+                                    {{ classification.pts }} {{ 'game.points'|trans }}
+                                </td>
+                                <td class="text-center">
+                                    {{ (classification.scored / classification.typedGames * 100)|number_format(1) }}%
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}

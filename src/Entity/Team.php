@@ -31,13 +31,13 @@ class Team
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Gedmo\Slug(fields={"name"})
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=3, unique=true)
+     * @ORM\Column(type="string", length=3)
      */
     private $shortName;
 
@@ -74,6 +74,13 @@ class Team
         $this->gamesGuest = new ArrayCollection();
         $this->gamesAll = new ArrayCollection();
         $this->tables = new ArrayCollection();
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getId(): ?int

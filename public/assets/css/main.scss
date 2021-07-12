@@ -133,6 +133,12 @@ body {
 }
 
 .navbar {
+   transition: all 0.8s ease;
+
+   &-shadow {
+      box-shadow: rgba(60, 64, 67, 0.2) 0 1px 2px 0;
+   }
+
    a {
       color: #6b747d;
    }
